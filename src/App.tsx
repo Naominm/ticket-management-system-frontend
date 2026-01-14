@@ -1,7 +1,11 @@
+import { Routes, Route } from "react-router";
+import AuthPage from "./pages/authPage";
 export default function App() {
   return (
     <>
-      <div> Hello there welcome to Ticket management system. </div>
+      <Routes>
+        <Route path="/" element={<AuthPage />} />
+      </Routes>
     </>
   );
 }
