@@ -2,7 +2,16 @@ import { Box } from "@mui/material";
 
 export default function AuthPage() {
   return (
-    <Box component="div" sx={{ backgroundColor: "(--var--primary-color)" }}>
+    <Box
+      component="div"
+      sx={{
+        backgroundColor: "var(--background-color)",
+        height: "100vh",
+        display: "flex",
+        gap: 5,
+        alignItems: "center",
+      }}
+    >
       Welcome to the auth page
     </Box>
   );
