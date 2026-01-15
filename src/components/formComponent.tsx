@@ -156,7 +156,7 @@ function FormSection() {
         <Link
           href="/forgot password"
           sx={{
-            color: "crimson",
+            color: "var(--red-color)",
             textDecoration: "none",
             fontFamily: "var(--primary-font)",
           }}
@@ -167,7 +167,7 @@ function FormSection() {
       </Box>
       <Box
         component={"div"}
-        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 4 }}
+        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 5 }}
       >
         <Button
           variant="contained"
