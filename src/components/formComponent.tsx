@@ -19,7 +19,7 @@ function FormSection() {
 
 function FormImageSection() {
   return (
-    <Box component="div">
+    <Box component="div" sx={{ backgroundColor: "var(--primary-color)" }}>
       <Box>This is the image section for the form component</Box>
     </Box>
   );
