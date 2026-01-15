@@ -4,6 +4,9 @@ import {
   FormControl,
   TextField,
   FormLabel,
+  FormControlLabel,
+  Checkbox,
+  Link,
 } from "@mui/material";
 
 export default function FormComponent() {
@@ -128,6 +131,22 @@ function FormSection() {
             fullWidth
           />
         </FormControl>
+      </Box>
+      <Box
+        component={"div"}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mt: 1,
+          px: { xs: 2, md: 10 },
+        }}
+      >
+        <FormControlLabel
+          control={<Checkbox size="small" />}
+          label="Keep me logged in"
+        />
+        <Link href="/forgot password"> Forgot password?</Link>
       </Box>
     </Box>
   );
