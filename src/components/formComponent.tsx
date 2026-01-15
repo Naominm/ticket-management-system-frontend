@@ -24,7 +24,7 @@ function FormSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-color)",
-        height: "80vh",
+        height: "85vh",
         width: "50%",
         borderRadius: "5px 0 0 5px",
       }}
@@ -40,7 +40,7 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: "80vh",
+        height: "85vh",
         width: "50%",
         borderRadius: "0px 5px 5px 0",
       }}
