@@ -144,9 +144,25 @@ function FormSection() {
       >
         <FormControlLabel
           control={<Checkbox size="small" />}
+          sx={{
+            "& .MuiFormControlLabel-label": {
+              fontFamily: "var(--primary-font)",
+              fontSize: "0.875rem",
+            },
+          }}
           label="Keep me logged in"
         />
-        <Link href="/forgot password"> Forgot password?</Link>
+        <Link
+          href="/forgot password"
+          sx={{
+            color: "crimson",
+            textDecoration: "none",
+            fontFamily: "var(--primary-font)",
+          }}
+        >
+          {" "}
+          Forgot password?
+        </Link>
       </Box>
     </Box>
   );
