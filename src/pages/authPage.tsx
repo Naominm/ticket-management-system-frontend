@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import FormComponent from "../components/formComponent";
 
 export default function AuthPage() {
   return (
@@ -12,7 +13,7 @@ export default function AuthPage() {
         alignItems: "center",
       }}
     >
-      Welcome to the auth page
+      <FormComponent />
     </Box>
   );
 }
