@@ -70,7 +70,10 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
-      <Box>
+      <Box
+        component={"div"}
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      >
         <FormControl
           sx={{
             px: { xs: 2, md: 10 },
@@ -115,10 +118,10 @@ function FormSection() {
               fontSize: "1 rem",
             }}
           >
-            Email
+            password
           </FormLabel>
           <TextField
-            placeholder="example@tenakata.com"
+            placeholder="@B123"
             sx={{ backgroundColor: "#fff" }}
             size="small"
             required
