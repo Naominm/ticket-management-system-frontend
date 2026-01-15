@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Checkbox,
   Link,
+  Button,
 } from "@mui/material";
 
 export default function FormComponent() {
@@ -163,6 +164,23 @@ function FormSection() {
           {" "}
           Forgot password?
         </Link>
+      </Box>
+      <Box
+        component={"div"}
+        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 4 }}
+      >
+        <Button
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: "var(--dark-background)",
+            textTransform: "lowercase",
+            fontFamily: "var(--primary-font)",
+            fontSize: "1.2rem",
+          }}
+        >
+          Submit
+        </Button>
       </Box>
     </Box>
   );
