@@ -10,9 +10,17 @@ export default function FormComponent() {
 }
 
 function FormSection() {
-  return <Box></Box>;
+  return (
+    <Box component="div">
+      <Box>This is the form section</Box>
+    </Box>
+  );
 }
 
 function FormImageSection() {
-  return <Box></Box>;
+  return (
+    <Box component="div">
+      <Box>This is the image section for the form component</Box>
+    </Box>
+  );
 }
