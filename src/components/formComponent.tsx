@@ -46,7 +46,7 @@ function FormSection() {
       <Box
         component="div"
         sx={{
-          borderRadius: "5px 0 0 5px",
+          borderRadius: { xs: "5px", md: "5px 0 0 5px" },
           padding: 5,
           display: "flex",
           flexDirection: "column",
@@ -160,6 +160,7 @@ function FormSection() {
             color: "var(--red-color)",
             textDecoration: "none",
             fontFamily: "var(--primary-font)",
+            fontSize: { xs: "0.8rem", md: "1rem" },
           }}
         >
           {" "}
@@ -196,19 +197,19 @@ function FormImageSection() {
         height: { xs: "auto", md: "85vh" },
         minHeight: "20vh",
         width: { xs: "100%", md: "50%" },
-        borderRadius: "0px 5px 5px 0",
+        borderRadius: { xs: "5px", md: "0px 5px 5px 0" },
       }}
     >
       <Button
         variant="contained"
         size="small"
         sx={{
-          backgroundColor: "var(--dark-background)",
+          backgroundColor: "transparent",
           position: "absolute",
           bottom: { xs: 590, md: 70 },
-          left: { xs: "22%", md: "62%" },
-          minHeight: "46px",
-          minWidth: { xs: "95px", md: "250px" },
+          left: { xs: "22%", sm: "35%", md: "62%" },
+          minHeight: { xs: "60px", md: "60px" },
+          minWidth: { xs: "150px", sm: "175px", md: "250px" },
           zIndex: 5545,
           borderRadius: { xs: "5px", md: "4px" },
           fontFamily: "var(--primary-font)",
