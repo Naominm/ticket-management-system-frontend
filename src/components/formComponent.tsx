@@ -31,9 +31,15 @@ function FormSection() {
         minHeight: "20vh",
         width: { xs: "100%", md: "50%" },
         borderRadius: "5px 0 0 5px",
+        padding: 5,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 2,
       }}
     >
-      <Box>This is the form section</Box>
+      <Box component="div">Welcome Back</Box>
+      <Box>log in with email</Box>
     </Box>
   );
 }
