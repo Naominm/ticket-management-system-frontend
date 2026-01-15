@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import FormComponent from "../components/formComponent";
-import logo from "../assets/logoTenakata.svg";
+import logo from "../assets/logo.png";
 
 export default function AuthPage() {
   return (
@@ -14,16 +14,25 @@ export default function AuthPage() {
       }}
     >
       <Box
-        component={"img"}
-        src={logo}
         sx={{
           position: "absolute",
           top: 50,
           left: "40%",
           zIndex: 5174,
           height: "15vh",
+          transform: "translateX(-50)",
+          boxShadow: "1px 2px 1px 2px rgba(146, 143, 143, 0.65)",
         }}
-      ></Box>
+      >
+        <Box
+          component={"img"}
+          src={logo}
+          sx={{
+            width: "100%",
+            height: "100%",
+          }}
+        ></Box>
+      </Box>
       <FormComponent />
     </Box>
   );
