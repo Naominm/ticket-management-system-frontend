@@ -208,8 +208,8 @@ function FormImageSection() {
         sx={{
           backgroundColor: "transparent",
           position: "absolute",
-          bottom: { xs: 590, md: 70 },
-          left: { xs: "22%", sm: "35%", md: "62%" },
+          bottom: { xs: 568, md: 70 },
+          left: { xs: "29%", sm: "35%", md: "62%" },
           minHeight: { xs: "60px", md: "60px" },
           minWidth: { xs: "150px", sm: "175px", md: "250px" },
           zIndex: 5545,
