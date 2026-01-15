@@ -70,33 +70,62 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
-      <FormControl
-        sx={{
-          px: { xs: 2, md: 10 },
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          width: "100%",
-        }}
-      >
-        <FormLabel
+      <Box>
+        <FormControl
           sx={{
-            color: "#000",
-            fontWeight: 500,
-            fontFamily: "var(--primary-font)",
-            fontSize: "1 rem",
+            px: { xs: 2, md: 10 },
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "100%",
           }}
         >
-          Email
-        </FormLabel>
-        <TextField
-          placeholder="example@tenakata.com"
-          sx={{ backgroundColor: "#fff" }}
-          size="small"
-          required
-          fullWidth
-        />
-      </FormControl>
+          <FormLabel
+            sx={{
+              color: "#000",
+              fontWeight: 500,
+              fontFamily: "var(--primary-font)",
+              fontSize: "1 rem",
+            }}
+          >
+            Email
+          </FormLabel>
+          <TextField
+            placeholder="example@tenakata.com"
+            sx={{ backgroundColor: "#fff" }}
+            size="small"
+            required
+            fullWidth
+          />
+        </FormControl>
+        <FormControl
+          sx={{
+            px: { xs: 2, md: 10 },
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "100%",
+          }}
+        >
+          <FormLabel
+            sx={{
+              color: "#000",
+              fontWeight: 500,
+              fontFamily: "var(--primary-font)",
+              fontSize: "1 rem",
+            }}
+          >
+            Email
+          </FormLabel>
+          <TextField
+            placeholder="example@tenakata.com"
+            sx={{ backgroundColor: "#fff" }}
+            size="small"
+            required
+            fullWidth
+          />
+        </FormControl>
+      </Box>
     </Box>
   );
 }
