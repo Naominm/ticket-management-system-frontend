@@ -205,12 +205,12 @@ function FormImageSection() {
         sx={{
           backgroundColor: "var(--dark-background)",
           position: "absolute",
-          bottom: 70,
-          left: "62%",
+          bottom: { xs: 590, md: 70 },
+          left: { xs: "22%", md: "62%" },
           minHeight: "46px",
-          minWidth: "250px ",
+          minWidth: { xs: "95px", md: "250px" },
           zIndex: 5545,
-          borderRadius: "4px",
+          borderRadius: { xs: "5px", md: "4px" },
           fontFamily: "var(--primary-font)",
           fontSize: "1.2rem",
         }}
