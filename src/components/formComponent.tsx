@@ -3,7 +3,6 @@ import {
   Typography,
   FormControl,
   TextField,
-  Button,
   FormLabel,
 } from "@mui/material";
 
@@ -71,7 +70,15 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
-      <FormControl sx={{ padding: 2 }}>
+      <FormControl
+        sx={{
+          px: { xs: 2, md: 10 },
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          width: "100%",
+        }}
+      >
         <FormLabel
           sx={{
             color: "#000",
@@ -82,6 +89,12 @@ function FormSection() {
         >
           Email
         </FormLabel>
+        <TextField
+          placeholder="example@tenakata.com"
+          sx={{ backgroundColor: "#fff" }}
+          required
+          fullWidth
+        />
       </FormControl>
     </Box>
   );
