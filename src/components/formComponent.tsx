@@ -8,7 +8,6 @@ import {
   Checkbox,
   Link,
   Button,
-  containerClasses,
 } from "@mui/material";
 import hero from "../assets/hero.svg";
 
@@ -200,6 +199,24 @@ function FormImageSection() {
         borderRadius: "0px 5px 5px 0",
       }}
     >
+      <Button
+        variant="contained"
+        size="small"
+        sx={{
+          backgroundColor: "var(--dark-background)",
+          position: "absolute",
+          bottom: 70,
+          left: "62%",
+          minHeight: "46px",
+          minWidth: "250px ",
+          zIndex: 5545,
+          borderRadius: "4px",
+          fontFamily: "var(--primary-font)",
+          fontSize: "1.2rem",
+        }}
+      >
+        Ticketing System
+      </Button>
       <Box
         component={"img"}
         src={hero}
