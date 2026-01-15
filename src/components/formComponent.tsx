@@ -171,7 +171,7 @@ function FormSection() {
       </Box>
       <Box
         component={"div"}
-        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 5 }}
+        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 3 }}
       >
         <Button
           variant="contained"
@@ -185,6 +185,19 @@ function FormSection() {
         >
           Submit
         </Button>
+        <Link
+          href="/Signup"
+          sx={{
+            color: "blue",
+            textDecoration: "none",
+            fontFamily: "var(--primary-font)",
+            fontSize: { xs: "0.8rem", md: "1rem" },
+            mt: 2,
+          }}
+        >
+          {" "}
+          Do not have an account Signup
+        </Link>
       </Box>
     </Box>
   );
@@ -210,7 +223,7 @@ function FormImageSection() {
           position: "absolute",
           bottom: { xs: 560, md: 70 },
           left: { xs: "29%", sm: "40%", md: "62%" },
-          minHeight: { xs: "40px",sm:"50px", md: "50px" },
+          minHeight: { xs: "40px", sm: "50px", md: "50px" },
           minWidth: { xs: "150px", sm: "175px", md: "250px" },
           zIndex: 5545,
           borderRadius: { xs: "5px", md: "4px" },
