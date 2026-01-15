@@ -60,8 +60,10 @@ function FormSection() {
             variant="h5"
             textTransform={"uppercase"}
             fontWeight={600}
-            fontSize={"2rem"}
-            sx={{ fontFamily: "var(--secondary-font)" }}
+            sx={{
+              fontFamily: "var(--secondary-font)",
+              fontSize: { xs: "1.5rem", md: "2rem" },
+            }}
           >
             Welcome Back
           </Typography>
