@@ -17,7 +17,7 @@ export default function AuthPage() {
         sx={{
           position: "absolute",
           top: 50,
-          left: "40%",
+          left: { xs: "20%", md: "40%" },
           zIndex: 5174,
           height: "10vh",
           transform: "translateX(-50)",
