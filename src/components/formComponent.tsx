@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export default function FormComponent() {
   return (
@@ -39,8 +39,24 @@ function FormSection() {
         fontFamily: "var(--primary-font) ",
       }}
     >
-      <Box component="div">Welcome Back</Box>
-      <Box>log in with email</Box>
+      <Box component="div">
+        <Typography
+          variant="h5"
+          textTransform={"uppercase"}
+          fontWeight={600}
+          fontSize={"2rem"}
+          sx={{ fontFamily: "var(--secondary-font)" }}
+        >
+          Welcome Back
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign={"center"}
+          textTransform={"capitalize"}
+        >
+          login with email
+        </Typography>
+      </Box>
     </Box>
   );
 }
