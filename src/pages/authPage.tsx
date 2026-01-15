@@ -19,7 +19,7 @@ export default function AuthPage() {
           top: 50,
           left: { xs: "20%", md: "40%" },
           zIndex: 5174,
-          height: "10vh",
+          height: { xs: "5vh", md: "10vh" },
           transform: "translateX(-50)",
           boxShadow: "1px 2px 1px 2px rgba(146, 143, 143, 0.65)",
         }}
