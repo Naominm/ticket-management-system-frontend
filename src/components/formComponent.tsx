@@ -8,7 +8,7 @@ export default function FormComponent() {
         width: "100%",
         display: "flex",
         flexDirection: "row",
-        py: 7,
+        py: 5,
         px: 10,
       }}
     >
@@ -26,7 +26,7 @@ function FormSection() {
         backgroundColor: "var(--primary-color)",
         height: "80vh",
         width: "50%",
-        borderRadius: 5,
+        borderRadius: "5px 0 0 5px",
       }}
     >
       <Box>This is the form section</Box>
@@ -42,7 +42,7 @@ function FormImageSection() {
         backgroundColor: "var(--primary-deep-color)",
         height: "80vh",
         width: "50%",
-        borderRadius: 5,
+        borderRadius: "0px 5px 5px 0",
       }}
     >
       <Box>This is the image section for the form component</Box>
