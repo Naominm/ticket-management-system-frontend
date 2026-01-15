@@ -92,6 +92,7 @@ function FormSection() {
         <TextField
           placeholder="example@tenakata.com"
           sx={{ backgroundColor: "#fff" }}
+          size="small"
           required
           fullWidth
         />
