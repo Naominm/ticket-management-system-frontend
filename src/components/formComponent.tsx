@@ -8,7 +8,9 @@ import {
   Checkbox,
   Link,
   Button,
+  containerClasses,
 } from "@mui/material";
+import hero from "../assets/hero.svg";
 
 export default function FormComponent() {
   return (
@@ -198,7 +200,17 @@ function FormImageSection() {
         borderRadius: "0px 5px 5px 0",
       }}
     >
-      <Box>This is the image section for the form component</Box>
+      <Box
+        component={"img"}
+        src={hero}
+        alt="hero image"
+        sx={{
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+          position: "relative",
+        }}
+      ></Box>
     </Box>
   );
 }
