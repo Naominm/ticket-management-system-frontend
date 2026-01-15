@@ -26,6 +26,7 @@ function FormSection() {
         backgroundColor: "var(--primary-color)",
         height: "80vh",
         width: "50%",
+        borderRadius: 5,
       }}
     >
       <Box>This is the form section</Box>
@@ -41,6 +42,7 @@ function FormImageSection() {
         backgroundColor: "var(--primary-deep-color)",
         height: "80vh",
         width: "50%",
+        borderRadius: 5,
       }}
     >
       <Box>This is the image section for the form component</Box>
