@@ -8,9 +8,7 @@ export default function AuthPage() {
       sx={{
         backgroundColor: "var(--background-color)",
         height: "100vh",
-        display: "flex",
         gap: 5,
-        alignItems: "center",
       }}
     >
       <FormComponent />

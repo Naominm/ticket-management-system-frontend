@@ -2,7 +2,16 @@ import { Box } from "@mui/material";
 
 export default function FormComponent() {
   return (
-    <Box component="div" sx={{ width: "100%" }}>
+    <Box
+      component="div"
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        py: 7,
+        px: 10,
+      }}
+    >
       <FormSection />
       <FormImageSection />
     </Box>
@@ -15,7 +24,7 @@ function FormSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-color)",
-        height: "50vh",
+        height: "80vh",
         width: "50%",
       }}
     >
@@ -30,7 +39,7 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: "50vh",
+        height: "80vh",
         width: "50%",
       }}
     >
