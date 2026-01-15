@@ -36,6 +36,7 @@ function FormSection() {
         flexDirection: "column",
         alignItems: "center",
         gap: 2,
+        fontFamily: "var(--primary-font) ",
       }}
     >
       <Box component="div">Welcome Back</Box>
