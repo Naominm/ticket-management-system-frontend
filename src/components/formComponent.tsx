@@ -30,14 +30,18 @@ export default function FormComponent() {
 
 function FormSection() {
   return (
-    <Box component={"div"}>
+    <Box
+      component={"div"}
+      sx={{
+        height: { xs: "auto", md: "85vh" },
+        minHeight: "20vh",
+        backgroundColor: "var(--primary-color)",
+        width: { xs: "100%", md: "50%" },
+      }}
+    >
       <Box
         component="div"
         sx={{
-          backgroundColor: "var(--primary-color)",
-          height: { xs: "auto", md: "85vh" },
-          minHeight: "20vh",
-          width: { xs: "100%", md: "50%" },
           borderRadius: "5px 0 0 5px",
           padding: 5,
           display: "flex",
@@ -61,11 +65,24 @@ function FormSection() {
             variant="body2"
             textAlign={"center"}
             textTransform={"capitalize"}
+            fontFamily={"var(--primary-font)"}
           >
             login with email
           </Typography>
         </Box>
       </Box>
+      <FormControl sx={{ padding: 2 }}>
+        <FormLabel
+          sx={{
+            color: "#000",
+            fontWeight: 500,
+            fontFamily: "var(--primary-font)",
+            fontSize: "1 rem",
+          }}
+        >
+          Email
+        </FormLabel>
+      </FormControl>
     </Box>
   );
 }
