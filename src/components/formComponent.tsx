@@ -1,4 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  Typography,
+  FormControl,
+  TextField,
+  Button,
+  FormLabel,
+} from "@mui/material";
 
 export default function FormComponent() {
   return (
@@ -23,39 +30,41 @@ export default function FormComponent() {
 
 function FormSection() {
   return (
-    <Box
-      component="div"
-      sx={{
-        backgroundColor: "var(--primary-color)",
-        height: { xs: "auto", md: "85vh" },
-        minHeight: "20vh",
-        width: { xs: "100%", md: "50%" },
-        borderRadius: "5px 0 0 5px",
-        padding: 5,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 2,
-        fontFamily: "var(--primary-font) ",
-      }}
-    >
-      <Box component="div">
-        <Typography
-          variant="h5"
-          textTransform={"uppercase"}
-          fontWeight={600}
-          fontSize={"2rem"}
-          sx={{ fontFamily: "var(--secondary-font)" }}
-        >
-          Welcome Back
-        </Typography>
-        <Typography
-          variant="body2"
-          textAlign={"center"}
-          textTransform={"capitalize"}
-        >
-          login with email
-        </Typography>
+    <Box component={"div"}>
+      <Box
+        component="div"
+        sx={{
+          backgroundColor: "var(--primary-color)",
+          height: { xs: "auto", md: "85vh" },
+          minHeight: "20vh",
+          width: { xs: "100%", md: "50%" },
+          borderRadius: "5px 0 0 5px",
+          padding: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+          fontFamily: "var(--primary-font) ",
+        }}
+      >
+        <Box component="div">
+          <Typography
+            variant="h5"
+            textTransform={"uppercase"}
+            fontWeight={600}
+            fontSize={"2rem"}
+            sx={{ fontFamily: "var(--secondary-font)" }}
+          >
+            Welcome Back
+          </Typography>
+          <Typography
+            variant="body2"
+            textAlign={"center"}
+            textTransform={"capitalize"}
+          >
+            login with email
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
