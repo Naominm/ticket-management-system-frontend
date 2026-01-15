@@ -9,7 +9,7 @@ export default function AuthPage() {
       sx={{
         backgroundColor: "var(--background-color)",
         position: "relative",
-        height: "100vh",
+        height: { xs: "auto", md: "100vh" },
         gap: 5,
       }}
     >
