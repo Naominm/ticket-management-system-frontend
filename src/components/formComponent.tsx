@@ -7,9 +7,12 @@ export default function FormComponent() {
       sx={{
         width: "100%",
         display: "flex",
-        flexDirection: "row",
-        py: 5,
-        px: 10,
+        flexDirection: { xs: "column", md: "row" },
+        alignItems: "center",
+        justifyContent: "center",
+        py: { xs: 2, md: 5 },
+        px: { xs: 4, md: 10 },
+        gap: { xs: 4, md: 0 },
       }}
     >
       <FormSection />
@@ -24,8 +27,9 @@ function FormSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-color)",
-        height: "85vh",
-        width: "50%",
+        height: { xs: "auto", md: "85vh" },
+        minHeight: "20vh",
+        width: { xs: "100%", md: "50%" },
         borderRadius: "5px 0 0 5px",
       }}
     >
@@ -40,8 +44,9 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: "85vh",
-        width: "50%",
+        height: { xs: "auto", md: "85vh" },
+        minHeight: "20vh",
+        width: { xs: "100%", md: "50%" },
         borderRadius: "0px 5px 5px 0",
       }}
     >
