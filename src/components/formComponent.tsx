@@ -18,7 +18,7 @@ export default function FormComponent() {
       sx={{
         width: "100%",
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column-reverse", md: "row" },
         alignItems: "center",
         justifyContent: "center",
         py: { xs: 2, md: 5 },
