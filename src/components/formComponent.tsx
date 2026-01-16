@@ -63,6 +63,12 @@ function FormSection() {
         { withCredentials: true },
       );
       console.log("signup successful", res.data);
+      setIsSignup(false);
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     } else {
       if (!password || !email) {
         setError("All fields are required");
