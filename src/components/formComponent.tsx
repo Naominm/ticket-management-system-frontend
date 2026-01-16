@@ -67,7 +67,7 @@ function FormSection() {
               fontSize: { xs: "1.5rem", md: "2rem" },
             }}
           >
-            {isSignup ? "welcome Back" : "Create account"}
+            {isSignup ? "Create account" : "Welcome Back"}
           </Typography>
           <Typography
             variant="body2"
@@ -75,7 +75,7 @@ function FormSection() {
             textTransform={"capitalize"}
             fontFamily={"var(--primary-font)"}
           >
-            login with email
+            {isSignup ? "Signup with Email" : "Login with Email"}
           </Typography>
         </Box>
       </Box>
@@ -83,6 +83,13 @@ function FormSection() {
         component={"div"}
         sx={{ display: "flex", flexDirection: "column", gap: 2 }}
       >
+        {isSignup && (
+          <FormControl>
+            <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+              First Name
+            </FormLabel>
+          </FormControl>
+        )}
         <FormControl
           sx={{
             px: { xs: 2, md: 10 },
@@ -188,7 +195,8 @@ function FormSection() {
           Submit
         </Button>
         <Link
-          href="/Signup"
+          component="button"
+          onClick={() => setIsSignup((prev) => !prev)}
           sx={{
             color: "blue",
             textDecoration: "none",
@@ -197,8 +205,9 @@ function FormSection() {
             mt: 2,
           }}
         >
-          {" "}
-          Do not have an account Signup
+          {isSignup
+            ? "Already have an account Login"
+            : "Do not have an account signup"}
         </Link>
       </Box>
     </Box>
