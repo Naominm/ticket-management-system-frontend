@@ -46,7 +46,7 @@ function FormSection() {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignup) {
       if (!firstName || !lastName || !email || !password || !confirmPassword) {
@@ -57,8 +57,12 @@ function FormSection() {
         setError("password do not match");
         return;
       }
-
-      console.log("signup successful");
+      const res = await axios.post(
+        `${API_URL}/api/auth/signup`,
+        { firstName, lastName, email, password },
+        { withCredentials: true },
+      );
+      console.log("signup successful", res.data);
     } else {
       if (!password || !email) {
         setError("All fields are required");
