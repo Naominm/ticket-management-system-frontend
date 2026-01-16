@@ -36,7 +36,7 @@ export default function FormComponent() {
 function FormSection() {
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState("");
-  const [email, SetEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   return (
@@ -140,7 +140,7 @@ function FormSection() {
           <TextField
             placeholder="example@tenakata.com"
             value={email}
-            onChange={(e) => SetEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             sx={{ backgroundColor: "#fff" }}
             size="small"
             required
