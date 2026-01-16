@@ -104,7 +104,7 @@ function FormSection() {
               Name
             </FormLabel>
             <TextField
-              placeholder="example@tenakata.com"
+              placeholder="eg. John Doe"
               sx={{ backgroundColor: "#fff" }}
               size="small"
               required
