@@ -22,7 +22,7 @@ export default function FormComponent() {
         flexDirection: { xs: "column-reverse", md: "row" },
         alignItems: "center",
         justifyContent: "center",
-        py: { xs: 2, md: 5 },
+        py: { xs: 2, md: 1 },
         px: { xs: 4, md: 10 },
         gap: { xs: 4, md: 0 },
       }}
@@ -39,7 +39,7 @@ function FormSection() {
     <Box
       component={"div"}
       sx={{
-        height: { xs: "auto", md: "85vh" },
+        height: { xs: "auto", md: "96vh" },
         minHeight: "20vh",
         backgroundColor: "var(--primary-color)",
         width: { xs: "100%", md: "50%" },
@@ -81,13 +81,35 @@ function FormSection() {
       </Box>
       <Box
         component={"div"}
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+        sx={{ display: "flex", flexDirection: "column", gap: 1 }}
       >
         {isSignup && (
-          <FormControl>
-            <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-              First Name
+          <FormControl
+            sx={{
+              px: { xs: 2, md: 10 },
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              width: "100%",
+            }}
+          >
+            <FormLabel
+              sx={{
+                color: "#000",
+                fontWeight: 500,
+                fontFamily: "var(--primary-font)",
+                fontSize: "1 rem",
+              }}
+            >
+              Name
             </FormLabel>
+            <TextField
+              placeholder="example@tenakata.com"
+              sx={{ backgroundColor: "#fff" }}
+              size="small"
+              required
+              fullWidth
+            />
           </FormControl>
         )}
         <FormControl
@@ -180,7 +202,12 @@ function FormSection() {
       </Box>
       <Box
         component={"div"}
-        sx={{ width: "100%", minHeight: "10vh", px: { xs: 2, md: 10 }, mt: 3 }}
+        sx={{
+          width: "100%",
+          minHeight: "10vh",
+          px: { xs: 2, md: 10 },
+          mt: 1.5,
+        }}
       >
         <Button
           variant="contained"
@@ -220,7 +247,7 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: { xs: "auto", md: "85vh" },
+        height: { xs: "auto", md: "96vh" },
         minHeight: "20vh",
         width: { xs: "100%", md: "50%" },
         borderRadius: { xs: "5px", md: "0px 5px 5px 0" },
