@@ -22,7 +22,7 @@ export default function FormComponent() {
         flexDirection: { xs: "column-reverse", md: "row" },
         alignItems: "center",
         justifyContent: "center",
-        py: { xs: 2, md: 1 },
+        py: { xs: 2, md: 0.5 },
         px: { xs: 4, md: 10 },
         gap: { xs: 4, md: 0 },
       }}
@@ -43,12 +43,12 @@ function FormSection() {
         minHeight: "50vh",
         backgroundColor: "var(--primary-color)",
         width: { xs: "100%", md: "50%" },
+        borderRadius: { xs: "5px", md: "5px 0 0 5px" },
       }}
     >
       <Box
         component="div"
         sx={{
-          borderRadius: { xs: "5px", md: "5px 0 0 5px" },
           padding: 3.4,
           display: "flex",
           flexDirection: "column",
