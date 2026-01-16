@@ -49,7 +49,7 @@ function FormSection() {
         component="div"
         sx={{
           borderRadius: { xs: "5px", md: "5px 0 0 5px" },
-          padding: 3,
+          padding: 3.4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -258,7 +258,7 @@ function FormSection() {
             color: "blue",
             textDecoration: "none",
             fontFamily: "var(--primary-font)",
-            fontSize: { xs: "0.8rem", md: "1rem" },
+            fontSize: { xs: "0.8rem", md: "0.8rem" },
             mt: 1,
           }}
         >
