@@ -11,6 +11,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useState } from "react";
+import axios from "axios";
 import hero from "../assets/hero.svg";
 
 export default function FormComponent() {
@@ -135,7 +136,7 @@ function FormSection() {
             </FormLabel>
             <TextField
               placeholder="eg. John Doe"
-              value={firstname}
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               sx={{ backgroundColor: "#fff" }}
               size="small"
