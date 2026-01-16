@@ -36,7 +36,8 @@ export default function FormComponent() {
 
 function FormSection() {
   const [isSignup, setIsSignup] = useState(false);
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -45,7 +46,7 @@ function FormSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignup) {
-      if (!name || !email || !password || !confirmPassword) {
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
         setError("please fill in all fields");
         return;
       }
@@ -130,12 +131,31 @@ function FormSection() {
                 fontSize: "1rem",
               }}
             >
-              Name
+              First Name
             </FormLabel>
             <TextField
               placeholder="eg. John Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstname}
+              onChange={(e) => setFirstName(e.target.value)}
+              sx={{ backgroundColor: "#fff" }}
+              size="small"
+              required
+              fullWidth
+            />
+            <FormLabel
+              sx={{
+                color: "#000",
+                fontWeight: 500,
+                fontFamily: "var(--primary-font)",
+                fontSize: "1rem",
+              }}
+            >
+              Last Name
+            </FormLabel>
+            <TextField
+              placeholder="eg. John Doe"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               sx={{ backgroundColor: "#fff" }}
               size="small"
               required
