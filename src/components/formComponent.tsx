@@ -272,7 +272,7 @@ function FormSection() {
             width: "100%",
             minHeight: "10vh",
             px: { xs: 2, md: 10 },
-            mt: 1.5,
+            mt: 0,
           }}
         >
           <Button
@@ -297,7 +297,7 @@ function FormSection() {
               textDecoration: "none",
               fontFamily: "var(--primary-font)",
               fontSize: { xs: "0.8rem", md: "0.8rem" },
-              mt: 1,
+              mb: 0.4,
             }}
           >
             {isSignup
