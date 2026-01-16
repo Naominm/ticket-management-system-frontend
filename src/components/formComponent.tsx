@@ -44,6 +44,8 @@ function FormSection() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignup) {
@@ -55,6 +57,7 @@ function FormSection() {
         setError("password do not match");
         return;
       }
+
       console.log("signup successful");
     } else {
       if (!password || !email) {
@@ -68,7 +71,7 @@ function FormSection() {
     <Box
       component={"div"}
       sx={{
-        height: { xs: "auto", md: "100vh" },
+        height: { xs: "auto", md: "120vh" },
         minHeight: "50vh",
         backgroundColor: "var(--primary-color)",
         width: { xs: "100%", md: "50%" },
@@ -337,7 +340,7 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: { xs: "auto", md: "100vh" },
+        height: { xs: "auto", md: "120vh" },
         minHeight: "50vh",
         width: { xs: "100%", md: "50%" },
         borderRadius: { xs: "5px", md: "0px 5px 5px 0" },
