@@ -9,19 +9,19 @@ export default function AuthPage() {
       sx={{
         backgroundColor: "var(--background-color)",
         position: "relative",
-        height: { xs: "auto", md: "100vh" },
+        Height: { xs: "auto", md: "auto" },
         gap: 5,
       }}
     >
       <Box
         sx={{
           position: "absolute",
-          top: 50,
+          top: 30,
           left: { xs: "20%", md: "40%" },
           zIndex: 5174,
-          height: { xs: "5vh", md: "10vh" },
+          height: { xs: "5vh", md: "8vh" },
           transform: "translateX(-50)",
-          boxShadow: "1px 2px 1px 2px rgba(146, 143, 143, 0.65)",
+          boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.65)",
         }}
       >
         <Box

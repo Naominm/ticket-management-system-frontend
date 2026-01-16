@@ -39,8 +39,8 @@ function FormSection() {
     <Box
       component={"div"}
       sx={{
-        height: { xs: "auto", md: "96vh" },
-        minHeight: "20vh",
+        height: { xs: "auto", md: "100vh" },
+        minHeight: "50vh",
         backgroundColor: "var(--primary-color)",
         width: { xs: "100%", md: "50%" },
       }}
@@ -49,11 +49,11 @@ function FormSection() {
         component="div"
         sx={{
           borderRadius: { xs: "5px", md: "5px 0 0 5px" },
-          padding: 5,
+          padding: 3,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 2,
+          gap: 1,
           fontFamily: "var(--primary-font) ",
         }}
       >
@@ -64,7 +64,7 @@ function FormSection() {
             fontWeight={600}
             sx={{
               fontFamily: "var(--secondary-font)",
-              fontSize: { xs: "1.5rem", md: "2rem" },
+              fontSize: { xs: "1.5rem", md: "1.8rem" },
             }}
           >
             {isSignup ? "Create account" : "Welcome Back"}
@@ -89,7 +89,7 @@ function FormSection() {
               px: { xs: 2, md: 10 },
               display: "flex",
               flexDirection: "column",
-              gap: 2,
+              gap: 1,
               width: "100%",
             }}
           >
@@ -98,7 +98,7 @@ function FormSection() {
                 color: "#000",
                 fontWeight: 500,
                 fontFamily: "var(--primary-font)",
-                fontSize: "1 rem",
+                fontSize: "1rem",
               }}
             >
               Name
@@ -117,7 +117,7 @@ function FormSection() {
             px: { xs: 2, md: 10 },
             display: "flex",
             flexDirection: "column",
-            gap: 2,
+            gap: 1,
             width: "100%",
           }}
         >
@@ -126,7 +126,7 @@ function FormSection() {
               color: "#000",
               fontWeight: 500,
               fontFamily: "var(--primary-font)",
-              fontSize: "1 rem",
+              fontSize: "1rem",
             }}
           >
             Email
@@ -153,7 +153,7 @@ function FormSection() {
               color: "#000",
               fontWeight: 500,
               fontFamily: "var(--primary-font)",
-              fontSize: "1 rem",
+              fontSize: "1rem",
             }}
           >
             password
@@ -166,6 +166,35 @@ function FormSection() {
             fullWidth
           />
         </FormControl>
+        {isSignup && (
+          <FormControl
+            sx={{
+              px: { xs: 2, md: 10 },
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+              width: "100%",
+            }}
+          >
+            <FormLabel
+              sx={{
+                color: "#000",
+                fontWeight: 500,
+                fontFamily: "var(--primary-font)",
+                fontSize: ".8 rem",
+              }}
+            >
+              confirm Password
+            </FormLabel>
+            <TextField
+              placeholder="example@tenakata.com"
+              sx={{ backgroundColor: "#fff" }}
+              size="small"
+              required
+              fullWidth
+            />
+          </FormControl>
+        )}
       </Box>
       <Box
         component={"div"}
@@ -193,7 +222,7 @@ function FormSection() {
             color: "var(--red-color)",
             textDecoration: "none",
             fontFamily: "var(--primary-font)",
-            fontSize: { xs: "0.8rem", md: "1rem" },
+            fontSize: { xs: "0.8rem", md: "0.8rem" },
           }}
         >
           {" "}
@@ -211,6 +240,7 @@ function FormSection() {
       >
         <Button
           variant="contained"
+          size="small"
           fullWidth
           sx={{
             backgroundColor: "var(--dark-background)",
@@ -229,7 +259,7 @@ function FormSection() {
             textDecoration: "none",
             fontFamily: "var(--primary-font)",
             fontSize: { xs: "0.8rem", md: "1rem" },
-            mt: 2,
+            mt: 1,
           }}
         >
           {isSignup
@@ -247,8 +277,8 @@ function FormImageSection() {
       component="div"
       sx={{
         backgroundColor: "var(--primary-deep-color)",
-        height: { xs: "auto", md: "96vh" },
-        minHeight: "20vh",
+        height: { xs: "auto", md: "100vh" },
+        minHeight: "50vh",
         width: { xs: "100%", md: "50%" },
         borderRadius: { xs: "5px", md: "0px 5px 5px 0" },
       }}
