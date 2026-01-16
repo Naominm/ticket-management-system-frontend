@@ -9,6 +9,7 @@ import {
   Link,
   Button,
 } from "@mui/material";
+import { useState } from "react";
 import hero from "../assets/hero.svg";
 
 export default function FormComponent() {
@@ -33,6 +34,7 @@ export default function FormComponent() {
 }
 
 function FormSection() {
+  const [isSignup, setIsSignup] = useState(false);
   return (
     <Box
       component={"div"}
@@ -65,7 +67,7 @@ function FormSection() {
               fontSize: { xs: "1.5rem", md: "2rem" },
             }}
           >
-            Welcome Back
+            {isSignup ? "welcome Back" : "Create account"}
           </Typography>
           <Typography
             variant="body2"
