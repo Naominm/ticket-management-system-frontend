@@ -35,6 +35,10 @@ export default function FormComponent() {
 
 function FormSection() {
   const [isSignup, setIsSignup] = useState(false);
+  const [name , setName] =useState("");
+  const [email, SetEmail] = useState("");
+  const [password setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   return (
     <Box
       component={"div"}
@@ -105,6 +109,8 @@ function FormSection() {
             </FormLabel>
             <TextField
               placeholder="eg. John Doe"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
               sx={{ backgroundColor: "#fff" }}
               size="small"
               required
@@ -133,6 +139,8 @@ function FormSection() {
           </FormLabel>
           <TextField
             placeholder="example@tenakata.com"
+            value={email}
+            onChange={(e)=>SetEmail(e.target.value)}
             sx={{ backgroundColor: "#fff" }}
             size="small"
             required
@@ -160,6 +168,8 @@ function FormSection() {
           </FormLabel>
           <TextField
             placeholder="@B123"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
             sx={{ backgroundColor: "#fff" }}
             size="small"
             required
@@ -187,6 +197,8 @@ function FormSection() {
               confirm Password
             </FormLabel>
             <TextField
+            value={confirmPassword}
+            onChange={(e)=>setConfirmPassword(e.target.value)}
               placeholder="example@tenakata.com"
               sx={{ backgroundColor: "#fff" }}
               size="small"
