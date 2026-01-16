@@ -8,6 +8,7 @@ import {
   Checkbox,
   Link,
   Button,
+  Alert,
 } from "@mui/material";
 import { useState } from "react";
 import hero from "../assets/hero.svg";
@@ -39,6 +40,28 @@ function FormSection() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isSignup) {
+      if (!name || !email || !password || !confirmPassword) {
+        setError("please fill in all fields");
+        return;
+      }
+      if (password !== confirmPassword) {
+        setError("password do not match");
+        return;
+      }
+      console.log("signup successful");
+    } else {
+      if (!password || !email) {
+        setError("All fields are required");
+        return;
+      }
+      console.log("login successful");
+    }
+  };
   return (
     <Box
       component={"div"}
@@ -83,8 +106,10 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
+      {error && <Alert severity="error">{error}</Alert>}
       <Box
-        component={"div"}
+        component={"form"}
+        onSubmit={handleSubmit}
         sx={{ display: "flex", flexDirection: "column", gap: 1 }}
       >
         {isSignup && (
@@ -207,77 +232,79 @@ function FormSection() {
             />
           </FormControl>
         )}
-      </Box>
-      <Box
-        component={"div"}
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          mt: 1,
-          px: { xs: 2, md: 10 },
-        }}
-      >
-        <FormControlLabel
-          control={<Checkbox size="small" />}
+
+        <Box
+          component={"div"}
           sx={{
-            "& .MuiFormControlLabel-label": {
-              fontFamily: "var(--primary-font)",
-              fontSize: "0.875rem",
-            },
-          }}
-          label="Keep me logged in"
-        />
-        <Link
-          href="/forgot password"
-          sx={{
-            color: "var(--red-color)",
-            textDecoration: "none",
-            fontFamily: "var(--primary-font)",
-            fontSize: { xs: "0.8rem", md: "0.8rem" },
-          }}
-        >
-          {" "}
-          Forgot password?
-        </Link>
-      </Box>
-      <Box
-        component={"div"}
-        sx={{
-          width: "100%",
-          minHeight: "10vh",
-          px: { xs: 2, md: 10 },
-          mt: 1.5,
-        }}
-      >
-        <Button
-          variant="contained"
-          size="small"
-          fullWidth
-          sx={{
-            backgroundColor: "var(--dark-background)",
-            textTransform: "lowercase",
-            fontFamily: "var(--primary-font)",
-            fontSize: "1.2rem",
-          }}
-        >
-          Submit
-        </Button>
-        <Link
-          component="button"
-          onClick={() => setIsSignup((prev) => !prev)}
-          sx={{
-            color: "blue",
-            textDecoration: "none",
-            fontFamily: "var(--primary-font)",
-            fontSize: { xs: "0.8rem", md: "0.8rem" },
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             mt: 1,
+            px: { xs: 2, md: 10 },
           }}
         >
-          {isSignup
-            ? "Already have an account Login"
-            : "Do not have an account signup"}
-        </Link>
+          <FormControlLabel
+            control={<Checkbox size="small" />}
+            sx={{
+              "& .MuiFormControlLabel-label": {
+                fontFamily: "var(--primary-font)",
+                fontSize: "0.875rem",
+              },
+            }}
+            label="Keep me logged in"
+          />
+          <Link
+            href="/forgot password"
+            sx={{
+              color: "var(--red-color)",
+              textDecoration: "none",
+              fontFamily: "var(--primary-font)",
+              fontSize: { xs: "0.8rem", md: "0.8rem" },
+            }}
+          >
+            {" "}
+            Forgot password?
+          </Link>
+        </Box>
+        <Box
+          component={"div"}
+          sx={{
+            width: "100%",
+            minHeight: "10vh",
+            px: { xs: 2, md: 10 },
+            mt: 1.5,
+          }}
+        >
+          <Button
+            variant="contained"
+            size="small"
+            fullWidth
+            type="submit"
+            sx={{
+              backgroundColor: "var(--dark-background)",
+              textTransform: "lowercase",
+              fontFamily: "var(--primary-font)",
+              fontSize: "1.2rem",
+            }}
+          >
+            Submit
+          </Button>
+          <Link
+            component="button"
+            onClick={() => setIsSignup((prev) => !prev)}
+            sx={{
+              color: "blue",
+              textDecoration: "none",
+              fontFamily: "var(--primary-font)",
+              fontSize: { xs: "0.8rem", md: "0.8rem" },
+              mt: 1,
+            }}
+          >
+            {isSignup
+              ? "Already have an account Login"
+              : "Do not have an account signup"}
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
