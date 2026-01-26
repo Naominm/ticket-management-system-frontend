@@ -18,7 +18,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import tenakataLogo from "../assets/logo.png";
 
-const drawerWidth = 240;
+const drawerWidth = 165;
 export default function SidebarComponent() {
   const [open, setOpen] = useState(true);
   return (
