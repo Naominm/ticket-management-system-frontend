@@ -48,10 +48,11 @@ export default function CollapsibleSidebar() {
           {open && (
             <Box
               sx={{
-                width: 80,
-                height: 80,
+                mt: 2,
+                width: 120,
+                height: 120,
                 borderRadius: "50%",
-                backgroundColor: "gray",
+                backgroundColor: "#f1f1f2",
               }}
             />
           )}
