@@ -85,7 +85,7 @@ function FormSection() {
     try {
       const res = await axios.post(
         `${API_URL}/api/auth/login`,
-        { email, password },
+        { identifier: email, password },
         { withCredentials: true },
       );
       console.log(`login successful`, res.data);
