@@ -11,6 +11,7 @@ import {
   Alert,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import hero from "../assets/hero.svg";
 
@@ -46,6 +47,7 @@ function FormSection() {
 
   const API_URL = import.meta.env.VITE_API_URL;
   console.log("API URL:", import.meta.env.VITE_API_URL);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +91,7 @@ function FormSection() {
         { withCredentials: true },
       );
       console.log(`login successful`, res.data);
+      navigate(`/home`);
       setError(null);
     } catch (err) {
       console.error(err);
