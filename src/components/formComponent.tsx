@@ -45,6 +45,7 @@ function FormSection() {
   const [error, setError] = useState<string | null>(null);
 
   const API_URL = import.meta.env.VITE_API_URL;
+  console.log("API URL:", import.meta.env.VITE_API_URL);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,24 +58,38 @@ function FormSection() {
         setError("password do not match");
         return;
       }
-      const res = await axios.post(
-        `${API_URL}/api/auth/signup`,
-        { firstName, lastName, email, password },
-        { withCredentials: true },
-      );
-      console.log("signup successful", res.data);
-      setIsSignup(false);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      try {
+        const res = await axios.post(
+          `${API_URL}/api/auth/signup`,
+          { firstName, lastName, email, password },
+          { withCredentials: true },
+        );
+        console.log("signup successful", res.data);
+        setIsSignup(false);
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       if (!password || !email) {
         setError("All fields are required");
         return;
       }
-      console.log("login successful");
+    }
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/auth/login`,
+        { email, password },
+        { withCredentials: true },
+      );
+      console.log(`login successful`, res.data);
+      setError(null);
+    } catch (err) {
+      console.error(err);
     }
   };
   return (
