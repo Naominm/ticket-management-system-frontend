@@ -1,0 +1,168 @@
+import { useState } from "react";
+import {
+  Drawer,
+  IconButton,
+  Box,
+  List,
+  ListItemIcon,
+  ListItemButton,
+  ListItemText,
+  Button,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import DashBoardIcon from "@mui/icons-material/Dashboard";
+import SettingsIcon from "@mui/icons-material/Settings";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import tenakataLogo from "../assets/logo.png";
+
+const drawerWidth = 240;
+export default function SidebarComponent() {
+  const [open, setOpen] = useState(true);
+  return (
+    <Drawer
+      variant="permanent"
+      elevation={8}
+      sx={{
+        width: open ? drawerWidth : 72,
+        flexShrink: 0,
+        whiteSpace: "nowrap",
+        transition: "width 0.3s",
+        "&.MuiDrawer-paper": {
+          width: open ? drawerWidth : 72,
+          transition: "width 0.3s",
+          overflowX: "hidden",
+          backgroundColor: "var(--background-color)",
+          color: "var(--primary-deep-color)",
+          boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.65)",
+        },
+      }}
+    >
+      <Box
+        sx={{
+          height: 120,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: open ? "flex-start" : "center",
+          px: open ? 2 : 0,
+        }}
+      >
+        {open && (
+          <Box
+            sx={{
+              mt: 2,
+              width: 120,
+              height: 120,
+              borderRadius: "50%",
+              backgroundColor: "#f1f1f2",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              component="img"
+              src={tenakataLogo}
+              alt="Tenakata logo"
+              sx={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                objectFit: "contain",
+                px: 1,
+              }}
+            />
+          </Box>
+        )}
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: open ? "flex-start" : "center",
+          px: open ? 2 : 0,
+          mt: open ? 5 : -12,
+        }}
+      >
+        <IconButton onClick={() => setOpen(!open)} sx={{ color: "gray" }}>
+          <MenuIcon />
+        </IconButton>
+      </Box>
+
+      <List>
+        <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
+        <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
+      </List>
+      {open && (
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            mt: 10,
+          }}
+        >
+          <FacebookIcon sx={{ color: "#1877F2" }} />
+          <XIcon sx={{ color: "gray" }} />
+          <YouTubeIcon sx={{ color: "#FF0000" }} />
+          <InstagramIcon sx={{ color: "#E4405F" }} />
+        </Box>
+      )}
+      {open && (
+        <Button
+          variant="contained"
+          size="small"
+          sx={{
+            backgroundColor: "var(--red-color)",
+            color: "#fff",
+            minHeight: "30px",
+            my: 4,
+            mx: 2,
+            fontFamily: "var(--primary-font)",
+            fontWeight: 800,
+          }}
+        >
+          Log out
+        </Button>
+      )}
+    </Drawer>
+  );
+}
+
+function SidebarItem({
+  open,
+  icon,
+  label,
+}: {
+  open: boolean;
+  icon: React.ReactNode;
+  label: string;
+}) {
+  return (
+    <ListItemButton
+      sx={{
+        minHeight: 48,
+        justifyContent: open ? "initial" : "center",
+        backgroundColor: "#ffff",
+        color: "var(--background-color)",
+        px: 2.5,
+        "&:hover": {
+          backgroundColor: "#f9f9f9",
+        },
+      }}
+    >
+      <ListItemIcon
+        sx={{
+          minWidth: 0,
+          mr: open ? 2 : "auto",
+          justifyContent: "center",
+          color: "var(--background-color)",
+        }}
+      >
+        {icon}
+      </ListItemIcon>
+      {open && <ListItemText primary={label} />}
+    </ListItemButton>
+  );
+}
