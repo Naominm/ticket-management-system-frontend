@@ -71,6 +71,8 @@ function FormSection() {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+
+        return;
       } catch (err) {
         console.error(err);
       }
@@ -243,6 +245,7 @@ function FormSection() {
           <TextField
             placeholder="@B123"
             value={password}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             sx={{ backgroundColor: "#fff" }}
             size="small"
@@ -272,6 +275,7 @@ function FormSection() {
             </FormLabel>
             <TextField
               value={confirmPassword}
+              type="password"
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="example@tenakata.com"
               sx={{ backgroundColor: "#fff" }}
