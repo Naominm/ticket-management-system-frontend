@@ -82,10 +82,11 @@ function SidebarItem({
       sx={{
         minHeight: 48,
         justifyContent: open ? "initial" : "center",
-        backgroundColor: "var(--background-color)",
+        backgroundColor: "#ffff",
+        color: "var(--background-color)",
         px: 2.5,
         "&:hover": {
-          backgroundColor: "var(--dark-background)",
+          backgroundColor: "#f9f9f9",
         },
       }}
     >
@@ -94,7 +95,7 @@ function SidebarItem({
           minWidth: 0,
           mr: open ? 2 : "auto",
           justifyContent: "center",
-          color: "#fff",
+          color: "var(--background-color)",
         }}
       >
         {icon}
