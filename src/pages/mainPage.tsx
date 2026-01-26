@@ -9,6 +9,7 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashBoardIcon from "@mui/icons-material/Dashboard";
@@ -38,6 +39,7 @@ export default function CollapsibleSidebar() {
             overflowX: "hidden",
             backgroundColor: "var(--background-color)",
             color: "var(--primary-deep-color)",
+            boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.65)",
           },
         }}
       >
@@ -109,6 +111,23 @@ export default function CollapsibleSidebar() {
             <YouTubeIcon sx={{ color: "#FF0000" }} />
             <InstagramIcon sx={{ color: "#E4405F" }} />
           </Box>
+        )}
+        {open && (
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              backgroundColor: "var(--red-color)",
+              color: "#fff",
+              minHeight: "30px",
+              my: 4,
+              mx: 2,
+              fontFamily: "var(--primary-font)",
+              fontWeight: 800,
+            }}
+          >
+            Log out
+          </Button>
         )}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
