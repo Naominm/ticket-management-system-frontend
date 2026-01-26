@@ -13,6 +13,10 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DashBoardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import XIcon from "@mui/icons-material/X";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import tenakataLogo from "../assets/logo.png";
 
 const drawerWidth = 240;
@@ -80,7 +84,7 @@ export default function CollapsibleSidebar() {
             display: "flex",
             justifyContent: open ? "flex-start" : "center",
             px: open ? 2 : 0,
-            mt: open ? 1 : -12,
+            mt: open ? 5 : -12,
           }}
         >
           <IconButton onClick={() => setOpen(!open)} sx={{ color: "gray" }}>
@@ -92,6 +96,20 @@ export default function CollapsibleSidebar() {
           <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
           <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
         </List>
+        {open && (
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              mt: 10,
+            }}
+          >
+            <FacebookIcon sx={{ color: "#1877F2" }} />
+            <XIcon sx={{ color: "gray" }} />
+            <YouTubeIcon sx={{ color: "#FF0000" }} />
+            <InstagramIcon sx={{ color: "#E4405F" }} />
+          </Box>
+        )}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
