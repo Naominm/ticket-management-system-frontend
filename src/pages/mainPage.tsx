@@ -36,25 +36,40 @@ export default function CollapsibleSidebar() {
           },
         }}
       >
-        <Toolbar
+        <Box
           sx={{
+            height: 120,
             display: "flex",
-            justifyContent: open ? "space-between" : "center",
-            px: 2,
+            alignItems: "center",
+            justifyContent: open ? "flex-start" : "center",
+            px: open ? 2 : 0,
           }}
         >
           {open && (
-            <Typography
-              variant="h6"
-              sx={{ fontFamily: "var(--secondary-font)" }}
-            >
-              Ticket MVP
-            </Typography>
+            <Box
+              sx={{
+                width: 80,
+                height: 80,
+                borderRadius: "50%",
+                backgroundColor: "gray",
+              }}
+            />
           )}
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: open ? "flex-start" : "center",
+            px: open ? 2 : 0,
+            mt: open ? 1 : -12,
+          }}
+        >
           <IconButton onClick={() => setOpen(!open)} sx={{ color: "gray" }}>
             <MenuIcon />
           </IconButton>
-        </Toolbar>
+        </Box>
+
         <List>
           <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
           <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
