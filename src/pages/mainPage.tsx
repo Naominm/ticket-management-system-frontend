@@ -13,6 +13,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import DashBoardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
+import tenakataLogo from "../assets/logo.png";
 
 const drawerWidth = 240;
 
@@ -53,8 +54,24 @@ export default function CollapsibleSidebar() {
                 height: 120,
                 borderRadius: "50%",
                 backgroundColor: "#f1f1f2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            />
+            >
+              <Box
+                component="img"
+                src={tenakataLogo}
+                alt="Tenakata logo"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  objectFit: "contain",
+                  px: 1,
+                }}
+              />
+            </Box>
           )}
         </Box>
 
