@@ -1,4 +1,12 @@
-import { Box, IconButton, Typography, ListItem, List } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  ListItem,
+  List,
+  Paper,
+  Button,
+} from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import CreateTicketComponent from "../components/createTicketComponent";
@@ -35,7 +43,8 @@ export default function CollapsibleSidebar() {
         <Box
           sx={{
             bgcolor: "#f4f4f4",
-            minHeight: "400px",
+            height: "auto",
+            minHeight: "600px",
             mt: 2,
             pl: 5,
             display: "flex",
@@ -67,19 +76,20 @@ export default function CollapsibleSidebar() {
             <Box
               sx={{
                 width: "50%",
-                border: "1px solid blue",
+                height: "70vh",
                 display: "flex",
                 flexDirection: "column",
                 bgcolor: "#f8f4f4",
               }}
             >
-              <List disablePadding>
+              <List disablePadding sx={{ mt: 5 }}>
                 <ListItem
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
                     bgcolor: "#f8f7f7",
                     borderRadius: 1,
+                    minHeight: "10vh",
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -101,6 +111,7 @@ export default function CollapsibleSidebar() {
                     justifyContent: "space-between",
                     bgcolor: "#ffff",
                     borderRadius: 1,
+                    minHeight: "10vh",
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -122,6 +133,7 @@ export default function CollapsibleSidebar() {
                     justifyContent: "space-between",
                     bgcolor: "#f8f7f7",
                     borderRadius: 1,
+                    minHeight: "10vh",
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -143,6 +155,7 @@ export default function CollapsibleSidebar() {
                     justifyContent: "space-between",
                     bgcolor: "#fff",
                     borderRadius: 1,
+                    minHeight: "10vh",
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -160,6 +173,7 @@ export default function CollapsibleSidebar() {
                     display: "flex",
                     justifyContent: "space-between",
                     borderRadius: 1,
+                    minHeight: "10vh",
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -177,9 +191,58 @@ export default function CollapsibleSidebar() {
             <Box
               sx={{
                 width: "50%",
-                border: "1px solid red",
+                height: "70vh",
+                bgcolor: "#EBEBEB",
+                px: 2,
+                py: 3,
+                display: "flex",
+                flexDirection: "column",
               }}
-            ></Box>
+            >
+              <Typography
+                sx={{ fontFamily: "var(--primary-font)", fontWeight: 700 }}
+              >
+                Task Description <span style={{ color: "red" }}>*</span>
+              </Typography>
+              <Paper
+                elevation={0}
+                sx={{
+                  backgroundColor: "#fff",
+                  width: "100%",
+                  minHeight: "35vh",
+                  mt: 2,
+                  padding: 1,
+                }}
+              >
+                <Typography
+                  variant="body2"
+                  sx={{ fontFamily: "var(--primary-font)", color: "gray" }}
+                >
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam,
+                  ipsa voluptatibus debitis officia non, in placeat excepturi
+                  recusandae id minus possimus culpa dolore. Aperiam dolorum
+                  aliquid quod facilis assumenda? Dolore enim esse velit tempora
+                  ut dolor quia voluptatum itaque, iure asperiores, veritatis
+                  maiores nobis facilis officiis repudiandae reiciendis neque
+                  ea.
+                </Typography>
+              </Paper>
+              <Box sx={{ display: "flex", mt: 4, width: "100%", gap: 0.5 }}>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ bgcolor: "var(--yellow-color)", width: "50%" }}
+                >
+                  Close
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ bgcolor: "var(--background-color)", width: "50%" }}
+                >
+                  Add task
+                </Button>
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>
