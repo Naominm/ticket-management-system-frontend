@@ -27,6 +27,7 @@ export default function CollapsibleSidebar() {
             bgcolor: "#f4f4f4",
             minHeight: "400px",
             mt: 2,
+            pl: 5,
             display: "flex",
             flexDirection: "column",
             gap: 5,
@@ -44,10 +45,13 @@ export default function CollapsibleSidebar() {
               backgroundColor: "#fff",
             }}
           >
-            <IconButton
-              sx={{ fontSize: "1rem", fontFamily: "var(--primary-font)" }}
-            >
-              Tickets
+            <IconButton>
+              <Typography
+                sx={{ fontSize: "1rem", fontFamily: "var(--primary-font)" }}
+              >
+                {" "}
+                Tickets
+              </Typography>
             </IconButton>
             <Button
               variant="contained"
