@@ -1,7 +1,8 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, ListItem, List } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import CreateTicketComponent from "../components/createTicketComponent";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function CollapsibleSidebar() {
   return (
@@ -66,8 +67,30 @@ export default function CollapsibleSidebar() {
               sx={{
                 width: "50%",
                 border: "1px solid blue",
+                display: "flex",
+                flexDirection: "column",
               }}
-            ></Box>
+            >
+              <List disablePadding>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#f5f5f5",
+                    mb: 1,
+                    borderRadius: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography fontWeight={600}>
+                      product <span style={{ color: "red" }}>*</span>
+                    </Typography>
+                    <ArrowDropDownIcon />
+                  </Box>
+                  <Typography>E-invoice</Typography>
+                </ListItem>
+              </List>
+            </Box>
             <Box
               sx={{
                 width: "50%",
