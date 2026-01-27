@@ -3,6 +3,7 @@ import SidebarComponent from "../components/sidebarComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import CreateTicketComponent from "../components/createTicketComponent";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function CollapsibleSidebar() {
   return (
@@ -69,6 +70,7 @@ export default function CollapsibleSidebar() {
                 border: "1px solid blue",
                 display: "flex",
                 flexDirection: "column",
+                bgcolor: "#f8f4f4",
               }}
             >
               <List disablePadding>
@@ -76,18 +78,99 @@ export default function CollapsibleSidebar() {
                   sx={{
                     display: "flex",
                     justifyContent: "space-between",
-                    bgcolor: "#f5f5f5",
-                    mb: 1,
+                    bgcolor: "#f8f7f7",
                     borderRadius: 1,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Typography fontWeight={600}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
                       product <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
-                  <Typography>E-invoice</Typography>
+                  <Typography sx={{ fontFamily: "var(--primary-font)" }}>
+                    E-invoice
+                  </Typography>
+                </ListItem>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#ffff",
+                    borderRadius: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
+                      Name <span style={{ color: "red" }}>*</span>
+                    </Typography>
+                    <ArrowDropDownIcon />
+                  </Box>
+                  <Typography sx={{ fontFamily: "var(--primary-font)" }}>
+                    Ahmed Mohamoud
+                  </Typography>
+                </ListItem>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#f8f7f7",
+                    borderRadius: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
+                      Company <span style={{ color: "red" }}>*</span>
+                    </Typography>
+                    <ArrowDropDownIcon />
+                  </Box>
+                  <Typography sx={{ fontFamily: "var(--primary-font)" }}>
+                    Burger King
+                  </Typography>
+                </ListItem>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#fff",
+                    borderRadius: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
+                      Start Date <span style={{ color: "red" }}>*</span>
+                    </Typography>
+                  </Box>
+                  <CalendarMonthIcon />
+                </ListItem>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    borderRadius: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
+                      End Date<span style={{ color: "red" }}>*</span>
+                    </Typography>
+                  </Box>
+                  <CalendarMonthIcon />
                 </ListItem>
               </List>
             </Box>
