@@ -9,7 +9,14 @@ export default function CollapsibleSidebar() {
       <SidebarComponent />
       <Box component="main" sx={{ flexGrow: 1 }}>
         <Box sx={{ display: "flex", gap: 4, backgroundColor: "#ffff" }}>
-          <IconButton sx={{ color: "gray", display: "flex", gap: 4 }}>
+          <IconButton
+            sx={{
+              color: "gray",
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+            }}
+          >
             <SearchIcon />
             <Typography
               variant="body2"
