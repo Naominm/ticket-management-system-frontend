@@ -42,7 +42,6 @@ export default function CollapsibleSidebar() {
               px: 2,
               minHeight: "15vh",
               backgroundColor: "#fff",
-              border: "1px solid red",
             }}
           >
             <IconButton
