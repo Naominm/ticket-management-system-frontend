@@ -55,6 +55,26 @@ export default function CollapsibleSidebar() {
           >
             Create ticket component
           </Box>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              height: "40vh",
+            }}
+          >
+            <Box
+              sx={{
+                width: "50%",
+                border: "1px solid blue",
+              }}
+            ></Box>
+            <Box
+              sx={{
+                width: "50%",
+                border: "1px solid red",
+              }}
+            ></Box>
+          </Box>
         </Box>
       </Box>
     </Box>
