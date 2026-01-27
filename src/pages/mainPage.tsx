@@ -1,6 +1,7 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchIcon from "@mui/icons-material/Search";
+import CreateTicketComponent from "../components/createTicketComponent";
 
 export default function CollapsibleSidebar() {
   return (
@@ -33,38 +34,7 @@ export default function CollapsibleSidebar() {
             gap: 2,
           }}
         >
-          <Box
-            sx={{
-              mt: 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "300px",
-              px: 2,
-              minHeight: "15vh",
-              backgroundColor: "#fff",
-              boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.2)",
-            }}
-          >
-            <IconButton>
-              <Typography
-                sx={{ fontSize: "1rem", fontFamily: "var(--primary-font)" }}
-              >
-                {" "}
-                Tickets
-              </Typography>
-            </IconButton>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "var(--background-color)",
-                fontFamily: "Var(--primary-font)",
-                textTransform: "capitalize",
-              }}
-            >
-              Create a task
-            </Button>
-          </Box>
+          <CreateTicketComponent />
           <Box
             sx={{
               textAlign: "center",
