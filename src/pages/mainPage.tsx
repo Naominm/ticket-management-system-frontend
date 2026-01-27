@@ -30,7 +30,7 @@ export default function CollapsibleSidebar() {
             pl: 5,
             display: "flex",
             flexDirection: "column",
-            gap: 5,
+            gap: 2,
           }}
         >
           <Box
@@ -43,6 +43,7 @@ export default function CollapsibleSidebar() {
               px: 2,
               minHeight: "15vh",
               backgroundColor: "#fff",
+              boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.2)",
             }}
           >
             <IconButton>
@@ -63,6 +64,19 @@ export default function CollapsibleSidebar() {
             >
               Create a task
             </Button>
+          </Box>
+          <Box
+            sx={{
+              textAlign: "center",
+              fontFamily: "var(--primary-font)",
+              fontWeight: 600,
+              color: "#000",
+              py: 2,
+              backgroundColor: "#fff",
+              textTransform: "capitalize",
+            }}
+          >
+            Create ticket component
           </Box>
         </Box>
       </Box>
