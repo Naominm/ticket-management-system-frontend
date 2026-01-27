@@ -79,10 +79,10 @@ export default function CollapsibleSidebar() {
                 height: "70vh",
                 display: "flex",
                 flexDirection: "column",
-                bgcolor: "#f8f4f4",
+                bgcolor: "#EBEBEB",
               }}
             >
-              <List disablePadding sx={{ mt: 5 }}>
+              <List disablePadding sx={{ mt: 5, px: 2 }}>
                 <ListItem
                   sx={{
                     display: "flex",
@@ -90,6 +90,7 @@ export default function CollapsibleSidebar() {
                     bgcolor: "#f8f7f7",
                     borderRadius: 1,
                     minHeight: "10vh",
+                    mb: 0.5,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -112,6 +113,7 @@ export default function CollapsibleSidebar() {
                     bgcolor: "#ffff",
                     borderRadius: 1,
                     minHeight: "10vh",
+                    mb: 0.5,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -134,6 +136,7 @@ export default function CollapsibleSidebar() {
                     bgcolor: "#f8f7f7",
                     borderRadius: 1,
                     minHeight: "10vh",
+                    mb: 0.5,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -156,6 +159,7 @@ export default function CollapsibleSidebar() {
                     bgcolor: "#fff",
                     borderRadius: 1,
                     minHeight: "10vh",
+                    mb: 0.5,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -174,6 +178,8 @@ export default function CollapsibleSidebar() {
                     justifyContent: "space-between",
                     borderRadius: 1,
                     minHeight: "10vh",
+                    bgcolor: "#f8f7f7",
+                    mb: 0.5,
                   }}
                 >
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -231,13 +237,21 @@ export default function CollapsibleSidebar() {
                 <Button
                   variant="contained"
                   size="large"
-                  sx={{ bgcolor: "var(--yellow-color)", width: "50%" }}
+                  sx={{
+                    bgcolor: "var(--yellow-color)",
+                    width: "50%",
+                    fontFamily: "var(--primary-font)",
+                  }}
                 >
                   Close
                 </Button>
                 <Button
                   variant="contained"
-                  sx={{ bgcolor: "var(--background-color)", width: "50%" }}
+                  sx={{
+                    bgcolor: "var(--background-color)",
+                    width: "50%",
+                    fontFamily: "var(--primary-font)",
+                  }}
                 >
                   Add task
                 </Button>
