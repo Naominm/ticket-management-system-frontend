@@ -34,7 +34,7 @@ export default function CollapsibleSidebar() {
         >
           <Box
             sx={{
-              mt: 5,
+              mt: 1,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
