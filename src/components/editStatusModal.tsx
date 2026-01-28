@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import CircleIcon from "@mui/icons-material/Circle";
 import { green, orange, red } from "@mui/material/colors";
 
 interface Props {
@@ -53,45 +54,56 @@ export default function EditModalStatus({ open, onClose }: Props) {
           </Box>
         </Box>
         <hr />
-        <Box
-          sx={{
-            bgcolor: "#f5f5f5",
-            mt: 4,
-            p: 2,
-            borderRadius: 2,
-            fontSize: "0.85rem",
-          }}
-        >
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Typography
             sx={{
               fontFamily: "var(--primary-font)",
               fontSize: "0.8rem",
               color: "gray",
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
             }}
           >
-            🟢 Green: You can press the green button only when the task is
+            <Box component="span">
+              <CircleIcon sx={{ color: "green", fontSize: "0.9rem" }} />
+            </Box>
+            Green: You can press the green button only when the task is
             completed and resolved successfully
           </Typography>
+
           <Typography
             sx={{
               fontFamily: "var(--primary-font)",
               fontSize: "0.8rem",
               color: "gray",
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
             }}
           >
-            🟠 The yellow button means that the task is still in progress. When
-            a task is created, the default status of this task is yellow
+            <Box component="span">
+              <CircleIcon sx={{ color: "orange", fontSize: "0.9rem" }} />
+            </Box>
+            Yellow: The task is still in progress. When a task is created, the
+            default status is yellow
           </Typography>
+
           <Typography
             sx={{
               fontFamily: "var(--primary-font)",
               fontSize: "0.8rem",
               color: "gray",
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
             }}
           >
-            🔴 If the problem is not resolved for any reason, you can press the
-            red button ,If the remaining days field is greater than the Task End
-            Date field, the status automatically changes to red
+            <Box component="span">
+              <CircleIcon sx={{ color: "red", fontSize: "0.9rem" }} />
+            </Box>
+            Red: If the problem is not resolved, the status changes to red when
+            the remaining days exceed the task end date
           </Typography>
         </Box>
       </DialogContent>
