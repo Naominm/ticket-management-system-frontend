@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Table,
@@ -13,6 +14,7 @@ import {
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
+import EditModalStatus from "../components/editStatusModal";
 
 import EditIcon from "@mui/icons-material/Edit";
 import RefreshIcon from "@mui/icons-material/Refresh";
@@ -83,12 +85,21 @@ const getStatusColor = (status: string) => {
 };
 
 export default function TicketPage() {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<number | null>(null);
+
   return (
     <Box>
       <Box sx={{ display: "flex" }}>
         <SidebarComponent />
         <Box component="main" sx={{ flexGrow: 1 }}>
           <SearchComponent />
+          <EditModalStatus
+            open={openModal}
+            selectedRow={selectedRow}
+            onClose={() => setOpenModal(false)}
+          />
+
           <Box
             sx={{
               bgcolor: "#f4f4f4",
@@ -141,7 +152,13 @@ export default function TicketPage() {
                       <TableCell>{row.daysLeft}</TableCell>
                       <TableCell>{row.issue}</TableCell>
                       <TableCell align="center">
-                        <IconButton sx={{ color: "var(--background-color)" }}>
+                        <IconButton
+                          sx={{ color: "var(--background-color)" }}
+                          onClick={() => {
+                            setSelectedRow(row.code);
+                            setOpenModal(true);
+                          }}
+                        >
                           <EditIcon />
                         </IconButton>
                       </TableCell>
