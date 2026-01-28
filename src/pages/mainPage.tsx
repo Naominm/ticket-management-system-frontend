@@ -1,14 +1,5 @@
-import {
-  Box,
-  IconButton,
-  Typography,
-  ListItem,
-  List,
-  Paper,
-  Button,
-} from "@mui/material";
+import { Box, Typography, ListItem, List, Paper, Button } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
-import SearchIcon from "@mui/icons-material/Search";
 import CreateTicketComponent from "../components/createTicketComponent";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -18,28 +9,6 @@ export default function CollapsibleSidebar() {
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <Box sx={{ display: "flex", gap: 4, backgroundColor: "#ffff" }}>
-          <IconButton
-            sx={{
-              color: "gray",
-              display: "flex",
-              alignItems: "center",
-              gap: 4,
-            }}
-          >
-            <SearchIcon />
-            <Typography
-              variant="body2"
-              sx={{
-                color: "gray",
-                fontSize: "1.2rem",
-                fontFamily: "var(--primary-font)",
-              }}
-            >
-              search...
-            </Typography>
-          </IconButton>
-        </Box>
         <Box
           sx={{
             bgcolor: "#f4f4f4",
