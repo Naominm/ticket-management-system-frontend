@@ -141,7 +141,7 @@ export default function TicketPage() {
                       <TableCell>{row.daysLeft}</TableCell>
                       <TableCell>{row.issue}</TableCell>
                       <TableCell align="center">
-                        <IconButton>
+                        <IconButton sx={{ color: "var(--background-color)" }}>
                           <EditIcon />
                         </IconButton>
                       </TableCell>
