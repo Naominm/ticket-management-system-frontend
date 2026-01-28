@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CircleIcon from "@mui/icons-material/Circle";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { green, orange, red } from "@mui/material/colors";
 
 interface Props {
@@ -55,6 +56,26 @@ export default function EditModalStatus({ open, onClose }: Props) {
         </Box>
         <hr />
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              maxWidth: "160px",
+              bgcolor: "var(--background-color)",
+              display: "flex",
+              gap: 2,
+              mt: 4,
+              textTransform: "capitalize",
+              fontFamily: "var(--primary font)",
+              fontSize: "0.8rem",
+            }}
+          >
+            {" "}
+            show more{" "}
+            <span>
+              <ArrowDropDownIcon />
+            </span>
+          </Button>
           <Typography
             sx={{
               fontFamily: "var(--primary-font)",
@@ -63,7 +84,7 @@ export default function EditModalStatus({ open, onClose }: Props) {
               display: "flex",
               alignItems: "center",
               gap: 1,
-              mt: 5,
+              mt: 2,
             }}
           >
             <Box component="span">
