@@ -63,6 +63,7 @@ export default function EditModalStatus({ open, onClose }: Props) {
               display: "flex",
               alignItems: "center",
               gap: 1,
+              mt: 5,
             }}
           >
             <Box component="span">
@@ -97,6 +98,7 @@ export default function EditModalStatus({ open, onClose }: Props) {
               display: "flex",
               alignItems: "center",
               gap: 1,
+              mb: 5,
             }}
           >
             <Box component="span">
@@ -106,6 +108,7 @@ export default function EditModalStatus({ open, onClose }: Props) {
             the remaining days exceed the task end date
           </Typography>
         </Box>
+        <hr />
       </DialogContent>
       <DialogActions>
         <Button
