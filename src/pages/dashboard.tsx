@@ -94,8 +94,9 @@ export default function DashboardPage() {
                       <Typography
                         variant="body2"
                         sx={{
-                          fontSize: "0.5rem",
+                          fontSize: "0.6rem",
                           fontFamily: "var(--primary-font)",
+                          color: "gray",
                         }}
                       >
                         #47AD6
