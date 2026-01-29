@@ -10,6 +10,8 @@ import {
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ManAvatar from "../assets/man.png";
 export default function DashboardPage() {
   return (
@@ -141,6 +143,44 @@ export default function DashboardPage() {
                           }}
                         >
                           Invalid Status in McDonalds Company
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton>
+                          <AccessTimeIcon sx={{ fontSize: "small" }} />
+                        </IconButton>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontFamily: "var(--primary-font)",
+                            fontSize: "0.5rem",
+                            color: "gray",
+                          }}
+                        >
+                          Feb 11.2024
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <IconButton>
+                          <CalendarTodayIcon sx={{ fontSize: "small" }} />
+                        </IconButton>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontFamily: "var(--primary-font)",
+                            fontSize: "0.5rem",
+                            color: "gray",
+                          }}
+                        >
+                          4.30 hrs ago
                         </Typography>
                       </Box>
                     </Box>
