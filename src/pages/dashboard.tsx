@@ -1,6 +1,14 @@
-import { Box, Paper } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 
 export default function DashboardPage() {
   return (
@@ -32,7 +40,35 @@ export default function DashboardPage() {
                 minHeight: "100vh",
               }}
             >
-              Last Tickets
+              <Card>
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                    alignItems: "center",
+                    justifyContent: "left",
+                    gap: 2,
+                    bgcolor: "#f4f4f4",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: "var(--primary-font)",
+                      color: "var(--dark-background)",
+                      fontSize: "1rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {" "}
+                    Last Tickets
+                  </Typography>
+                  <IconButton
+                    sx={{ color: "var(--dark-background)", fontSize: "small" }}
+                  >
+                    <MapsHomeWorkIcon />
+                  </IconButton>
+                </CardContent>
+              </Card>
             </Box>
             <Box
               sx={{
