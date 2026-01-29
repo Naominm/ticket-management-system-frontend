@@ -4,9 +4,10 @@ import SearchComponent from "../components/searchComponent";
 
 export default function DashboardPage() {
   return (
-    <Box sx={{ bgcolor: "#f4f4f4", pb: 5 }}>
+    <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
       <SidebarComponent />
-      <Box sx={{ display: "flex", flexDirection: "column", ml: 20 }}>
+
+      <Box component="main" sx={{ flexGrow: 1, pb: 5 }}>
         <SearchComponent />
 
         <Box
