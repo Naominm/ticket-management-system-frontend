@@ -68,7 +68,14 @@ export default function DashboardPage() {
                     <MapsHomeWorkIcon />
                   </IconButton>
                 </CardContent>
-                <CardBodyComponent />
+                <CardBodyComponent
+                  title="in process"
+                  name="Ahmed Mohamed"
+                  status="Invalid Status in McDonalds Company"
+                  date="Feb 11 ,2024"
+                  time="4.30 Hours ago"
+                  id="#4A7d5"
+                />
               </Card>
             </Box>
             <Box

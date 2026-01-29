@@ -10,7 +10,23 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ManAvatar from "../assets/man.png";
 
-export default function CardBodyComponent() {
+interface CardProps {
+  title: string;
+  name: string;
+  id: string;
+  status: string;
+  date: string;
+  time: string;
+}
+
+export default function CardBodyComponent({
+  title,
+  id,
+  name,
+  status,
+  date,
+  time,
+}: CardProps) {
   return (
     <Card>
       <CardContent>
@@ -31,7 +47,7 @@ export default function CardBodyComponent() {
               fontSize: "0.5rem",
             }}
           >
-            in process
+            {title}
           </Button>
           <Typography
             variant="body2"
@@ -41,7 +57,7 @@ export default function CardBodyComponent() {
               color: "gray",
             }}
           >
-            #47AD6
+            {id}
           </Typography>
         </Box>
         <Box
@@ -69,7 +85,7 @@ export default function CardBodyComponent() {
                 textTransform: "capitalize",
               }}
             >
-              Ahmed Mohamoud
+              {name}
             </Typography>
             <Typography
               sx={{
@@ -79,7 +95,7 @@ export default function CardBodyComponent() {
                 textTransform: "capitalize",
               }}
             >
-              Invalid Status in McDonalds Company
+              {status}
             </Typography>
           </Box>
         </Box>
@@ -102,7 +118,7 @@ export default function CardBodyComponent() {
                 color: "gray",
               }}
             >
-              Feb 11.2024
+              {date}
             </Typography>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -117,7 +133,7 @@ export default function CardBodyComponent() {
                 color: "gray",
               }}
             >
-              4.30 hrs ago
+              {time}
             </Typography>
           </Box>
         </Box>
