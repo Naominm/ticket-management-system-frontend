@@ -10,8 +10,7 @@ import {
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
-import PersonIcon from "@mui/icons-material/Person";
-
+import ManAvatar from "../assets/man.png";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -101,6 +100,49 @@ export default function DashboardPage() {
                       >
                         #47AD6
                       </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        mt: 2,
+                        gap: 2,
+                      }}
+                    >
+                      <Box
+                        component={"img"}
+                        sx={{ width: "40px" }}
+                        src={ManAvatar}
+                      />
+                      <Box
+                        component={"div"}
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 0.4,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: "var(--primary-font)",
+                            color: "#000",
+                            fontSize: "0.5rem",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          Ahmed Mohamoud
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: "var(--primary-font)",
+                            color: "#000",
+                            fontSize: "0.4rem",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          Invalid Status in McDonalds Company
+                        </Typography>
+                      </Box>
                     </Box>
                   </CardContent>
                 </Card>
