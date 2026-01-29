@@ -27,6 +27,7 @@ export default function SidebarComponent() {
       elevation={8}
       sx={{
         width: open ? drawerWidth : 72,
+        border:"1px solid green",
         flexShrink: 0,
         whiteSpace: "nowrap",
         transition: "width 0.3s",

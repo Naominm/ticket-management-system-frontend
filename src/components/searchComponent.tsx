@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 export default function SearchComponent() {
   return (
-    <Box sx={{ display: "flex", gap: 4, backgroundColor: "#ffff" }}>
+    <Box sx={{ display: "flex", gap: 4, backgroundColor: "#ffff"}}>
       <IconButton
         sx={{
           color: "gray",
