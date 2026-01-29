@@ -5,10 +5,12 @@ import {
   CardContent,
   Typography,
   IconButton,
+  Button,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function DashboardPage() {
   return (
@@ -68,6 +70,39 @@ export default function DashboardPage() {
                     <MapsHomeWorkIcon />
                   </IconButton>
                 </CardContent>
+                <Card>
+                  <CardContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        px: 0.5,
+                      }}
+                    >
+                      <Button
+                        size="small"
+                        variant="contained"
+                        sx={{
+                          fontFamily: "var(--primary-font)",
+                          bgcolor: "var(--yellow-color)",
+                          fontSize: "0.5rem",
+                        }}
+                      >
+                        in process
+                      </Button>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontSize: "0.5rem",
+                          fontFamily: "var(--primary-font)",
+                        }}
+                      >
+                        #47AD6
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
               </Card>
             </Box>
             <Box
