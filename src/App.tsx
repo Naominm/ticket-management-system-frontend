@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import AuthPage from "./pages/authPage";
 import CollapsibleSidebar from "./pages/mainPage";
 import TicketPage from "./pages/ticketsPage";
+import DashboardPage from "./pages/dashboard";
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <Route path="/" element={<AuthPage />} />
         <Route path="/home" element={<CollapsibleSidebar />} />
         <Route path="/ticket" element={<TicketPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </>
   );
