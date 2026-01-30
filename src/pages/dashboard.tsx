@@ -13,6 +13,7 @@ import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import CardBodyComponent from "../components/cardBodyComponent";
 import PersonIcon from "@mui/icons-material/Person";
 import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
+import MostClientActive from "../components/mostClientActiveComponent";
 import PeopleIcon from "@mui/icons-material/People";
 import mcDonaldsAvatar from "../assets/macdonalds.png";
 export default function DashboardPage() {
@@ -213,63 +214,11 @@ export default function DashboardPage() {
                       <PeopleIcon />
                     </IconButton>
                   </CardContent>
-                  <CardContent component={Paper}>
-                    <Box
-                      component={Paper}
-                      elevation={0}
-                      sx={{
-                        display: "flex",
-                        width: "100%",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 2,
-                          width: "50%",
-                        }}
-                      >
-                        <Box
-                          component={"img"}
-                          sx={{
-                            width: "40px",
-                            bgcolor: "#f4f4f4",
-                            borderRadius: "50%",
-                          }}
-                          src={mcDonaldsAvatar}
-                        />
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontSize: "0.8rem",
-                            fontFamily: "var(--primary-font)",
-                          }}
-                        >
-                          McDonalds
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          width: "50%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontSize: "0.8rem",
-                            fontFamily: "var(--primary-font)",
-                          }}
-                        >
-                          100
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </CardContent>
+                  <MostClientActive
+                    name="mcDonalds"
+                    number={60}
+                    avatar={mcDonaldsAvatar}
+                  />
                 </Box>
               </Box>
               <Box component={Paper} sx={{ width: "100%", height: "50vh" }}>
