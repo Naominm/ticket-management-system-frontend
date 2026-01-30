@@ -172,7 +172,8 @@ export default function DashboardPage() {
                           sx={{
                             fontSize: "1rem",
                             fontFamily: "var(--primary-font)",
-                            color: "gray",
+                            color: "#000",
+                            fontWeight: 400,
                           }}
                         >
                           Ahmed Mohhamed
