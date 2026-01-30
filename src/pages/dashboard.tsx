@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
   IconButton,
-  Button,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";

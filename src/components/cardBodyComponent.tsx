@@ -52,7 +52,7 @@ export default function CardBodyComponent({
           <Typography
             variant="body2"
             sx={{
-              fontSize: "0.6rem",
+              fontSize: "0.8rem",
               fontFamily: "var(--primary-font)",
               color: "gray",
             }}
@@ -81,7 +81,7 @@ export default function CardBodyComponent({
               sx={{
                 fontFamily: "var(--primary-font)",
                 color: "#000",
-                fontSize: "0.5rem",
+                fontSize: "0.8rem",
                 textTransform: "capitalize",
               }}
             >
@@ -91,7 +91,7 @@ export default function CardBodyComponent({
               sx={{
                 fontFamily: "var(--primary-font)",
                 color: "#000",
-                fontSize: "0.4rem",
+                fontSize: "0.5rem",
                 textTransform: "capitalize",
               }}
             >
