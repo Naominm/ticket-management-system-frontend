@@ -164,6 +164,19 @@ export default function DashboardPage() {
                       number={1400}
                     />
                   </Card>
+                  <Box sx={{ display: "flex", justifyContent: "right", mr: 2 }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        my: 2,
+                        backgroundColor: "var(--dark-background)",
+                        textTransform: "capitalize",
+                        maxWidth: "120px",
+                      }}
+                    >
+                      Show All
+                    </Button>
+                  </Box>
                 </Box>
                 <Box
                   component={Paper}
