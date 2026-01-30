@@ -5,6 +5,7 @@ import {
   CardContent,
   Typography,
   IconButton,
+  Button,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
@@ -85,6 +86,17 @@ export default function DashboardPage() {
                   time="4.30 Hours ago"
                   id="#4A7d5"
                 />
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    mt: 5,
+                    bgcolor: "(--dark-background)",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  show all
+                </Button>
               </Card>
             </Box>
             <Box
@@ -126,7 +138,12 @@ export default function DashboardPage() {
                       >
                         Most Active Employee
                       </Typography>
-                      <IconButton sx={{ color: "var(--dark-background)" }}>
+                      <IconButton
+                        sx={{
+                          fontSize: "small",
+                          color: "var(--dark-background)",
+                        }}
+                      >
                         <PersonIcon />
                       </IconButton>
                     </CardContent>
