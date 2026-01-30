@@ -34,13 +34,12 @@ export default function DashboardPage() {
             height: "auto",
             minHeight: "200vh",
             display: "flex",
-            flexDirection: "column",
-            border: "2px solid red",
           }}
         >
           <Box sx={{ display: "flex", width: "100%", mt: 4, gap: 2, px: 2 }}>
             <Box
               component={Paper}
+              elevation={0}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -104,7 +103,17 @@ export default function DashboardPage() {
                   id="#4A7d5"
                   bg="green"
                 />
+                <CardBodyComponent
+                  title="in process"
+                  name="Ahmed Mohamed"
+                  status="Invalid Status in McDonalds Company"
+                  date="Feb 11 ,2024"
+                  time="4.30 Hours ago"
+                  id="#4A7d5"
+                  bg="var(--yellow-color)"
+                />
               </Card>
+
               <ShowAll />
             </Box>
             <Box
