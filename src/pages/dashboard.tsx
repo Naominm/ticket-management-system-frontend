@@ -16,6 +16,7 @@ import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
 import MostClientActive from "../components/mostClientActiveComponent";
 import PeopleIcon from "@mui/icons-material/People";
 import mcDonaldsAvatar from "../assets/macdonalds.png";
+import BurgerKingAvatar from "../assets/burgerking.png";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -218,6 +219,11 @@ export default function DashboardPage() {
                     name="mcDonalds"
                     number={60}
                     avatar={mcDonaldsAvatar}
+                  />
+                  <MostClientActive
+                    name="BurgerKing"
+                    number={60}
+                    avatar={BurgerKingAvatar}
                   />
                 </Box>
               </Box>
