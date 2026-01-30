@@ -13,6 +13,7 @@ import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import CardBodyComponent from "../components/cardBodyComponent";
 import PersonIcon from "@mui/icons-material/Person";
 import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
+import PeopleIcon from "@mui/icons-material/People";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -187,7 +188,30 @@ export default function DashboardPage() {
                     width: "50%",
                   }}
                 >
-                  Most Active client
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      alignItems: "center",
+                      justifyContent: "left",
+                      gap: 2,
+                      bgcolor: "#f4f4f4",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: "var(--primary-font)",
+                        fontSize: "1rem",
+                        fontWeight: "600",
+                        color: "var( --dark-background)",
+                      }}
+                    >
+                      Most Client active
+                    </Typography>
+                    <IconButton sx={{ color: "var(--dark-background)" }}>
+                      <PeopleIcon />
+                    </IconButton>
+                  </CardContent>
                 </Box>
               </Box>
               <Box component={Paper} sx={{ width: "100%", height: "50vh" }}>
