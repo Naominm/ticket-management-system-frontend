@@ -5,11 +5,13 @@ interface ActiveEmployeeProp {
   name: string;
   number: number;
   percentage: string;
+  color: string;
 }
 export default function MostActiveEmployeeCard({
   name,
   number,
   percentage,
+  color,
 }: ActiveEmployeeProp) {
   return (
     <CardContent sx={{ display: "flex", width: "100%", gap: 5 }}>
@@ -44,7 +46,7 @@ export default function MostActiveEmployeeCard({
           sx={{
             fontFamily: "var(--primary-font)",
             fontSize: "1rem",
-            color: "green",
+            color: { color },
             fontWeight: 400,
           }}
         >

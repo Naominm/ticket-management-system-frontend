@@ -155,6 +155,19 @@ export default function DashboardPage() {
                       name="Ahmed Mohhamed"
                       percentage="99%"
                       number={1400}
+                      color="green"
+                    />
+                    <MostActiveEmployeeCard
+                      name="Ahmed Mohhamed"
+                      percentage="80%"
+                      number={1320}
+                      color="var(--yellow-color)"
+                    />
+                    <MostActiveEmployeeCard
+                      name="Ahmed Mohhamed"
+                      percentage="50%"
+                      number={930}
+                      color="red"
                     />
                   </Card>
                   <ShowAll />
