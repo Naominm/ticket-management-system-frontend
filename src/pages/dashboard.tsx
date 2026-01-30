@@ -36,13 +36,12 @@ export default function DashboardPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 2,
                 width: "35%",
                 height: "auto",
                 minHeight: "100vh",
               }}
             >
-              <Card>
+              <Card sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <CardContent
                   sx={{
                     display: "flex",
@@ -86,18 +85,29 @@ export default function DashboardPage() {
                   time="4.30 Hours ago"
                   id="#4A7d5"
                 />
+                <CardBodyComponent
+                  title="in process"
+                  name="Ahmed Mohamed"
+                  status="Invalid Status in McDonalds Company"
+                  date="Feb 11 ,2024"
+                  time="4.30 Hours ago"
+                  id="#4A7d5"
+                />
+              </Card>
+              <Box sx={{ display: "flex", justifyContent: "right", pr: 2 }}>
                 <Button
                   variant="contained"
                   size="small"
                   sx={{
-                    mt: 5,
-                    bgcolor: "(--dark-background)",
+                    my: 2,
+                    backgroundColor: "var(--dark-background)",
                     textTransform: "capitalize",
+                    maxWidth: "120px",
                   }}
                 >
                   show all
                 </Button>
-              </Card>
+              </Box>
             </Box>
             <Box
               sx={{
