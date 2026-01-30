@@ -18,6 +18,7 @@ import mcDonaldsAvatar from "../assets/macdonalds.png";
 import BurgerKingAvatar from "../assets/burgerking.png";
 import othanimAvatar from "../assets/othanim.png";
 import ShowAll from "../components/showAllButton";
+import DashboardGraph from "../components/graphDashboard";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -31,9 +32,10 @@ export default function DashboardPage() {
             bgcolor: "#f4f4f4",
             width: "100%",
             height: "auto",
-            minHeight: "600px",
+            minHeight: "200vh",
             display: "flex",
             flexDirection: "column",
+            border: "2px solid red",
           }}
         >
           <Box sx={{ display: "flex", width: "100%", mt: 4, gap: 2, px: 2 }}>
@@ -227,8 +229,8 @@ export default function DashboardPage() {
                 </Box>
               </Box>
 
-              <Box component={Paper} sx={{ width: "100%", height: "50vh" }}>
-                component 2
+              <Box component={Paper} sx={{ width: "100%", minHeight: "50vh" }}>
+                <DashboardGraph />
               </Box>
             </Box>
           </Box>
