@@ -10,6 +10,7 @@ import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import CardBodyComponent from "../components/cardBodyComponent";
+import PersonIcon from "@mui/icons-material/Person";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -76,6 +77,14 @@ export default function DashboardPage() {
                   time="4.30 Hours ago"
                   id="#4A7d5"
                 />
+                <CardBodyComponent
+                  title="in process"
+                  name="Ahmed Mohamed"
+                  status="Invalid Status in McDonalds Company"
+                  date="Feb 11 ,2024"
+                  time="4.30 Hours ago"
+                  id="#4A7d5"
+                />
               </Card>
             </Box>
             <Box
@@ -96,7 +105,32 @@ export default function DashboardPage() {
                     width: "50%",
                   }}
                 >
-                  Most Active employee
+                  <Card>
+                    <CardContent
+                      sx={{
+                        bgcolor: "#f4f4f4",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "left",
+                        flexDirection: "row-reverse",
+                        gap: 2,
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "var(--primary-font)",
+                          fontSize: "1rem",
+                          fontWeight: "600",
+                          color: "var( --dark-background)",
+                        }}
+                      >
+                        Most Active Employee
+                      </Typography>
+                      <IconButton sx={{ color: "var(--dark-background)" }}>
+                        <PersonIcon />
+                      </IconButton>
+                    </CardContent>
+                  </Card>
                 </Box>
                 <Box
                   component={Paper}
