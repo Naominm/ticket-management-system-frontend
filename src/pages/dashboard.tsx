@@ -82,6 +82,7 @@ export default function DashboardPage() {
                   date="Feb 11 ,2024"
                   time="4.30 Hours ago"
                   id="#4A7d5"
+                  bg="var(--yellow-color)"
                 />
                 <CardBodyComponent
                   title="in process"
@@ -90,6 +91,7 @@ export default function DashboardPage() {
                   date="Feb 11 ,2024"
                   time="4.30 Hours ago"
                   id="#4A7d5"
+                  bg="red"
                 />
                 <CardBodyComponent
                   title="in process"
@@ -98,6 +100,7 @@ export default function DashboardPage() {
                   date="Feb 11 ,2024"
                   time="4.30 Hours ago"
                   id="#4A7d5"
+                  bg="green"
                 />
               </Card>
               <ShowAll />

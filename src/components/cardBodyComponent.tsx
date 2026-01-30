@@ -17,6 +17,7 @@ interface CardProps {
   status: string;
   date: string;
   time: string;
+  bg: string;
 }
 
 export default function CardBodyComponent({
@@ -26,6 +27,7 @@ export default function CardBodyComponent({
   status,
   date,
   time,
+  bg,
 }: CardProps) {
   return (
     <Card>
@@ -43,7 +45,7 @@ export default function CardBodyComponent({
             variant="contained"
             sx={{
               fontFamily: "var(--primary-font)",
-              bgcolor: "var(--yellow-color)",
+              bgcolor: bg,
               fontSize: "0.5rem",
             }}
           >
