@@ -17,6 +17,7 @@ import MostClientActive from "../components/mostClientActiveComponent";
 import PeopleIcon from "@mui/icons-material/People";
 import mcDonaldsAvatar from "../assets/macdonalds.png";
 import BurgerKingAvatar from "../assets/burgerking.png";
+import othanimAvatar from "../assets/othanim.png";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -43,7 +44,7 @@ export default function DashboardPage() {
                 flexDirection: "column",
                 width: "35%",
                 height: "auto",
-                minHeight: "100vh",
+                minHeight: "120vh",
               }}
             >
               <Card sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -122,7 +123,7 @@ export default function DashboardPage() {
                 gap: 2,
               }}
             >
-              <Box sx={{ display: "flex", gap: 2, height: "50vh" }}>
+              <Box sx={{ display: "flex", gap: 2, minHeight: "50vh" }}>
                 <Box
                   component={Paper}
                   sx={{
@@ -130,6 +131,7 @@ export default function DashboardPage() {
                     flexDirection: "column",
                     gap: 2,
                     width: "50%",
+                    height: "auto",
                   }}
                 >
                   <Card>
@@ -187,7 +189,7 @@ export default function DashboardPage() {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 2,
+                    gap: 1,
                     width: "50%",
                   }}
                 >
@@ -224,6 +226,11 @@ export default function DashboardPage() {
                     name="BurgerKing"
                     number={60}
                     avatar={BurgerKingAvatar}
+                  />
+                  <MostClientActive
+                    name="Othanim"
+                    number={55}
+                    avatar={othanimAvatar}
                   />
                 </Box>
               </Box>
