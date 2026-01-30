@@ -12,7 +12,7 @@ import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import CardBodyComponent from "../components/cardBodyComponent";
 import PersonIcon from "@mui/icons-material/Person";
-import manAvatar from "../assets/man.png";
+import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -158,52 +158,11 @@ export default function DashboardPage() {
                         <PersonIcon />
                       </IconButton>
                     </CardContent>
-                    <CardContent
-                      sx={{ display: "flex", width: "100%", gap: 5 }}
-                    >
-                      <Box sx={{ display: "flex", gap: 2 }}>
-                        <Box
-                          component={"img"}
-                          sx={{ width: "40px" }}
-                          src={manAvatar}
-                        />
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontSize: "1rem",
-                            fontFamily: "var(--primary-font)",
-                            color: "#000",
-                            fontWeight: 400,
-                          }}
-                        >
-                          Ahmed Mohhamed
-                        </Typography>
-                      </Box>
-                      <Box sx={{ display: "flex", gap: 4 }}>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontFamily: "var(--primary-font)",
-                            color: "gray",
-                            fontSize: "1rem",
-                            fontWeight: 400,
-                          }}
-                        >
-                          1400
-                        </Typography>
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontFamily: "var(--primary-font)",
-                            fontSize: "1rem",
-                            color: "green",
-                            fontWeight: 400,
-                          }}
-                        >
-                          99%
-                        </Typography>
-                      </Box>
-                    </CardContent>
+                    <MostActiveEmployeeCard
+                      name="Ahmed Mohhamed"
+                      percentage="99%"
+                      number={1400}
+                    />
                   </Card>
                 </Box>
                 <Box
