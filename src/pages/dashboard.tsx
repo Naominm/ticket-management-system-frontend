@@ -18,6 +18,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import mcDonaldsAvatar from "../assets/macdonalds.png";
 import BurgerKingAvatar from "../assets/burgerking.png";
 import othanimAvatar from "../assets/othanim.png";
+import ShowAll from "../components/showAllButton";
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -100,20 +101,7 @@ export default function DashboardPage() {
                   id="#4A7d5"
                 />
               </Card>
-              <Box sx={{ display: "flex", justifyContent: "right", pr: 2 }}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    my: 2,
-                    backgroundColor: "var(--dark-background)",
-                    textTransform: "capitalize",
-                    maxWidth: "120px",
-                  }}
-                >
-                  show all
-                </Button>
-              </Box>
+              <ShowAll />
             </Box>
             <Box
               sx={{
@@ -170,19 +158,7 @@ export default function DashboardPage() {
                       number={1400}
                     />
                   </Card>
-                  <Box sx={{ display: "flex", justifyContent: "right", mr: 2 }}>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        my: 2,
-                        backgroundColor: "var(--dark-background)",
-                        textTransform: "capitalize",
-                        maxWidth: "120px",
-                      }}
-                    >
-                      Show All
-                    </Button>
-                  </Box>
+                  <ShowAll />
                 </Box>
                 <Box
                   component={Paper}
@@ -232,8 +208,10 @@ export default function DashboardPage() {
                     number={55}
                     avatar={othanimAvatar}
                   />
+                  <ShowAll />
                 </Box>
               </Box>
+
               <Box component={Paper} sx={{ width: "100%", height: "50vh" }}>
                 component 2
               </Box>
