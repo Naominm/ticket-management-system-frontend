@@ -1,6 +1,7 @@
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, Avatar, Typography, IconButton } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 export default function SettingsPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -37,8 +38,7 @@ export default function SettingsPage() {
                 justifyContent: "center",
               }}
             >
-              {" "}
-              Avatar goes here
+              <AvatarSec />
             </Paper>
             <Paper>
               <Box sx={{ minHeight: "60vh" }}>Your description</Box>
@@ -61,6 +61,38 @@ export default function SettingsPage() {
           </Box>
         </Box>
       </Box>
+    </Box>
+  );
+}
+function AvatarSec() {
+  return (
+    <Box sx={{ position: "relative" }}>
+      <Avatar
+        src=""
+        alt="user avater"
+        sx={{
+          width: 100,
+          height: 100,
+          bgcolor: "#f1f1f1",
+        }}
+      />
+      <IconButton
+        size="small"
+        sx={{
+          position: "absolute",
+          bottom: 4,
+          right: 4,
+          bgcolor: "#6A1B9A",
+          color: "#fff",
+          "&:hover": {
+            bgcolor: "#4a148c",
+          },
+          width: 28,
+          height: 28,
+        }}
+      >
+        <CameraAltIcon sx={{ fontSize: 16 }} />
+      </IconButton>
     </Box>
   );
 }
