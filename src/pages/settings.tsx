@@ -2,6 +2,7 @@ import { Box, Paper, Avatar, Typography, IconButton } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import AvatarImage from "../assets/boy.png";
 export default function SettingsPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -68,7 +69,7 @@ function AvatarSec() {
   return (
     <Box sx={{ position: "relative" }}>
       <Avatar
-        src=""
+        src={AvatarImage}
         alt="user avater"
         sx={{
           width: 100,
