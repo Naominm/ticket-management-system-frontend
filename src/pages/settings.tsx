@@ -41,8 +41,36 @@ export default function SettingsPage() {
             >
               <AvatarSec />
             </Paper>
-            <Paper>
-              <Box sx={{ minHeight: "60vh" }}>Your description</Box>
+            <Paper
+              sx={{
+                bgcolor: "#EDEDED",
+                px: 2,
+                py: 4,
+                fontFamily: "var(--primary-font)",
+              }}
+            >
+              Your Description
+              <Box
+                component={Paper}
+                sx={{ minHeight: "60vh", color: "#fff", mt: 2 }}
+              >
+                <Typography
+                  variant="body2"
+                  sx={{
+                    fontFamily: "var(--primary-font)",
+                    fontSize: "0.8rem",
+                    color: "gray",
+                    p: 2,
+                  }}
+                >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Maxime mollitia, Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Maxime mollitia, | Lorem ipsum dolor sit
+                  amet consectetur adipisicing elit. Maxime mollitia, Lorem
+                  ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                  mollitia,
+                </Typography>
+              </Box>
             </Paper>
           </Box>
           <Box
