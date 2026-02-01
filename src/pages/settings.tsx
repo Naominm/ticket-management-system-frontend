@@ -101,6 +101,7 @@ function AvatarSec() {
           fontSize: "1rem",
           fontWeight: 600,
           mt: 1,
+          textAlign: "center",
         }}
       >
         Your Name
@@ -108,7 +109,11 @@ function AvatarSec() {
       <Typography
         variant="body2"
         color="gray"
-        sx={{ fontFamily: "var(--primary-font)", fontSize: "0.6rem" }}
+        sx={{
+          fontFamily: "var(--primary-font)",
+          fontSize: "0.6rem",
+          textAlign: "center",
+        }}
       >
         Your Job Title
       </Typography>
