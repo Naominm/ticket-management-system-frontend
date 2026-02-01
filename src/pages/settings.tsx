@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 export default function SettingsPage() {
@@ -16,8 +16,50 @@ export default function SettingsPage() {
             height: "auto",
             minHeight: "200vh",
             display: "flex",
+            gap: 5,
           }}
-        ></Box>
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "35%",
+              height: "auto",
+              gap: 2,
+              mt: 2,
+            }}
+          >
+            <Paper
+              sx={{
+                minHeight: "40vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {" "}
+              Avatar goes here
+            </Paper>
+            <Paper>
+              <Box sx={{ minHeight: "60vh" }}>Your description</Box>
+            </Paper>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "75%",
+              height: "auto",
+              gap: 2,
+              mt: 2,
+            }}
+          >
+            <Paper sx={{ minHeight: "40vh" }}> Employee growth</Paper>
+            <Paper>
+              <Box sx={{ minHeight: "60vh" }}>form</Box>
+            </Paper>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
