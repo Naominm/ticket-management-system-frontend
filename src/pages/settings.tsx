@@ -80,8 +80,8 @@ function AvatarSec() {
         size="small"
         sx={{
           position: "absolute",
-          bottom: 4,
-          right: 4,
+          bottom: 65,
+          right: 10,
           bgcolor: "#6A1B9A",
           color: "#fff",
           "&:hover": {
@@ -93,6 +93,24 @@ function AvatarSec() {
       >
         <CameraAltIcon sx={{ fontSize: 16 }} />
       </IconButton>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          fontFamily: "var(--primary-font)",
+          fontSize: "1rem",
+          fontWeight: 600,
+          mt: 1,
+        }}
+      >
+        Your Name
+      </Typography>
+      <Typography
+        variant="body2"
+        color="gray"
+        sx={{ fontFamily: "var(--primary-font)", fontSize: "0.6rem" }}
+      >
+        Your Job Title
+      </Typography>
     </Box>
   );
 }
