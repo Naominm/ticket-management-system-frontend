@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Paper,
@@ -7,12 +8,16 @@ import {
   FormLabel,
   FormControl,
   TextField,
+  Button,
+  Tab,
+  Tabs,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AvatarImage from "../assets/boy.png";
 export default function SettingsPage() {
+  const [tab, setTab] = useState(0);
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
       <SidebarComponent />
@@ -93,152 +98,45 @@ export default function SettingsPage() {
             }}
           >
             <Paper sx={{ minHeight: "40vh" }}> Employee growth</Paper>
-            <Paper>
-              <Box sx={{ minHeight: "60vh" }}>
-                <Box sx={{ display: "flex", gap: 4, px: 2, py: 2 }}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      fontFamily: "var(--primary-font)",
-                      fontWeight: 400,
-                      fontSize: "1rem",
-                      color: "gray",
-                    }}
-                  >
-                    Personal Details
-                  </Typography>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{
-                      fontFamily: "var(--primary-font)",
-                      fontSize: "1rem",
-                      fontWeight: 400,
-                      color: "gray",
-                    }}
-                  >
-                    Job Details
-                  </Typography>
-                </Box>
-                <hr />
-                <Box
+            <Tabs
+              value={tab}
+              onChange={(_, newValue) => setTab(newValue)}
+              indicatorColor="primary"
+              textColor="primary"
+              sx={{
+                px: 2,
+                borderBottom: "1px solid gray",
+                "& .MuiTab-root": {
+                  fontFamily: "var(--primary-font)",
+                  textTransform: "none",
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                },
+              }}
+            >
+              <Tab label="Personal Details" />
+              <Tab label="Job Details" />
+            </Tabs>
+
+            <Box sx={{ minHeight: "60vh" }}>
+              {tab === 0 && <PersonalDetailsForm />}
+              {/* {tab === 1 && <JobDetailsForm />} */}
+              <Box
+                sx={{ display: "flex", justifyContent: "right", pr: 2, mt: 4 }}
+              >
+                <Button
+                  variant="contained"
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    gap: 4,
-                    padding: 4,
+                    bgcolor: "var(--dark-background)",
+                    color: "#fff",
+                    fontFamily: "var(--primary-font)",
+                    fontWeight: 600,
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <FormControl
-                      sx={{
-                        display: "flex",
-                        gap: 1,
-                        width: "50%",
-                      }}
-                    >
-                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-                        First Name
-                      </FormLabel>
-                      <TextField
-                        size="small"
-                        sx={{
-                          maxWidth: "100%",
-                          bgcolor: "#DEDEDE",
-                          fontFamily: "var(--primary-font)",
-                        }}
-                      />
-                    </FormControl>
-                    <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
-                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-                        Last Name
-                      </FormLabel>
-                      <TextField
-                        size="small"
-                        sx={{
-                          maxWidth: "100%",
-                          bgcolor: "#DEDEDE",
-                          border: "none",
-                          fontFamily: "var(--primary-font)",
-                        }}
-                      />
-                    </FormControl>
-                  </Box>
-                  <FormControl
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      width: "100%",
-                    }}
-                  >
-                    <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-                      Email
-                    </FormLabel>
-                    <TextField
-                      size="small"
-                      sx={{
-                        width: "100%",
-                        bgcolor: "#DEDEDE",
-                        fontFamily: "var(--primary-font)",
-                      }}
-                    />
-                  </FormControl>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 10,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <FormControl
-                      sx={{
-                        display: "flex",
-                        gap: 1,
-                        width: "50%",
-                      }}
-                    >
-                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-                        password
-                      </FormLabel>
-                      <TextField
-                        size="small"
-                        type="password"
-                        sx={{
-                          maxWidth: "100%",
-                          bgcolor: "#DEDEDE",
-                          fontFamily: "var(--primary-font)",
-                        }}
-                      />
-                    </FormControl>
-                    <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
-                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-                        Confirm Password
-                      </FormLabel>
-                      <TextField
-                        size="small"
-                        type="password"
-                        sx={{
-                          maxWidth: "100%",
-                          bgcolor: "#DEDEDE",
-                          border: "none",
-                          fontFamily: "var(--primary-font)",
-                        }}
-                      />
-                    </FormControl>
-                  </Box>
-                </Box>
+                  Submit
+                </Button>
               </Box>
-            </Paper>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -297,6 +195,118 @@ function AvatarSec() {
       >
         Your Job Title
       </Typography>
+    </Box>
+  );
+}
+
+function PersonalDetailsForm() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 10,
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <FormControl
+          sx={{
+            display: "flex",
+            gap: 1,
+            width: "50%",
+          }}
+        >
+          <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+            First Name
+          </FormLabel>
+          <TextField
+            size="small"
+            sx={{
+              maxWidth: "100%",
+              bgcolor: "#DEDEDE",
+              fontFamily: "var(--primary-font)",
+            }}
+          />
+        </FormControl>
+        <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
+          <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+            Last Name
+          </FormLabel>
+          <TextField
+            size="small"
+            sx={{
+              maxWidth: "100%",
+              bgcolor: "#DEDEDE",
+              border: "none",
+              fontFamily: "var(--primary-font)",
+            }}
+          />
+        </FormControl>
+      </Box>
+      <FormControl
+        sx={{
+          display: "flex",
+          gap: 1,
+          width: "100%",
+        }}
+      >
+        <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>Email</FormLabel>
+        <TextField
+          size="small"
+          sx={{
+            width: "100%",
+            bgcolor: "#DEDEDE",
+            fontFamily: "var(--primary-font)",
+          }}
+        />
+      </FormControl>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 10,
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <FormControl
+          sx={{
+            display: "flex",
+            gap: 1,
+            width: "50%",
+          }}
+        >
+          <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+            password
+          </FormLabel>
+          <TextField
+            size="small"
+            type="password"
+            sx={{
+              maxWidth: "100%",
+              bgcolor: "#DEDEDE",
+              fontFamily: "var(--primary-font)",
+            }}
+          />
+        </FormControl>
+        <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
+          <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+            Confirm Password
+          </FormLabel>
+          <TextField
+            size="small"
+            type="password"
+            sx={{
+              maxWidth: "100%",
+              bgcolor: "#DEDEDE",
+              border: "none",
+              fontFamily: "var(--primary-font)",
+            }}
+          />
+        </FormControl>
+      </Box>
     </Box>
   );
 }
