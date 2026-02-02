@@ -120,7 +120,7 @@ export default function SettingsPage() {
 
             <Box sx={{ minHeight: "60vh" }}>
               {tab === 0 && <PersonalDetailsForm />}
-              {/* {tab === 1 && <JobDetailsForm />} */}
+              {tab === 1 && <JobDetailsForm />}
               <Box
                 sx={{ display: "flex", justifyContent: "right", pr: 2, mt: 4 }}
               >
@@ -307,6 +307,61 @@ function PersonalDetailsForm() {
           />
         </FormControl>
       </Box>
+    </Box>
+  );
+}
+
+function JobDetailsForm() {
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <FormControl fullWidth>
+        <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+          Job Title
+        </FormLabel>
+        <TextField
+          size="small"
+          placeholder="Net Developer"
+          sx={{
+            bgcolor: "#DEDEDE",
+            "& .MuiInputBase-input": {
+              fontFamily: "var(--primary-font)",
+            },
+          }}
+        />
+      </FormControl>
+
+      <FormControl fullWidth>
+        <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+          Department
+        </FormLabel>
+        <TextField
+          size="small"
+          placeholder="Development"
+          sx={{
+            bgcolor: "#DEDEDE",
+            "& .MuiInputBase-input": {
+              fontFamily: "var(--primary-font)",
+            },
+          }}
+        />
+      </FormControl>
+
+      <FormControl fullWidth>
+        <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+          Placing Positions
+        </FormLabel>
+        <TextField
+          size="small"
+          placeholder="senior"
+          sx={{
+            bgcolor: "#DEDEDE",
+            fontFamily: "var(--primary-font)",
+            "& .MuiInputBase-input": {
+              fontFamily: "var(--primary-font)",
+            },
+          }}
+        />
+      </FormControl>
     </Box>
   );
 }
