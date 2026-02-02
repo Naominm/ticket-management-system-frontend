@@ -85,7 +85,33 @@ export default function SettingsPage() {
           >
             <Paper sx={{ minHeight: "40vh" }}> Employee growth</Paper>
             <Paper>
-              <Box sx={{ minHeight: "60vh" }}>form</Box>
+              <Box sx={{ minHeight: "60vh" }}>
+                <Box sx={{ display: "flex", gap: 4, px: 2, py: 2 }}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontFamily: "var(--primary-font)",
+                      fontWeight: 400,
+                      fontSize: "1rem",
+                      color: "gray",
+                    }}
+                  >
+                    Personal Details
+                  </Typography>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontFamily: "var(--primary-font)",
+                      fontSize: "1rem",
+                      fontWeight: 400,
+                      color: "gray",
+                    }}
+                  >
+                    Job Details
+                  </Typography>
+                </Box>
+                <hr />
+              </Box>
             </Paper>
           </Box>
         </Box>
