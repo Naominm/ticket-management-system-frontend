@@ -16,6 +16,7 @@ import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AvatarImage from "../assets/boy.png";
+import EmployeeGrowthGraph from "../components/lineGraphComponent";
 export default function SettingsPage() {
   const [tab, setTab] = useState(0);
   return (
@@ -97,7 +98,10 @@ export default function SettingsPage() {
               mt: 2,
             }}
           >
-            <Paper sx={{ minHeight: "40vh" }}> Employee growth</Paper>
+            <Paper sx={{ minHeight: "40vh" }}>
+              {" "}
+              <EmployeeGrowthGraph />
+            </Paper>
             <Tabs
               value={tab}
               onChange={(_, newValue) => setTab(newValue)}
