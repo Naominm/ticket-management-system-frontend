@@ -166,16 +166,14 @@ export default function SettingsPage() {
                   <FormControl
                     sx={{
                       display: "flex",
-                      flexDirection: "row",
-                      gap: 4,
-                      alignItems: "center",
+                      gap: 1,
                       width: "100%",
                     }}
                   >
                     <FormLabel>Email</FormLabel>
                     <TextField
                       size="small"
-                      sx={{ width: "90%", bgcolor: "#DEDEDE" }}
+                      sx={{ width: "100%", bgcolor: "#DEDEDE" }}
                     />
                   </FormControl>
                 </Box>
