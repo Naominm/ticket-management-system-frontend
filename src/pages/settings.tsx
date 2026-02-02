@@ -124,6 +124,7 @@ export default function SettingsPage() {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
+                    justifyContent: "center",
                     gap: 4,
                     padding: 4,
                   }}
@@ -147,7 +148,7 @@ export default function SettingsPage() {
                       <FormLabel>First Name</FormLabel>
                       <TextField
                         size="small"
-                        sx={{ maxWidth: "200px", bgcolor: "#DEDEDE" }}
+                        sx={{ maxWidth: "100%", bgcolor: "#DEDEDE" }}
                       />
                     </FormControl>
                     <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
@@ -155,7 +156,7 @@ export default function SettingsPage() {
                       <TextField
                         size="small"
                         sx={{
-                          maxWidth: "200px",
+                          maxWidth: "100%",
                           bgcolor: "#DEDEDE",
                           border: "none",
                         }}
