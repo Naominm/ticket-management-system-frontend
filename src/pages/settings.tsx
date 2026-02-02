@@ -145,20 +145,29 @@ export default function SettingsPage() {
                         width: "50%",
                       }}
                     >
-                      <FormLabel>First Name</FormLabel>
+                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+                        First Name
+                      </FormLabel>
                       <TextField
                         size="small"
-                        sx={{ maxWidth: "100%", bgcolor: "#DEDEDE" }}
+                        sx={{
+                          maxWidth: "100%",
+                          bgcolor: "#DEDEDE",
+                          fontFamily: "var(--primary-font)",
+                        }}
                       />
                     </FormControl>
                     <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
-                      <FormLabel>Last Name</FormLabel>
+                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+                        Last Name
+                      </FormLabel>
                       <TextField
                         size="small"
                         sx={{
                           maxWidth: "100%",
                           bgcolor: "#DEDEDE",
                           border: "none",
+                          fontFamily: "var(--primary-font)",
                         }}
                       />
                     </FormControl>
@@ -170,10 +179,16 @@ export default function SettingsPage() {
                       width: "100%",
                     }}
                   >
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+                      Email
+                    </FormLabel>
                     <TextField
                       size="small"
-                      sx={{ width: "100%", bgcolor: "#DEDEDE" }}
+                      sx={{
+                        width: "100%",
+                        bgcolor: "#DEDEDE",
+                        fontFamily: "var(--primary-font)",
+                      }}
                     />
                   </FormControl>
                 </Box>
