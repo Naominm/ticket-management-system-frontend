@@ -191,6 +191,51 @@ export default function SettingsPage() {
                       }}
                     />
                   </FormControl>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <FormControl
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        width: "50%",
+                      }}
+                    >
+                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+                        password
+                      </FormLabel>
+                      <TextField
+                        size="small"
+                        type="password"
+                        sx={{
+                          maxWidth: "100%",
+                          bgcolor: "#DEDEDE",
+                          fontFamily: "var(--primary-font)",
+                        }}
+                      />
+                    </FormControl>
+                    <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
+                      <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
+                        Confirm Password
+                      </FormLabel>
+                      <TextField
+                        size="small"
+                        type="password"
+                        sx={{
+                          maxWidth: "100%",
+                          bgcolor: "#DEDEDE",
+                          border: "none",
+                          fontFamily: "var(--primary-font)",
+                        }}
+                      />
+                    </FormControl>
+                  </Box>
                 </Box>
               </Box>
             </Paper>
