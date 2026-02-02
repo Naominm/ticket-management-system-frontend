@@ -1,4 +1,13 @@
-import { Box, Paper, Avatar, Typography, IconButton } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Avatar,
+  Typography,
+  IconButton,
+  FormLabel,
+  FormControl,
+  TextField,
+} from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
@@ -111,6 +120,49 @@ export default function SettingsPage() {
                   </Typography>
                 </Box>
                 <hr />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 4,
+                    padding: 4,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 10,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <FormControl
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        width: "50%",
+                      }}
+                    >
+                      <FormLabel>First Name</FormLabel>
+                      <TextField
+                        size="small"
+                        sx={{ maxWidth: "200px", bgcolor: "#DEDEDE" }}
+                      />
+                    </FormControl>
+                    <FormControl sx={{ display: "flex", gap: 1, width: "50%" }}>
+                      <FormLabel>Last Name</FormLabel>
+                      <TextField
+                        size="small"
+                        sx={{
+                          maxWidth: "200px",
+                          bgcolor: "#DEDEDE",
+                          border: "none",
+                        }}
+                      />
+                    </FormControl>
+                  </Box>
+                </Box>
               </Box>
             </Paper>
           </Box>
