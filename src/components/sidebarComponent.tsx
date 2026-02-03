@@ -31,11 +31,11 @@ export default function SidebarComponent() {
         flexShrink: 0,
         whiteSpace: "nowrap",
         transition: "width 0.3s",
-        "&.MuiDrawer-paper": {
+        "& .MuiDrawer-paper": {
           width: open ? drawerWidth : 72,
           transition: "width 0.3s",
           overflowX: "hidden",
-          backgroundColor: "var(--background-color)",
+          backgroundColor: "#fff",
           color: "var(--primary-deep-color)",
           boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.65)",
         },
@@ -47,52 +47,45 @@ export default function SidebarComponent() {
           display: "flex",
           alignItems: "center",
           justifyContent: open ? "flex-start" : "center",
-          px: open ? 2 : 0,
-        }}
-      >
-        {open && (
-          <Box
-            sx={{
-              mt: 2,
-              width: 120,
-              height: 120,
-              borderRadius: "50%",
-              backgroundColor: "#f1f1f2",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Box
-              component="img"
-              src={tenakataLogo}
-              alt="Tenakata logo"
-              sx={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "50%",
-                objectFit: "contain",
-                px: 1,
-              }}
-            />
-          </Box>
-        )}
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: open ? "flex-start" : "center",
-          px: open ? 2 : 0,
-          mt: open ? 5 : -12,
+          px: open ? 0 : 0,
         }}
       >
         <IconButton onClick={() => setOpen(!open)} sx={{ color: "gray" }}>
           <MenuIcon />
         </IconButton>
+
+        {open && (
+          <>
+            <Box
+              sx={{
+                mt: 10,
+                width: 120,
+                height: 120,
+                borderRadius: "50%",
+                backgroundColor: "#f1f1f2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                component="img"
+                src={tenakataLogo}
+                alt="Tenakata logo"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  objectFit: "contain",
+                  px: 1,
+                }}
+              />
+            </Box>
+          </>
+        )}
       </Box>
 
-      <List>
+      <List sx={{ mt: 8 }}>
         <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
         <SidebarItem open={open} icon={<MapsHomeWorkIcon />} label="Tickets" />
         <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
