@@ -38,7 +38,7 @@ export default function EmployeeGrowthGraph() {
         Employee Growth Rate (Monthly)
       </Typography>
 
-      <ResponsiveContainer width="100%" height="85%">
+      <ResponsiveContainer width="90%" height="85%">
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />

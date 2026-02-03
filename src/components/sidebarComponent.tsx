@@ -13,6 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DashBoardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -93,6 +94,7 @@ export default function SidebarComponent() {
 
       <List>
         <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
+        <SidebarItem open={open} icon={<MapsHomeWorkIcon />} label="Tickets" />
         <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
       </List>
       {open && (
