@@ -164,7 +164,20 @@ function SidebarItem({
       >
         {icon}
       </ListItemIcon>
-      {open && <ListItemText primary={label} />}
+      {open && (
+        <ListItemText
+          primary={label}
+          slotProps={{
+            primary: {
+              sx: {
+                fontFamily: "var(--primary-font)",
+                fontSize: "1rem",
+                fontWeight: 500,
+              },
+            },
+          }}
+        />
+      )}
     </ListItemButton>
   );
 }
