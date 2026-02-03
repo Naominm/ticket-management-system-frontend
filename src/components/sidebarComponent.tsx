@@ -48,9 +48,13 @@ export default function SidebarComponent() {
           alignItems: "center",
           justifyContent: open ? "flex-start" : "center",
           px: open ? 0 : 0,
+          mt: 0,
         }}
       >
-        <IconButton onClick={() => setOpen(!open)} sx={{ color: "gray" }}>
+        <IconButton
+          onClick={() => setOpen(!open)}
+          sx={{ color: "gray", mb: 10 }}
+        >
           <MenuIcon />
         </IconButton>
 
