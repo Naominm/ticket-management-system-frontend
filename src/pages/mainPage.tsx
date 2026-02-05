@@ -8,6 +8,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
@@ -129,9 +130,18 @@ export default function CollapsibleSidebar() {
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
-                  <Typography sx={{ fontFamily: "var(--primary-font)" }}>
-                    Burger King
-                  </Typography>
+                  <input
+                    type="text"
+                    placeholder="Enter the department ID"
+                    value={departmentId}
+                    onChange={(e) => setDepartmentId(e.target.value)}
+                    style={{
+                      border: "none",
+                      outline: "none",
+                      background: "transparent",
+                      fontFamily: "var(--primary-font)",
+                    }}
+                  />
                 </ListItem>
                 <ListItem
                   sx={{
@@ -148,7 +158,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      Start Date <span style={{ color: "red" }}>*</span>
+                      Creation Date <span style={{ color: "red" }}>*</span>
                     </Typography>
                   </Box>
                   <CalendarMonthIcon />
