@@ -67,7 +67,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      product <span style={{ color: "red" }}>*</span>
+                      Task Title <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
@@ -113,7 +113,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      Company <span style={{ color: "red" }}>*</span>
+                      Company/Department <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
