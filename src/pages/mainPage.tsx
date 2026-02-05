@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Box, Typography, ListItem, List, Paper, Button } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
@@ -5,6 +6,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function CollapsibleSidebar() {
+  const [title, setTitle] = useState("");
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
@@ -71,9 +73,18 @@ export default function CollapsibleSidebar() {
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
-                  <Typography sx={{ fontFamily: "var(--primary-font)" }}>
-                    E-invoice
-                  </Typography>
+                  <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    multiple
+                    placeholder="Enter task title"
+                    style={{
+                      border: "none",
+                      outline: "none",
+                      background: "transparent",
+                      fontFamily: "var(--primary-font)",
+                    }}
+                  />
                 </ListItem>
                 <ListItem
                   sx={{
