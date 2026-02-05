@@ -178,7 +178,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      End Date<span style={{ color: "red" }}>*</span>
+                      priority<span style={{ color: "red" }}>*</span>
                     </Typography>
                   </Box>
                   <CalendarMonthIcon />
