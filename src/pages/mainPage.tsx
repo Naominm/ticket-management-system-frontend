@@ -7,6 +7,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
@@ -200,18 +201,25 @@ export default function CollapsibleSidebar() {
                   padding: 1,
                 }}
               >
-                <Typography
-                  variant="body2"
-                  sx={{ fontFamily: "var(--primary-font)", color: "gray" }}
-                >
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam,
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder=" Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam,
                   ipsa voluptatibus debitis officia non, in placeat excepturi
                   recusandae id minus possimus culpa dolore. Aperiam dolorum
                   aliquid quod facilis assumenda? Dolore enim esse velit tempora
                   ut dolor quia voluptatum itaque, iure asperiores, veritatis
                   maiores nobis facilis officiis repudiandae reiciendis neque
-                  ea.
-                </Typography>
+                  ea."
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    outline: "none",
+                    resize: "none",
+                    fontFamily: "var(--primary-font)",
+                  }}
+                />
               </Paper>
               <Box sx={{ display: "flex", mt: 4, width: "100%", gap: 0.5 }}>
                 <Button
