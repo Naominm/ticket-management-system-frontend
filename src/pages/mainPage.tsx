@@ -56,9 +56,18 @@ export default function CollapsibleSidebar() {
       setDescription("");
       setDepartmentId("");
       setPriority("MEDIUM");
-      <Alert severity="success">Ticket created</Alert>;
-    } catch (err) {
+      setAlert({
+        type: "sucess",
+        message: "Ticket Created Successfully",
+      });
+    } catch (err: any) {
       console.error(err);
+      setAlert({
+        type: "error",
+        message:
+          err.response?.data?.message ||
+          "Failed to create ticket please try again",
+      });
     }
   };
 
