@@ -8,17 +8,32 @@ import {
   Button,
   Select,
   MenuItem,
+  Alert,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { setLayout } from "recharts/types/state/layoutSlice";
 
 export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [departmentId, setDepartmentId] = useState("");
   const [priority, setPriority] = useState("medium");
+  const [loading, setLoading] = useState(false);
+
+  const handleCreateTicket = async () => {
+    if (!title || !description || !departmentId) {
+      <Alert severity="error">"Please fill in all fields"</Alert>;
+    }
+    try {
+      setLoading(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
@@ -268,13 +283,15 @@ export default function CollapsibleSidebar() {
                 </Button>
                 <Button
                   variant="contained"
+                  onClick={handleCreateTicket}
+                  disabled={loading}
                   sx={{
                     bgcolor: "var(--background-color)",
                     width: "50%",
                     fontFamily: "var(--primary-font)",
                   }}
                 >
-                  Add task
+                  {loading ? "creating a task" : "create task"}
                 </Button>
               </Box>
             </Box>
