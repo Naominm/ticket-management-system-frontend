@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import {
   Box,
@@ -14,7 +15,6 @@ import SidebarComponent from "../components/sidebarComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { setLayout } from "recharts/types/state/layoutSlice";
 
 export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
@@ -29,6 +29,22 @@ export default function CollapsibleSidebar() {
     }
     try {
       setLoading(true);
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://localhost:5000/api/tickets",
+        {
+          title,
+          description,
+          priority,
+          departmentId: Number(departmentId),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      console.log("Ticket created:", response.data);
     } catch (err) {
       console.error(err);
     }
@@ -291,7 +307,7 @@ export default function CollapsibleSidebar() {
                     fontFamily: "var(--primary-font)",
                   }}
                 >
-                  {loading ? "creating a task" : "create task"}
+                  {loading ? "creating a task" : "create"}
                 </Button>
               </Box>
             </Box>
