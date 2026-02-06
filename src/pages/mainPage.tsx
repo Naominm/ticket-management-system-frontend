@@ -20,7 +20,7 @@ export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [departmentId, setDepartmentId] = useState("");
-  const [priority, setPriority] = useState("medium");
+  const [priority, setPriority] = useState("MEDIUM");
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{
     type: "success" | "error";
