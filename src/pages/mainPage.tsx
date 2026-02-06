@@ -22,10 +22,17 @@ export default function CollapsibleSidebar() {
   const [departmentId, setDepartmentId] = useState("");
   const [priority, setPriority] = useState("medium");
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<{
+    type: "sucess" | "error";
+    message: string;
+  } | null>(null);
 
   const handleCreateTicket = async () => {
     if (!title || !description || !departmentId) {
-      <Alert severity="error">"Please fill in all fields"</Alert>;
+      setAlert({
+        type: "error",
+        message: "Please fill in all fields",
+      });
     }
     try {
       setLoading(true);
@@ -49,6 +56,7 @@ export default function CollapsibleSidebar() {
       setDescription("");
       setDepartmentId("");
       setPriority("MEDIUM");
+      <Alert severity="success">Ticket created</Alert>;
     } catch (err) {
       console.error(err);
     }
