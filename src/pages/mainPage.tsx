@@ -33,6 +33,7 @@ export default function CollapsibleSidebar() {
         type: "error",
         message: "Please fill in all fields",
       });
+      return;
     }
     try {
       setLoading(true);
