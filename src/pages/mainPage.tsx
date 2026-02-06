@@ -104,6 +104,16 @@ export default function CollapsibleSidebar() {
           >
             Create ticket component
           </Box>
+          {alert && (
+            <Alert
+              severity={alert.type}
+              sx={{ mb: 2 }}
+              onClose={() => setAlert(null)}
+            >
+              {alert.message}
+            </Alert>
+          )}
+
           <Box
             sx={{
               display: "flex",
