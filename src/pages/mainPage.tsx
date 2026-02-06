@@ -45,6 +45,10 @@ export default function CollapsibleSidebar() {
         },
       );
       console.log("Ticket created:", response.data);
+      setTitle("");
+      setDescription("");
+      setDepartmentId("");
+      setPriority("MEDIUM");
     } catch (err) {
       console.error(err);
     }
