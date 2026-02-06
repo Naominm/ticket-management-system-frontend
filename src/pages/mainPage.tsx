@@ -23,7 +23,7 @@ export default function CollapsibleSidebar() {
   const [priority, setPriority] = useState("medium");
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState<{
-    type: "sucess" | "error";
+    type: "success" | "error";
     message: string;
   } | null>(null);
 
@@ -57,7 +57,7 @@ export default function CollapsibleSidebar() {
       setDepartmentId("");
       setPriority("MEDIUM");
       setAlert({
-        type: "sucess",
+        type: "success",
         message: "Ticket Created Successfully",
       });
     } catch (err: any) {
