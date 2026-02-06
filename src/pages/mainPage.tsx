@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Box, Typography, ListItem, List, Paper, Button,Select,MenuItem } from "@mui/material";
+import {
+  Box,
+  Typography,
+  ListItem,
+  List,
+  Paper,
+  Button,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -9,7 +18,7 @@ export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [departmentId, setDepartmentId] = useState("");
-  const [priority setPriority]= useState  ("medium")
+  const [priority, setPriority] = useState("medium");
   return (
     <Box sx={{ display: "flex" }}>
       <SidebarComponent />
@@ -183,20 +192,19 @@ export default function CollapsibleSidebar() {
                     </Typography>
                   </Box>
                   <Select
-                  value={priority}
-                  onChange={(e)=>setPriority(e.target.value)}
-                  size="small"
-                  sx={{
-                    minWidth: 120,
-                    backgroundColor: "#fff",
-                    fontFamily: "var(--primary-font)",
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                    size="small"
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: "#fff",
+                      fontFamily: "var(--primary-font)",
                     }}
                   >
-                <MenuItem value="LOW">Low</MenuItem>
-                <MenuItem value="MEDIUM">Medium</MenuItem>
-                <MenuItem value="HIGH">High</MenuItem>
+                    <MenuItem value="LOW">Low</MenuItem>
+                    <MenuItem value="MEDIUM">Medium</MenuItem>
+                    <MenuItem value="HIGH">High</MenuItem>
                   </Select>
-                  
                 </ListItem>
               </List>
             </Box>
