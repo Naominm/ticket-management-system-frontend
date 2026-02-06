@@ -68,6 +68,8 @@ export default function CollapsibleSidebar() {
           err.response?.data?.message ||
           "Failed to create ticket please try again",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
