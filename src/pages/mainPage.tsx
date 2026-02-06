@@ -39,7 +39,7 @@ export default function CollapsibleSidebar() {
       setAlert(null);
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:5000/api/tickets",
+        "http://localhost:5000/api/ticket",
         {
           title,
           description,
