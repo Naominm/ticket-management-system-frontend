@@ -48,12 +48,10 @@ export default function CollapsibleSidebar() {
           departmentId: Number(departmentId),
         },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true,
         },
       );
-      console.log("Ticket created:", response.data);
+      console.log("Ticket created:", response.data, token);
       setTitle("");
       setDescription("");
       setDepartmentId("");

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Drawer,
   IconButton,
@@ -22,6 +23,7 @@ import tenakataLogo from "../assets/logo.png";
 const drawerWidth = 165;
 export default function SidebarComponent() {
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   return (
     <Drawer
       variant="permanent"
@@ -92,7 +94,12 @@ export default function SidebarComponent() {
 
       <List sx={{ mt: 8 }}>
         <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
-        <SidebarItem open={open} icon={<MapsHomeWorkIcon />} label="Tickets" />
+        <SidebarItem
+          open={open}
+          icon={<MapsHomeWorkIcon />}
+          label="Tickets"
+          onClick={() => navigate("/ticket")}
+        />
         <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
       </List>
       {open && (
@@ -134,13 +141,16 @@ function SidebarItem({
   open,
   icon,
   label,
+  onClick,
 }: {
   open: boolean;
   icon: React.ReactNode;
   label: string;
+  onClick?: () => void;
 }) {
   return (
     <ListItemButton
+      onClick={onClick}
       sx={{
         minHeight: 48,
         justifyContent: open ? "initial" : "center",
