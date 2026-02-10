@@ -104,7 +104,12 @@ export default function SidebarComponent() {
           label="Tickets"
           onClick={() => navigate("/home")}
         />
-        <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
+        <SidebarItem
+          open={open}
+          icon={<SettingsIcon />}
+          label="Settings"
+          onClick={() => navigate("/settings")}
+        />
       </List>
       {open && (
         <Box
