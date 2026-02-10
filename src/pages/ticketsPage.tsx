@@ -25,13 +25,13 @@ import { green, red, orange } from "@mui/material/colors";
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case "OPEN":
+    case "CLOSED":
     case "green":
       return green[500];
-    case "CLOSED":
+    case "NOT_RESOLVED":
     case "red":
       return red[500];
-    case "IN_PROGRESS":
+    case "OPEN":
     case "orange":
       return orange[500];
     default:

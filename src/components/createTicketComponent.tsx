@@ -1,7 +1,9 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
+import { useNavigate } from "react-router";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function CreateTicketComponent() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -34,6 +36,7 @@ export default function CreateTicketComponent() {
           fontFamily: "Var(--primary-font)",
           textTransform: "capitalize",
         }}
+        onClick={() => navigate("/home")}
       >
         Create a task
       </Button>
