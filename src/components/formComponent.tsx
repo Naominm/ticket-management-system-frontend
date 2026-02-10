@@ -66,6 +66,8 @@ function FormSection() {
           { firstName, lastName, email, password },
           { withCredentials: true },
         );
+        const token = res.data.token;
+        localStorage.setItem("token", token);
         console.log("signup successful", res.data);
         setIsSignup(false);
         setFirstName("");
