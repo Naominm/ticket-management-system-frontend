@@ -10,7 +10,10 @@ import {
   Paper,
   IconButton,
   Tooltip,
+  Typography,
 } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
@@ -20,63 +23,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { green, red, orange } from "@mui/material/colors";
 
-const rows = [
-  {
-    code: 6,
-    employee: "Othaim",
-    startDate: "20/11/23",
-    status: "green",
-    daysLeft: 0,
-    issue: "Invalid Invoices",
-  },
-  {
-    code: 5,
-    employee: "Burger King",
-    startDate: "20/11/22",
-    status: "orange",
-    daysLeft: 0,
-    issue: "Implementation",
-  },
-  {
-    code: 4,
-    employee: "McDonalds",
-    startDate: "20/11/21",
-    status: "red",
-    daysLeft: 7,
-    issue: "Install Program",
-  },
-  {
-    code: 3,
-    employee: "Othaim",
-    startDate: "20/11/20",
-    status: "green",
-    daysLeft: 0,
-    issue: "Invalid Invoices",
-  },
-  {
-    code: 2,
-    employee: "McDonalds",
-    startDate: "20/11/19",
-    status: "green",
-    daysLeft: 0,
-    issue: "Install Program",
-  },
-  {
-    code: 1,
-    employee: "Burger King",
-    startDate: "20/11/18",
-    status: "orange",
-    daysLeft: 2,
-    issue: "Invalid Invoices",
-  },
-];
-
 const getStatusColor = (status: string) => {
   switch (status) {
+    case "OPEN":
     case "green":
       return green[500];
+    case "CLOSED":
     case "red":
       return red[500];
+    case "IN_PROGRESS":
     case "orange":
       return orange[500];
     default:
@@ -87,6 +42,22 @@ const getStatusColor = (status: string) => {
 export default function TicketPage() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const {
+    data: tickets = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["tickets"],
+    queryFn: async () => {
+      const res = await axios.get(`${API_URL}/api/ticket`, {
+        withCredentials: true,
+      });
+      return res.data.tickets;
+    },
+  });
 
   return (
     <Box>
@@ -113,60 +84,82 @@ export default function TicketPage() {
             }}
           >
             <CreateTicketComponent />
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Code</TableCell>
-                    <TableCell>Employee</TableCell>
-                    <TableCell>Start Date</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Days Left</TableCell>
-                    <TableCell>Issue</TableCell>
-                    <TableCell align="center">
-                      <Tooltip title="Refresh">
-                        <IconButton sx={{ color: "var(--background-color)" }}>
-                          <RefreshIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.code}>
-                      <TableCell>{row.code}</TableCell>
-                      <TableCell>{row.employee}</TableCell>
-                      <TableCell>{row.startDate}</TableCell>
-                      <TableCell>
-                        <span
-                          style={{
-                            display: "inline-block",
-                            width: 16,
-                            height: 16,
-                            borderRadius: "50%",
-                            backgroundColor: getStatusColor(row.status),
-                          }}
-                        ></span>
-                      </TableCell>
-                      <TableCell>{row.daysLeft}</TableCell>
-                      <TableCell>{row.issue}</TableCell>
+            {isLoading && (
+              <Typography sx={{ p: 2 }}>Loading tickets...</Typography>
+            )}
+            {isError && (
+              <Typography color="error" sx={{ p: 2 }}>
+                Failed to load tickets
+              </Typography>
+            )}
+            {!isLoading && !isError && (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Code</TableCell>
+                      <TableCell>Employee</TableCell>
+                      <TableCell>Start Date</TableCell>
+                      <TableCell>Status</TableCell>
+                      <TableCell>Days Left</TableCell>
+                      <TableCell>Issue</TableCell>
                       <TableCell align="center">
-                        <IconButton
-                          sx={{ color: "var(--background-color)" }}
-                          onClick={() => {
-                            setSelectedRow(row.code);
-                            setOpenModal(true);
-                          }}
-                        >
-                          <EditIcon />
-                        </IconButton>
+                        <Tooltip title="Refresh">
+                          <IconButton
+                            sx={{ color: "var(--background-color)" }}
+                            onClick={() => refetch()}
+                          >
+                            <RefreshIcon />
+                          </IconButton>
+                        </Tooltip>
                       </TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  </TableHead>
+                  <TableBody>
+                    {tickets.map((ticket: any) => (
+                      <TableRow key={ticket.id}>
+                        <TableCell>{ticket.id}</TableCell>
+                        <TableCell>{ticket.user?.name || "N/A"}</TableCell>
+                        <TableCell>
+                          {new Date(ticket.createdAt).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <span
+                            style={{
+                              display: "inline-block",
+                              width: 16,
+                              height: 16,
+                              borderRadius: "50%",
+                              backgroundColor: getStatusColor(ticket.status),
+                            }}
+                          ></span>
+                        </TableCell>
+                        <TableCell>{ticket.priority}</TableCell>
+                        <TableCell>{ticket.title}</TableCell>
+                        <TableCell align="center">
+                          <IconButton
+                            sx={{ color: "var(--background-color" }}
+                            onClick={() => {
+                              setSelectedRow(ticket.id);
+                              setOpenModal(true);
+                            }}
+                          >
+                            <EditIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {tickets.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={7} align="center">
+                          No tickets Found
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
           </Box>
         </Box>
       </Box>

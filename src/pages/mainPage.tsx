@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   Box,
   Typography,
@@ -26,6 +27,7 @@ export default function CollapsibleSidebar() {
     type: "success" | "error";
     message: string;
   } | null>(null);
+  const navigate = useNavigate();
 
   const handleCreateTicket = async () => {
     if (!title || !description || !departmentId) {
@@ -60,6 +62,7 @@ export default function CollapsibleSidebar() {
         type: "success",
         message: "Ticket Created Successfully",
       });
+      navigate("/ticket");
     } catch (err: any) {
       console.error(err);
       setAlert({
