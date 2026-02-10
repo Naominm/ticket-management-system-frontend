@@ -91,14 +91,18 @@ export default function SidebarComponent() {
           </>
         )}
       </Box>
-
       <List sx={{ mt: 8 }}>
-        <SidebarItem open={open} icon={<DashBoardIcon />} label="Dashboard" />
+        <SidebarItem
+          open={open}
+          icon={<DashBoardIcon />}
+          label="Dashboard"
+          onClick={() => navigate("/dashboard")}
+        />
         <SidebarItem
           open={open}
           icon={<MapsHomeWorkIcon />}
           label="Tickets"
-          onClick={() => navigate("/ticket")}
+          onClick={() => navigate("/home")}
         />
         <SidebarItem open={open} icon={<SettingsIcon />} label="Settings" />
       </List>
