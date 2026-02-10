@@ -138,6 +138,7 @@ export default function SidebarComponent() {
             fontFamily: "var(--primary-font)",
             fontWeight: 800,
           }}
+          onClick={() => navigate("/")}
         >
           Log out
         </Button>
