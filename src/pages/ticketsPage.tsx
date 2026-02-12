@@ -122,7 +122,7 @@ export default function TicketPage() {
                     {tickets.map((ticket: any) => (
                       <TableRow key={ticket.id}>
                         <TableCell>{ticket.id}</TableCell>
-                        <TableCell>{ticket.user?.name || "N/A"}</TableCell>
+                        <TableCell>{ticket.user?.lastName || "N/A"}</TableCell>
                         <TableCell>
                           {new Date(ticket.createdAt).toLocaleDateString()}
                         </TableCell>
