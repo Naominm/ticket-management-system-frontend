@@ -41,7 +41,7 @@ const getStatusColor = (status: string) => {
 
 export default function TicketPage() {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
   const API_URL = import.meta.env.VITE_API_URL;
 
   const {
@@ -66,9 +66,12 @@ export default function TicketPage() {
         <Box component="main" sx={{ flexGrow: 1 }}>
           <SearchComponent />
           <EditModalStatus
+            ticket={selectedTicket}
             open={openModal}
-            selectedRow={selectedRow}
-            onClose={() => setOpenModal(false)}
+            onClose={() => {
+              setOpenModal(false);
+              setSelectedTicket(null);
+            }}
           />
 
           <Box
@@ -138,9 +141,9 @@ export default function TicketPage() {
                         <TableCell>{ticket.title}</TableCell>
                         <TableCell align="center">
                           <IconButton
-                            sx={{ color: "var(--background-color" }}
+                            sx={{ color: "var(--background-color)" }}
                             onClick={() => {
-                              setSelectedRow(ticket.id);
+                              setSelectedTicket(ticket); 
                               setOpenModal(true);
                             }}
                           >
