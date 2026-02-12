@@ -231,14 +231,18 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
       </DialogContent>
 
       <DialogActions sx={{ p: 3 }}>
-        <Button onClick={onClose} disabled={updateTicketMutation.isPending}>
-          cancel
+        <Button
+          sx={{ backgroundColor: "var(--yellow-color)", color: "#fff" }}
+          onClick={onClose}
+          disabled={updateTicketMutation.isPending}
+        >
+          close
         </Button>
         <Button
           variant="contained"
           onClick={handleSave}
           disabled={updateTicketMutation.isPending}
-          sx={{ bgcolor: "#f99417", minWidth: "100px" }}
+          sx={{ bgcolor: "var(--dark-background)", minWidth: "100px" }}
         >
           {updateTicketMutation.isPending ? (
             <CircularProgress size={20} color="inherit" />
