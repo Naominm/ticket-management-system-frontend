@@ -104,7 +104,7 @@ export default function TicketPage() {
                       <TableCell>Employee</TableCell>
                       <TableCell>Start Date</TableCell>
                       <TableCell>Status</TableCell>
-                      <TableCell>Days Left</TableCell>
+                      <TableCell>Priority</TableCell>
                       <TableCell>Issue</TableCell>
                       <TableCell align="center">
                         <Tooltip title="Refresh">
