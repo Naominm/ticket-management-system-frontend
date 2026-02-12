@@ -143,7 +143,7 @@ export default function TicketPage() {
                           <IconButton
                             sx={{ color: "var(--background-color)" }}
                             onClick={() => {
-                              setSelectedTicket(ticket); 
+                              setSelectedTicket(ticket);
                               setOpenModal(true);
                             }}
                           >

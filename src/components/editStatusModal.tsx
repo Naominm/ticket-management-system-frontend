@@ -71,7 +71,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
       onClose();
     },
     onError: (error: any) => {
-      console.error("❌ ERROR OBJECT:", error);
+      console.error("ERROR OBJECT:", error);
       if (error.response) {
         console.error("Server Response Data:", error.response.data);
         console.error("Server Response Status:", error.response.status);
@@ -186,7 +186,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
               >
                 show more <ArrowDropDownIcon />
               </Button>
-              {/* Status guides... */}
+
               <Typography
                 sx={{
                   color: "gray",
