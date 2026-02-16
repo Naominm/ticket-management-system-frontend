@@ -45,6 +45,25 @@ const formatTimeAgo = (date: string) => {
 };
 
 export default function DashboardPage() {
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const { data: tickets = [], isLoading } = useQuery({
+    queryKey: ["lastTickets"],
+    queryFn: async () => {
+      const res = await axios.get(`${API_URL}/api/ticket`, {
+        withCredentials: true,
+      });
+      return res.data.tickets;
+    },
+  });
+
+  const lastTickets = [...tickets]
+    .sort(
+      (a: any, b: any) =>
+        new Date(b.createdAt).getTime() -
+        new Date(a.createdAt).getTime()
+    )
+    .slice(0, 4);
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
       <SidebarComponent />
@@ -101,45 +120,30 @@ export default function DashboardPage() {
                     <MapsHomeWorkIcon />
                   </IconButton>
                 </CardContent>
-                <CardBodyComponent
-                  title="in process"
-                  name="Ahmed Mohamed"
-                  status="Invalid Status in McDonalds Company"
-                  date="Feb 11 ,2024"
-                  time="4.30 Hours ago"
-                  id="#4A7d5"
-                  bg="var(--yellow-color)"
-                />
-                <CardBodyComponent
-                  title="in process"
-                  name="Ahmed Mohamed"
-                  status="Invalid Status in McDonalds Company"
-                  date="Feb 11 ,2024"
-                  time="4.30 Hours ago"
-                  id="#4A7d5"
-                  bg="red"
-                />
-                <CardBodyComponent
-                  title="in process"
-                  name="Ahmed Mohamed"
-                  status="Invalid Status in McDonalds Company"
-                  date="Feb 11 ,2024"
-                  time="4.30 Hours ago"
-                  id="#4A7d5"
-                  bg="green"
-                />
-                <CardBodyComponent
-                  title="in process"
-                  name="Ahmed Mohamed"
-                  status="Invalid Status in McDonalds Company"
-                  date="Feb 11 ,2024"
-                  time="4.30 Hours ago"
-                  id="#4A7d5"
-                  bg="var(--yellow-color)"
-                />
-              </Card>
-
-              <ShowAll />
+         {isLoading && (
+                        <Typography sx={{ p: 2 }}>Loading tickets...</Typography>
+                      )}
+        
+                      {!isLoading &&
+                        lastTickets.map((ticket: any) => (
+                          <CardBodyComponent
+                            key={ticket.id}
+                            title={ticket.status.toLowerCase()}
+                            id={`#${ticket.id}`}
+                            name={
+                              ticket.user
+                                ? `${ticket.user.firstName} ${ticket.user.lastName}`
+                                : "Unknown"
+                            }
+                            status={ticket.title}
+                            date={new Date(ticket.createdAt).toLocaleDateString()}
+                            time={formatTimeAgo(ticket.createdAt)}
+                            bg={getStatusBg(ticket.status)}
+                          />
+                        ))}
+                    </Card>
+        
+                    <ShowAll />
             </Box>
             <Box
               sx={{
