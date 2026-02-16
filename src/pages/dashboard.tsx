@@ -19,6 +19,21 @@ import BurgerKingAvatar from "../assets/burgerking.png";
 import othanimAvatar from "../assets/othanim.png";
 import ShowAll from "../components/showAllButton";
 import DashboardGraph from "../components/graphDashboard";
+
+const getStatusBg = (status: string) => {
+  switch (status) {
+    case "OPEN":
+      return "var(--yellow-color)";
+    case "IN_PROGRESS":
+      return "orange";
+    case "RESOLVED":
+      return "green";
+    case "CLOSED":
+      return "red";
+    default:
+      return "gray";
+  }
+};
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
