@@ -34,6 +34,16 @@ const getStatusBg = (status: string) => {
       return "gray";
   }
 };
+
+const formatTimeAgo = (date: string) => {
+  const diff = Date.now() - new Date(date).getTime();
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+
+  if (hours < 1) return "Just now";
+  if (hours === 1) return "1 hour ago";
+  return `${hours} hours ago`;
+};
+
 export default function DashboardPage() {
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
