@@ -19,6 +19,8 @@ import BurgerKingAvatar from "../assets/burgerking.png";
 import othanimAvatar from "../assets/othanim.png";
 import ShowAll from "../components/showAllButton";
 import DashboardGraph from "../components/graphDashboard";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const getStatusBg = (status: string) => {
   switch (status) {
@@ -29,7 +31,7 @@ const getStatusBg = (status: string) => {
     case "RESOLVED":
       return "green";
     case "CLOSED":
-      return "red";
+      return "green";
     default:
       return "gray";
   }
@@ -60,10 +62,20 @@ export default function DashboardPage() {
   const lastTickets = [...tickets]
     .sort(
       (a: any, b: any) =>
-        new Date(b.createdAt).getTime() -
-        new Date(a.createdAt).getTime()
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )
     .slice(0, 4);
+  const { data: mostActive = [], isLoading: isLoadingActive } = useQuery({
+    queryKey: ["mostActiveEmployees"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${API_URL}/api/assign/most-active-employees`,
+        { withCredentials: true },
+      );
+      return res.data.data;
+    },
+  });
+
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
       <SidebarComponent />
@@ -120,30 +132,30 @@ export default function DashboardPage() {
                     <MapsHomeWorkIcon />
                   </IconButton>
                 </CardContent>
-         {isLoading && (
-                        <Typography sx={{ p: 2 }}>Loading tickets...</Typography>
-                      )}
-        
-                      {!isLoading &&
-                        lastTickets.map((ticket: any) => (
-                          <CardBodyComponent
-                            key={ticket.id}
-                            title={ticket.status.toLowerCase()}
-                            id={`#${ticket.id}`}
-                            name={
-                              ticket.user
-                                ? `${ticket.user.firstName} ${ticket.user.lastName}`
-                                : "Unknown"
-                            }
-                            status={ticket.title}
-                            date={new Date(ticket.createdAt).toLocaleDateString()}
-                            time={formatTimeAgo(ticket.createdAt)}
-                            bg={getStatusBg(ticket.status)}
-                          />
-                        ))}
-                    </Card>
-        
-                    <ShowAll />
+                {isLoading && (
+                  <Typography sx={{ p: 2 }}>Loading tickets...</Typography>
+                )}
+
+                {!isLoading &&
+                  lastTickets.map((ticket: any) => (
+                    <CardBodyComponent
+                      key={ticket.id}
+                      title={ticket.status.toLowerCase()}
+                      id={`#${ticket.id}`}
+                      name={
+                        ticket.user
+                          ? `${ticket.user.firstName} ${ticket.user.lastName}`
+                          : "Unknown"
+                      }
+                      status={ticket.title}
+                      date={new Date(ticket.createdAt).toLocaleDateString()}
+                      time={formatTimeAgo(ticket.createdAt)}
+                      bg={getStatusBg(ticket.status)}
+                    />
+                  ))}
+              </Card>
+
+              <ShowAll />
             </Box>
             <Box
               sx={{
