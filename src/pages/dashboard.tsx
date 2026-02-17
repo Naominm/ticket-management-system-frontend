@@ -206,7 +206,7 @@ export default function DashboardPage() {
                         <PersonIcon />
                       </IconButton>
                     </CardContent>
-                    <MostActiveEmployeeCard
+                    {/* <MostActiveEmployeeCard
                       name="Ahmed Mohhamed"
                       percentage="99%"
                       number={1400}
@@ -223,7 +223,31 @@ export default function DashboardPage() {
                       percentage="50%"
                       number={930}
                       color="red"
-                    />
+                    /> */}
+                    {isLoadingActive && (
+                      <Typography sx={{ p: 2 }}>
+                        Loading employees...
+                      </Typography>
+                    )}
+
+                    {!isLoadingActive &&
+                      mostActive
+                        .slice(0, 3)
+                        .map((employee: any) => (
+                          <MostActiveEmployeeCard
+                            key={employee.id}
+                            name={`${employee.firstName} ${employee.lastName}`}
+                            percentage={`${employee.percentageResolved}%`}
+                            number={employee.ticketsCount}
+                            color={
+                              employee.percentageResolved >= 80
+                                ? "green"
+                                : employee.percentageResolved >= 50
+                                  ? "var(--yellow-color)"
+                                  : "red"
+                            }
+                          />
+                        ))}
                   </Card>
                   <ShowAll />
                 </Box>
