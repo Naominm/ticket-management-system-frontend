@@ -31,6 +31,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [assignedAgentId, setAssignedAgentId] = useState<string>("");
 
   const { data: currentUser } = useQuery({
     queryKey: ["profile"],
@@ -39,6 +40,17 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         withCredentials: true,
       });
       return res.data.user;
+    },
+  });
+
+  const { data: agents = [] } = useQuery({
+    queryKey: ["agents"],
+    enabled: currentUser?.role !== "USER",
+    queryFn: async () => {
+      const res = await axios.get(`${API_URL}/api/users?role=AGENT`, {
+        withCredentials: true,
+      });
+      return res.data.users;
     },
   });
 
@@ -53,10 +65,16 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         payload.title = title;
         payload.description = description;
       } else {
-        let status = "OPEN";
-        if (selectedColor === green[500]) status = "CLOSED";
-        else if (selectedColor === red[500]) status = "NOT_RESOLVED";
+        let status: "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED" = "OPEN";
+
+        if (selectedColor === green[500]) status = "RESOLVED";
+        else if (selectedColor === orange[500]) status = "IN_PROGRESS";
+        else if (selectedColor === red[500]) status = "CLOSED";
+
         payload.status = status;
+        if (assignedAgentId !== "") {
+          payload.assignedAgentId = Number(assignedAgentId);
+        }
       }
 
       const finalUrl = `${API_URL}/api/ticket/${ticket.id}`;
@@ -87,6 +105,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
       console.log("Modal opened with ticket:", ticket);
       setTitle(ticket.title || "");
       setDescription(ticket.description || "");
+      setAssignedAgentId(ticket.assignedAgentId || "");
       if (ticket.status === "CLOSED") setSelectedColor(green[500]);
       else if (ticket.status === "OPEN") setSelectedColor(orange[500]);
       else setSelectedColor(red[500]);
@@ -145,6 +164,23 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
           </Box>
         ) : (
           <>
+            <Box sx={{ mt: 1 }}>
+              <Typography sx={{ mb: 1, fontSize: "0.9rem" }}>
+                Assign ticket
+              </Typography>
+
+              <TextField
+                type="number"
+                fullWidth
+                size="small"
+                label="Agent ID"
+                value={assignedAgentId}
+                onChange={(e) => setAssignedAgentId(e.target.value)}
+                disabled={updateTicketMutation.isPending}
+              />
+            </Box>
+
+            <hr />
             <Box sx={{ display: "flex", gap: 5, mt: 1 }}>
               <Typography sx={{ mb: 2 }}>Choose status color:</Typography>
               <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
