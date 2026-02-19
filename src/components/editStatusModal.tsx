@@ -65,11 +65,15 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         payload.title = title;
         payload.description = description;
       } else {
-        let status: "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED" = "OPEN";
-
-        if (selectedColor === green[500]) status = "RESOLVED";
-        else if (selectedColor === orange[500]) status = "IN_PROGRESS";
-        else if (selectedColor === red[500]) status = "CLOSED";
+        let status: "OPEN" | "IN_PROGRESS" | "RESOLVED" | "CLOSED" =
+          ticket.status;
+        if (selectedColor) {
+          if (selectedColor === green[500]) status = "RESOLVED";
+          else if (selectedColor === orange[500]) status = "IN_PROGRESS";
+          else if (selectedColor === red[500]) status = "CLOSED";
+        } else if (assignedAgentId && assignedAgentId !== "") {
+          status = "IN_PROGRESS";
+        }
 
         payload.status = status;
         if (assignedAgentId !== "") {
@@ -102,13 +106,26 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
 
   useEffect(() => {
     if (ticket) {
-      console.log("Modal opened with ticket:", ticket);
       setTitle(ticket.title || "");
       setDescription(ticket.description || "");
       setAssignedAgentId(ticket.assignedAgentId || "");
-      if (ticket.status === "CLOSED") setSelectedColor(green[500]);
-      else if (ticket.status === "OPEN") setSelectedColor(orange[500]);
-      else setSelectedColor(red[500]);
+
+      switch (ticket.status) {
+        case "CLOSED":
+          setSelectedColor(green[500]);
+          break;
+        case "OPEN":
+          setSelectedColor(orange[500]);
+          break;
+        case "IN_PROGRESS":
+          setSelectedColor(orange[500]);
+          break;
+        case "RESOLVED":
+          setSelectedColor(green[500]);
+          break;
+        default:
+          setSelectedColor(red[500]);
+      }
     }
   }, [ticket]);
 
