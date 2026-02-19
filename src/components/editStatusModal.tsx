@@ -133,12 +133,12 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
     console.log("Save button clicked");
 
     if (!ticket) {
-      console.warn("Save aborted: No ticket data found.");
+      console.log("Save aborted: No ticket data found.");
       return;
     }
 
     if (!currentUser) {
-      console.warn("Save aborted: User data not loaded yet.");
+      console.log("Save aborted: User data not loaded yet.");
       alert("Still loading user data, please wait.");
       return;
     }
