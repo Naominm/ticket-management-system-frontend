@@ -15,6 +15,7 @@ import DashBoardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
+import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -103,6 +104,12 @@ export default function SidebarComponent() {
           icon={<MapsHomeWorkIcon />}
           label="Tickets"
           onClick={() => navigate("/home")}
+        />
+        <SidebarItem
+          open={open}
+          icon={<HomeRepairServiceIcon />}
+          label="My Tickets"
+          onClick={() => navigate("/ticket")}
         />
         <SidebarItem
           open={open}
