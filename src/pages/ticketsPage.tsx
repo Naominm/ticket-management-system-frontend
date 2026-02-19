@@ -11,8 +11,13 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
@@ -20,7 +25,9 @@ import CreateTicketComponent from "../components/createTicketComponent";
 import EditModalStatus from "../components/editStatusModal";
 
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { CircularProgress } from "@mui/material";
 import { green, red, orange } from "@mui/material/colors";
 
 const getStatusColor = (status: string) => {
@@ -42,7 +49,10 @@ const getStatusColor = (status: string) => {
 export default function TicketPage() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [ticketToDelete, setTicketToDelete] = useState<any | null>(null);
   const API_URL = import.meta.env.VITE_API_URL;
+  const queryClient = useQueryClient();
 
   const {
     data: tickets = [],
@@ -58,6 +68,38 @@ export default function TicketPage() {
       return res.data.tickets;
     },
   });
+  const { data: currentUser } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const res = await axios.get(`${API_URL}/api/profile`, {
+        withCredentials: true,
+      });
+      return res.data.user;
+    },
+  });
+
+  const deleteTicketMutation = useMutation({
+    mutationFn: async (ticketId: number) =>
+      axios.delete(`${API_URL}/api/ticket/${ticketId}`, {
+        withCredentials: true,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      setDeleteDialogOpen(false);
+      setTicketToDelete(null);
+    },
+    onError: (error: any) => {
+      alert(
+        error.response?.data?.message ||
+          "Something went wrong while deleting the ticket.",
+      );
+    },
+  });
+
+  const handleDeleteClick = (ticket: any) => {
+    setTicketToDelete(ticket);
+    setDeleteDialogOpen(true);
+  };
 
   return (
     <Box>
@@ -149,6 +191,19 @@ export default function TicketPage() {
                           >
                             <EditIcon />
                           </IconButton>
+                          {currentUser?.role === "ADMIN" &&
+                            (ticket.status === "RESOLVED" ||
+                              ticket.status === "CLOSED") && (
+                              <Tooltip title="Delete Completed Ticket">
+                                <IconButton
+                                  sx={{ color: red[500] }}
+                                  onClick={() => handleDeleteClick(ticket)}
+                                  disabled={deleteTicketMutation.isPending}
+                                >
+                                  <DeleteIcon />
+                                </IconButton>
+                              </Tooltip>
+                            )}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -166,6 +221,38 @@ export default function TicketPage() {
           </Box>
         </Box>
       </Box>
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle>Delete Ticket</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete ticket{" "}
+            <strong>{ticketToDelete?.title}</strong>?<br />
+            <strong>This action cannot be undone.</strong>
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() =>
+              ticketToDelete && deleteTicketMutation.mutate(ticketToDelete.id)
+            }
+            disabled={deleteTicketMutation.isPending}
+          >
+            {deleteTicketMutation.isPending ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              "Delete"
+            )}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
