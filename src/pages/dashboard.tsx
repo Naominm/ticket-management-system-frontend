@@ -235,10 +235,10 @@ export default function DashboardPage() {
                         .slice(0, 3)
                         .map((employee: any) => (
                           <MostActiveEmployeeCard
-                            key={employee.id}
-                            name={`${employee.firstName} ${employee.lastName}`}
-                            percentage={`${employee.percentageResolved}%`}
-                            number={employee.ticketsCount}
+                            key={employee.employeeId}
+                            name={employee.employeeName}
+                            percentage={`${employee.resolutionRate}%`}
+                            number={employee.totalTickets}
                             color={
                               employee.percentageResolved >= 80
                                 ? "green"
