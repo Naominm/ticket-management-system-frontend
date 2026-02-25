@@ -15,8 +15,8 @@ import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
 import MostClientActive from "../components/mostClientActiveComponent";
 import PeopleIcon from "@mui/icons-material/People";
 import mcDonaldsAvatar from "../assets/macdonalds.png";
-import BurgerKingAvatar from "../assets/burgerking.png";
-import othanimAvatar from "../assets/othanim.png";
+// import BurgerKingAvatar from "../assets/burgerking.png";
+// import othanimAvatar from "../assets/othanim.png";
 import ShowAll from "../components/showAllButton";
 import DashboardGraph from "../components/graphDashboard";
 import axios from "axios";
@@ -65,6 +65,7 @@ export default function DashboardPage() {
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )
     .slice(0, 4);
+
   const { data: mostActive = [], isLoading: isLoadingActive } = useQuery({
     queryKey: ["mostActiveEmployees"],
     queryFn: async () => {
@@ -75,6 +76,18 @@ export default function DashboardPage() {
       return res.data.data;
     },
   });
+
+  const { data: mostActiveDepartments = [], isLoading: isLoadingDepartments } =
+    useQuery({
+      queryKey: ["mostActiveDepartments"],
+      queryFn: async () => {
+        const res = await axios.get(
+          `${API_URL}/api/ticket/most-active-departments`,
+          { withCredentials: true },
+        );
+        return res.data.data;
+      },
+    });
 
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -206,24 +219,6 @@ export default function DashboardPage() {
                         <PersonIcon />
                       </IconButton>
                     </CardContent>
-                    {/* <MostActiveEmployeeCard
-                      name="Ahmed Mohhamed"
-                      percentage="99%"
-                      number={1400}
-                      color="green"
-                    />
-                    <MostActiveEmployeeCard
-                      name="Ahmed Mohhamed"
-                      percentage="80%"
-                      number={1320}
-                      color="var(--yellow-color)"
-                    />
-                    <MostActiveEmployeeCard
-                      name="Ahmed Mohhamed"
-                      percentage="50%"
-                      number={930}
-                      color="red"
-                    /> */}
                     {isLoadingActive && (
                       <Typography sx={{ p: 2 }}>
                         Loading employees...
@@ -235,7 +230,7 @@ export default function DashboardPage() {
                         .slice(0, 3)
                         .map((employee: any) => (
                           <MostActiveEmployeeCard
-                            key={employee.employeeId}
+                            key={employee.id}
                             name={employee.employeeName}
                             percentage={`${employee.resolutionRate}%`}
                             number={employee.totalTickets}
@@ -284,21 +279,26 @@ export default function DashboardPage() {
                       <PeopleIcon />
                     </IconButton>
                   </CardContent>
-                  <MostClientActive
-                    name="mcDonalds"
-                    number={60}
-                    avatar={mcDonaldsAvatar}
-                  />
-                  <MostClientActive
-                    name="BurgerKing"
-                    number={60}
-                    avatar={BurgerKingAvatar}
-                  />
-                  <MostClientActive
-                    name="Othanim"
-                    number={55}
-                    avatar={othanimAvatar}
-                  />
+
+                  {isLoadingDepartments && (
+                    <Typography sx={{ p: 2 }}>
+                      Loading departments...
+                    </Typography>
+                  )}
+
+                  {!isLoadingDepartments &&
+                    Array.isArray(mostActiveDepartments) &&
+                    mostActiveDepartments.length > 0 &&
+                    mostActiveDepartments
+                      .slice(0, 3)
+                      .map((dept: any) => (
+                        <MostClientActive
+                          key={dept.id}
+                          name={dept.name}
+                          number={dept.resolvedTickets}
+                          avatar={mcDonaldsAvatar}
+                        />
+                      ))}
                   <ShowAll />
                 </Box>
               </Box>

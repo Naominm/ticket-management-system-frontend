@@ -15,7 +15,7 @@ export default function MostActiveEmployeeCard({
 }: ActiveEmployeeProp) {
   return (
     <CardContent sx={{ display: "flex", width: "100%", gap: 5 }}>
-      <Box sx={{ display: "flex", gap: 4}}>
+      <Box sx={{ display: "flex", gap: 4 }}>
         <Box component={"img"} sx={{ width: "40px" }} src={manAvatar} />
         <Typography
           variant="h6"
