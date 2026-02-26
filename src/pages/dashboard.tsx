@@ -82,7 +82,7 @@ export default function DashboardPage() {
       queryKey: ["mostActiveDepartments"],
       queryFn: async () => {
         const res = await axios.get(
-          `${API_URL}/api/ticket/most-active-departments`,
+          `${API_URL}/api/assign/most-active-departments`,
           { withCredentials: true },
         );
         return res.data.data;
