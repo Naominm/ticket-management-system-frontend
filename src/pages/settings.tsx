@@ -31,8 +31,9 @@ export default function SettingsPage() {
         const res = await axios.get(`${API_URL}/api/profile`, {
           withCredentials: true,
         });
+        console.log("RAW PROFILE RESPONSE:", JSON.stringify(res.data, null, 2));
 
-        setProfile(res.data);
+        setProfile(res.data.user);
       } catch (error) {
         console.error("Failed to fetch profile", error);
       } finally {
