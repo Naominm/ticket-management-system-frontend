@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Paper,
@@ -17,8 +17,43 @@ import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AvatarImage from "../assets/boy.png";
 import EmployeeGrowthGraph from "../components/lineGraphComponent";
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
 export default function SettingsPage() {
   const [tab, setTab] = useState(0);
+  const [profile, setProfile] = useState<any>(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
+
+        setProfile(res.data);
+      } catch (error) {
+        console.error("Failed to fetch profile", error);
+      } finally {
+        setLoadingProfile(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+  const handleSubmit = async () => {
+    try {
+      await axios.put(`${API_URL}/api/profile`, profile, {
+        withCredentials: true,
+      });
+
+      alert("Profile updated successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
       <SidebarComponent />
@@ -123,7 +158,17 @@ export default function SettingsPage() {
             </Tabs>
 
             <Box sx={{ minHeight: "60vh" }}>
-              {tab === 0 && <PersonalDetailsForm />}
+              {tab === 0 &&
+                (loadingProfile ? (
+                  <Box display="flex" justifyContent="center" mt={4}>
+                    <CircularProgress />
+                  </Box>
+                ) : (
+                  <PersonalDetailsForm
+                    profile={profile}
+                    setProfile={setProfile}
+                  />
+                ))}
               {tab === 1 && <JobDetailsForm />}
               <Box
                 sx={{ display: "flex", justifyContent: "right", pr: 2, mt: 4 }}
@@ -136,6 +181,7 @@ export default function SettingsPage() {
                     fontFamily: "var(--primary-font)",
                     fontWeight: 600,
                   }}
+                  onClick={handleSubmit}
                 >
                   Submit
                 </Button>
@@ -203,7 +249,7 @@ function AvatarSec() {
   );
 }
 
-function PersonalDetailsForm() {
+function PersonalDetailsForm({ profile, setProfile }: any) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Box
@@ -227,6 +273,10 @@ function PersonalDetailsForm() {
           </FormLabel>
           <TextField
             size="small"
+            value={profile?.firstName || ""}
+            onChange={(e) =>
+              setProfile({ ...profile, firstName: e.target.value })
+            }
             sx={{
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
@@ -240,6 +290,10 @@ function PersonalDetailsForm() {
           </FormLabel>
           <TextField
             size="small"
+            value={profile?.lastName || ""}
+            onChange={(e) =>
+              setProfile({ ...profile, lastName: e.target.value })
+            }
             sx={{
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
@@ -259,6 +313,8 @@ function PersonalDetailsForm() {
         <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>Email</FormLabel>
         <TextField
           size="small"
+          value={profile?.email || ""}
+          onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           sx={{
             width: "100%",
             bgcolor: "#DEDEDE",
