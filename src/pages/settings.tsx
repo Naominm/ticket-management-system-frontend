@@ -170,7 +170,9 @@ export default function SettingsPage() {
                     setProfile={setProfile}
                   />
                 ))}
-              {tab === 1 && <JobDetailsForm />}
+              {tab === 1 && (
+                <JobDetailsForm profile={profile} setProfile={setProfile} />
+              )}
               <Box
                 sx={{ display: "flex", justifyContent: "right", pr: 2, mt: 4 }}
               >
@@ -372,7 +374,7 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
   );
 }
 
-function JobDetailsForm() {
+function JobDetailsForm({ profile, setProfile }: any) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <FormControl fullWidth>
@@ -381,12 +383,10 @@ function JobDetailsForm() {
         </FormLabel>
         <TextField
           size="small"
-          placeholder="Net Developer"
+          value={profile?.jobTitle || ""}
+          onChange={(e) => setProfile({ ...profile, jobTitle: e.target.value })}
           sx={{
             bgcolor: "#DEDEDE",
-            "& .MuiInputBase-input": {
-              fontFamily: "var(--primary-font)",
-            },
           }}
         />
       </FormControl>
@@ -397,29 +397,26 @@ function JobDetailsForm() {
         </FormLabel>
         <TextField
           size="small"
-          placeholder="Development"
+          value={profile?.department || ""}
+          onChange={(e) =>
+            setProfile({ ...profile, department: e.target.value })
+          }
           sx={{
             bgcolor: "#DEDEDE",
-            "& .MuiInputBase-input": {
-              fontFamily: "var(--primary-font)",
-            },
           }}
         />
       </FormControl>
 
       <FormControl fullWidth>
         <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
-          Placing Positions
+          Position
         </FormLabel>
         <TextField
           size="small"
-          placeholder="senior"
+          value={profile?.position || ""}
+          onChange={(e) => setProfile({ ...profile, position: e.target.value })}
           sx={{
             bgcolor: "#DEDEDE",
-            fontFamily: "var(--primary-font)",
-            "& .MuiInputBase-input": {
-              fontFamily: "var(--primary-font)",
-            },
           }}
         />
       </FormControl>
