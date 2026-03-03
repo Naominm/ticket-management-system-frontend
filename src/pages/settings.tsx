@@ -19,6 +19,7 @@ import AvatarImage from "../assets/boy.png";
 import EmployeeGrowthGraph from "../components/lineGraphComponent";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
+
 export default function SettingsPage() {
   const [tab, setTab] = useState(0);
   const [profile, setProfile] = useState<any>(null);
@@ -90,7 +91,7 @@ export default function SettingsPage() {
                 justifyContent: "center",
               }}
             >
-              <AvatarSec profile={profile} />
+              <AvatarSec profile={profile} setProfile={setProfile} />
             </Paper>
             <Paper
               sx={{
@@ -200,19 +201,88 @@ export default function SettingsPage() {
   );
 }
 function AvatarSec({ profile, setProfile }: any) {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const [preview, setPreview] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = (file: File) => {
+    setSelectedFile(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleUploadToCloudinary = async () => {
+    if (!selectedFile) return;
+
+    setUploading(true);
+    const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const CLOUDINARY_UPLOAD_PRESET = import.meta.env
+      .VITE_CLOUDINARY_UPLOAD_PRESET;
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        formData,
+      );
+
+      const cloudinaryUrl = res.data.secure_url;
+      const updatedRes = await axios.put(
+        `${API_URL}/api/profile`,
+        { ...profile, avatarUrl: cloudinaryUrl },
+        { withCredentials: true },
+      );
+
+      setProfile(updatedRes.data.user);
+      setPreview(null);
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Cloudinary upload failed", error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <Box sx={{ position: "relative" }}>
       <Avatar
-        src={AvatarImage}
-        alt="user avater"
+        src={profile?.avatarUrl || AvatarImage}
+        alt="user avatar"
         sx={{
           width: 100,
           height: 100,
           bgcolor: "#f1f1f1",
         }}
       />
+      {preview && (
+        <Button
+          variant="contained"
+          size="small"
+          onClick={handleUploadToCloudinary}
+          sx={{ mt: 1 }}
+          disabled={uploading}
+        >
+          {uploading ? "Uploading..." : "Save Photo"}
+        </Button>
+      )}
+      <input
+        type="file"
+        accept="image/*"
+        hidden
+        id="avatar-upload"
+        onChange={(e) => e.target.files && handleFileChange(e.target.files[0])}
+      />
       <IconButton
         size="small"
+        onClick={() => document.getElementById("avatar-upload")?.click()}
         sx={{
           position: "absolute",
           bottom: 65,
