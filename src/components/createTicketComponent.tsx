@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -18,9 +18,15 @@ export default function CreateTicketComponent() {
         boxShadow: "2px 2px 4px 2px rgba(146, 143, 143, 0.2)",
       }}
     >
-      <IconButton sx={{ color: "var(--background-color)" }}>
+      <Box
+        sx={{
+          color: "var(--background-color)",
+          ":hover": "none",
+          cursor: "pointer",
+        }}
+      >
         <Box sx={{ display: "flex", gap: 2 }}>
-          <AddIcon fontSize="small" />
+          <AddIcon fontSize="small" sx={{ border: "2px solid red" }} />
           <Typography
             sx={{ fontSize: "1rem", fontFamily: "var(--primary-font)" }}
           >
@@ -28,7 +34,7 @@ export default function CreateTicketComponent() {
             Tickets
           </Typography>
         </Box>
-      </IconButton>
+      </Box>
       <Button
         variant="contained"
         sx={{
