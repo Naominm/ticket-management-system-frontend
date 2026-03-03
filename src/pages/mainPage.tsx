@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import {
   Box,
@@ -23,6 +23,9 @@ export default function CollapsibleSidebar() {
   const [departmentId, setDepartmentId] = useState("");
   const [priority, setPriority] = useState("MEDIUM");
   const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL;
   const [alert, setAlert] = useState<{
     type: "success" | "error";
     message: string;
@@ -75,6 +78,25 @@ export default function CollapsibleSidebar() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/profile`, {
+          withCredentials: true,
+        });
+        console.log("RAW PROFILE RESPONSE:", JSON.stringify(res.data, null, 2));
+
+        setProfile(res.data.user);
+      } catch (error) {
+        console.error("Failed to fetch profile", error);
+      } finally {
+        setLoadingProfile(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -185,7 +207,7 @@ export default function CollapsibleSidebar() {
                     <ArrowDropDownIcon />
                   </Box>
                   <Typography sx={{ fontFamily: "var(--primary-font)" }}>
-                    Ahmed Mohamoud
+                    {`${profile?.firstName || ""} ${profile?.lastName || ""}`}
                   </Typography>
                 </ListItem>
                 <ListItem
