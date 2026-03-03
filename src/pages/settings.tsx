@@ -118,7 +118,17 @@ export default function SettingsPage() {
                   <TextField
                     minRows={4}
                     multiline
-                    sx={{ fontFamily: "var(--primary-font)", width: "100%" }}
+                    sx={{
+                      fontFamily: "var(--primary-font)",
+                      "& .MuiInputBase-input": {
+                        color: "gray",
+                        fontSize: "0.8rem",
+                      },
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "#ccc",
+                      },
+                      width: "100%",
+                    }}
                     value={profile?.bio || ""}
                     onChange={(e) =>
                       setProfile({ ...profile, bio: e.target.value })
@@ -335,6 +345,10 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
+          "& .MuiInputBase-input": {
+            fontSize: "1rem",
+            fontFamily: "var(--primary-font)",
+          },
         }}
       >
         <FormControl
@@ -394,7 +408,10 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
           sx={{
             width: "100%",
             bgcolor: "#DEDEDE",
-            fontFamily: "var(--primary-font)",
+            "& .MuiInputBase-input": {
+              fontSize: "1rem",
+              fontFamily: "var(--primary-font)",
+            },
           }}
         />
       </FormControl>
@@ -423,7 +440,10 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
             sx={{
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
-              fontFamily: "var(--primary-font)",
+              "& .MuiInputBase-input": {
+                fontSize: "1rem",
+                fontFamily: "var(--primary-font)",
+              },
             }}
           />
         </FormControl>
@@ -438,7 +458,10 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
               border: "none",
-              fontFamily: "var(--primary-font)",
+              "& .MuiInputBase-input": {
+                fontSize: "1rem",
+                fontFamily: "var(--primary-font)",
+              },
             }}
           />
         </FormControl>
