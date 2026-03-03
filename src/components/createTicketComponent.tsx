@@ -25,8 +25,11 @@ export default function CreateTicketComponent() {
           cursor: "pointer",
         }}
       >
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <AddIcon fontSize="small" sx={{ border: "2px solid red" }} />
+        <Box
+          onClick={() => navigate("/ticket")}
+          sx={{ display: "flex", gap: 2 }}
+        >
+          <AddIcon fontSize="small" />
           <Typography
             sx={{ fontSize: "1rem", fontFamily: "var(--primary-font)" }}
           >
