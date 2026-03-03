@@ -472,7 +472,17 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
 
 function JobDetailsForm({ profile, setProfile }: any) {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
+        "& .MuiInputBase-input": {
+          fontSize: "1rem",
+          fontFamily: "var(--primary-font)",
+        },
+      }}
+    >
       <FormControl fullWidth>
         <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
           Job Title
