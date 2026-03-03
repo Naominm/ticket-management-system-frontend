@@ -90,7 +90,7 @@ export default function SettingsPage() {
                 justifyContent: "center",
               }}
             >
-              <AvatarSec />
+              <AvatarSec profile={profile} />
             </Paper>
             <Paper
               sx={{
@@ -114,12 +114,15 @@ export default function SettingsPage() {
                     p: 2,
                   }}
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Maxime mollitia, Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Maxime mollitia, | Lorem ipsum dolor sit
-                  amet consectetur adipisicing elit. Maxime mollitia, Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                  mollitia,
+                  <TextField
+                    minRows={4}
+                    multiline
+                    sx={{ fontFamily: "var(--primary-font)", width: "100%" }}
+                    value={profile?.bio || ""}
+                    onChange={(e) =>
+                      setProfile({ ...profile, bio: e.target.value })
+                    }
+                  />
                 </Typography>
               </Box>
             </Paper>
@@ -196,7 +199,7 @@ export default function SettingsPage() {
     </Box>
   );
 }
-function AvatarSec() {
+function AvatarSec({ profile, setProfile }: any) {
   return (
     <Box sx={{ position: "relative" }}>
       <Avatar
@@ -235,7 +238,7 @@ function AvatarSec() {
           textAlign: "center",
         }}
       >
-        Your Name
+        {profile?.firstName || ""}
       </Typography>
       <Typography
         variant="body2"
@@ -246,7 +249,7 @@ function AvatarSec() {
           textAlign: "center",
         }}
       >
-        Your Job Title
+        {profile?.jobTitle || ""}
       </Typography>
     </Box>
   );
