@@ -68,7 +68,7 @@ export default function SettingsPage() {
             bgcolor: "#f4f4f4",
             width: "100%",
             height: "auto",
-            minHeight: "200vh",
+            minHeight: "100vh",
             display: "flex",
             gap: 5,
             pl: 4,
