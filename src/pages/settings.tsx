@@ -71,6 +71,7 @@ export default function SettingsPage() {
             minHeight: "200vh",
             display: "flex",
             gap: 5,
+            pl: 4,
           }}
         >
           <Box
