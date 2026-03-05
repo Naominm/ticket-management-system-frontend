@@ -177,7 +177,11 @@ export default function SettingsPage() {
 
             <Box sx={{ minHeight: "60vh" }}>
               {message && (
-                <Alert severity="success" sx={{ mb: 2 }}>
+                <Alert
+                  severity="success"
+                  sx={{ mb: 2 }}
+                  onClose={() => setMessage("")}
+                >
                   {message}
                 </Alert>
               )}
