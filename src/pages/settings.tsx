@@ -11,6 +11,7 @@ import {
   Button,
   Tab,
   Tabs,
+  Alert,
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
@@ -24,6 +25,7 @@ export default function SettingsPage() {
   const [tab, setTab] = useState(0);
   const [profile, setProfile] = useState<any>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
+  const [message, setMessage] = useState("");
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function SettingsPage() {
         withCredentials: true,
       });
 
-      alert("Profile updated successfully");
+      setMessage("Profile updated successfully");
     } catch (error) {
       console.error(error);
     }
@@ -174,6 +176,11 @@ export default function SettingsPage() {
             </Tabs>
 
             <Box sx={{ minHeight: "60vh" }}>
+              {message && (
+                <Alert severity="success" sx={{ mb: 2 }}>
+                  {message}
+                </Alert>
+              )}
               {tab === 0 &&
                 (loadingProfile ? (
                   <Box display="flex" justifyContent="center" mt={4}>
