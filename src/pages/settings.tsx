@@ -26,6 +26,8 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState<any>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
   const [message, setMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -194,6 +196,10 @@ export default function SettingsPage() {
                   <PersonalDetailsForm
                     profile={profile}
                     setProfile={setProfile}
+                    password={password}
+                    setPassword={setPassword}
+                    confirmPassword={confirmPassword}
+                    setConfirmPassword={setConfirmPassword}
                   />
                 ))}
               {tab === 1 && (
@@ -347,7 +353,14 @@ function AvatarSec({ profile, setProfile }: any) {
   );
 }
 
-function PersonalDetailsForm({ profile, setProfile }: any) {
+function PersonalDetailsForm({
+  profile,
+  setProfile,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+}: any) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <Box
@@ -449,6 +462,8 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
           <TextField
             size="small"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             sx={{
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
@@ -466,6 +481,8 @@ function PersonalDetailsForm({ profile, setProfile }: any) {
           <TextField
             size="small"
             type="password"
+            value={password}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             sx={{
               maxWidth: "100%",
               bgcolor: "#DEDEDE",
