@@ -253,7 +253,12 @@ export default function DashboardPage() {
                           />
                         ))}
                   </Card>
-                  <ShowAll />
+                  {tickets.length > 4 && (
+                    <ShowAll
+                      text={showAllTickets ? "Show Less" : "Show All"}
+                      onClick={() => setShowAllTickets(!showAllTickets)}
+                    />
+                  )}
                 </Box>
                 <Box
                   component={Paper}
@@ -308,7 +313,12 @@ export default function DashboardPage() {
                           avatar={mcDonaldsAvatar}
                         />
                       ))}
-                  <ShowAll />
+                  {tickets.length > 4 && (
+                    <ShowAll
+                      text={showAllTickets ? "Show Less" : "Show All"}
+                      onClick={() => setShowAllTickets(!showAllTickets)}
+                    />
+                  )}
                 </Box>
               </Box>
 
