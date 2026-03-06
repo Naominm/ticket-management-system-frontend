@@ -1,18 +1,34 @@
-import { Box, Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 
-export default function ShowAll() {
+type ShowAllProps = {
+  text: string;
+  onClick: () => void;
+};
+
+export default function ShowAll({ text, onClick }: ShowAllProps) {
   return (
-    <Box sx={{ display: "flex", justifyContent: "right", mr: 2 }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Button
-        variant="contained"
+        onClick={onClick}
+        size="small"
         sx={{
-          my: 2,
-          backgroundColor: "var(--dark-background)",
-          textTransform: "capitalize",
-          maxWidth: "120px",
+          textTransform: "none",
+          fontWeight: 600,
+          fontFamily: "var(--primary-font)",
+          bgcolor: "var(--dark-background)",
+          color: "#fff",
+          m: 2,
+          width: "80%",
+          p: 1,
         }}
       >
-        Show All
+        {text}
       </Button>
     </Box>
   );

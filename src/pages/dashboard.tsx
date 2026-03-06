@@ -6,6 +6,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import { useState } from "react";
 import SidebarComponent from "../components/sidebarComponent";
 import SearchComponent from "../components/searchComponent";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
@@ -48,6 +49,7 @@ const formatTimeAgo = (date: string) => {
 
 export default function DashboardPage() {
   const API_URL = import.meta.env.VITE_API_URL;
+  const [showAllTickets, setShowAllTickets] = useState(false);
 
   const { data: tickets = [], isLoading } = useQuery({
     queryKey: ["lastTickets"],
@@ -59,12 +61,14 @@ export default function DashboardPage() {
     },
   });
 
-  const lastTickets = [...tickets]
-    .sort(
-      (a: any, b: any) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-    )
-    .slice(0, 4);
+  const sortedTickets = [...tickets].sort(
+    (a: any, b: any) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+
+  const displayedTickets = showAllTickets
+    ? sortedTickets
+    : sortedTickets.slice(0, 4);
 
   const { data: mostActive = [], isLoading: isLoadingActive } = useQuery({
     queryKey: ["mostActiveEmployees"],
@@ -150,7 +154,7 @@ export default function DashboardPage() {
                 )}
 
                 {!isLoading &&
-                  lastTickets.map((ticket: any) => (
+                  displayedTickets.map((ticket: any) => (
                     <CardBodyComponent
                       key={ticket.id}
                       title={ticket.status.toLowerCase()}
@@ -168,7 +172,12 @@ export default function DashboardPage() {
                   ))}
               </Card>
 
-              <ShowAll />
+              {tickets.length > 4 && (
+                <ShowAll
+                  text={showAllTickets ? "Show Less" : "Show All"}
+                  onClick={() => setShowAllTickets(!showAllTickets)}
+                />
+              )}
             </Box>
             <Box
               sx={{

@@ -481,7 +481,7 @@ function PersonalDetailsForm({
           <TextField
             size="small"
             type="password"
-            value={password}
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             sx={{
               maxWidth: "100%",
