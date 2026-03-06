@@ -94,12 +94,9 @@ export default function DashboardPage() {
           `${API_URL}/api/assign/most-active-departments`,
           { withCredentials: true },
         );
-        console.log("Departments:", mostActiveDepartments);
         return res.data.data;
       },
     });
-
-  console.log("Departments:", mostActiveDepartments);
 
   const displayedDepartments = showAllDepartments
     ? mostActiveDepartments
@@ -247,25 +244,23 @@ export default function DashboardPage() {
                     )}
 
                     {!isLoadingActive &&
-                      displayedEmployees
-                        .slice(0, 3)
-                        .map((employee: any) => (
-                          <MostActiveEmployeeCard
-                            key={employee.id}
-                            name={employee.employeeName}
-                            percentage={`${employee.resolutionRate}%`}
-                            number={employee.totalTickets}
-                            color={
-                              employee.percentageResolved >= 80
-                                ? "green"
-                                : employee.percentageResolved >= 50
-                                  ? "var(--yellow-color)"
-                                  : "red"
-                            }
-                          />
-                        ))}
+                      displayedEmployees.map((employee: any) => (
+                        <MostActiveEmployeeCard
+                          key={employee.id}
+                          name={employee.employeeName}
+                          percentage={`${employee.resolutionRate}%`}
+                          number={employee.totalTickets}
+                          color={
+                            employee.percentageResolved >= 80
+                              ? "green"
+                              : employee.percentageResolved >= 50
+                                ? "var(--yellow-color)"
+                                : "red"
+                          }
+                        />
+                      ))}
                   </Card>
-                  {mostActive.length > 4 && (
+                  {mostActive.length > 3 && (
                     <ShowAll
                       text={showAllEmployees ? "Show Less" : "Show All"}
                       onClick={() => setShowAllEmployees(!showAllEmployees)}
@@ -315,17 +310,15 @@ export default function DashboardPage() {
                   {!isLoadingDepartments &&
                     Array.isArray(mostActiveDepartments) &&
                     mostActiveDepartments.length > 0 &&
-                    displayedDepartments
-                      .slice(0, 3)
-                      .map((dept: any) => (
-                        <MostClientActive
-                          key={dept.id}
-                          name={dept.name}
-                          number={dept.resolvedTickets}
-                          avatar={mcDonaldsAvatar}
-                        />
-                      ))}
-                  {mostActiveDepartments.length > 4 && (
+                    displayedDepartments.map((dept: any) => (
+                      <MostClientActive
+                        key={dept.id}
+                        name={dept.name}
+                        number={dept.resolvedTickets}
+                        avatar={mcDonaldsAvatar}
+                      />
+                    ))}
+                  {mostActiveDepartments.length > 3 && (
                     <ShowAll
                       text={showAllDepartments ? "Show Less" : "Show All"}
                       onClick={() => setShowAllDepartments(!showAllDepartments)}
