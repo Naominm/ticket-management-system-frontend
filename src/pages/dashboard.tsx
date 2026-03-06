@@ -94,9 +94,13 @@ export default function DashboardPage() {
           `${API_URL}/api/assign/most-active-departments`,
           { withCredentials: true },
         );
+        console.log("Departments:", mostActiveDepartments);
         return res.data.data;
       },
     });
+
+  console.log("Departments:", mostActiveDepartments);
+
   const displayedDepartments = showAllDepartments
     ? mostActiveDepartments
     : mostActiveDepartments.slice(0, 3);
@@ -324,7 +328,7 @@ export default function DashboardPage() {
                   {mostActiveDepartments.length > 4 && (
                     <ShowAll
                       text={showAllDepartments ? "Show Less" : "Show All"}
-                      onClick={() => setShowAllDepartments(!showAllEmployees)}
+                      onClick={() => setShowAllDepartments(!showAllDepartments)}
                     />
                   )}
                 </Box>
