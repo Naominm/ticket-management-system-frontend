@@ -50,6 +50,8 @@ const formatTimeAgo = (date: string) => {
 export default function DashboardPage() {
   const API_URL = import.meta.env.VITE_API_URL;
   const [showAllTickets, setShowAllTickets] = useState(false);
+  const [showAllEmployees, setShowAllEmployees] = useState(false);
+  const [showAllDepartments, setShowAllDepartments] = useState(false);
 
   const { data: tickets = [], isLoading } = useQuery({
     queryKey: ["lastTickets"],
@@ -80,6 +82,9 @@ export default function DashboardPage() {
       return res.data.data;
     },
   });
+  const displayedEmployees = showAllEmployees
+    ? mostActive
+    : mostActive.slice(0, 3);
 
   const { data: mostActiveDepartments = [], isLoading: isLoadingDepartments } =
     useQuery({
@@ -92,6 +97,9 @@ export default function DashboardPage() {
         return res.data.data;
       },
     });
+  const displayedDepartments = showAllDepartments
+    ? mostActiveDepartments
+    : mostActiveDepartments.slice(0, 3);
 
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f4f4", minHeight: "100vh" }}>
@@ -235,7 +243,7 @@ export default function DashboardPage() {
                     )}
 
                     {!isLoadingActive &&
-                      mostActive
+                      displayedEmployees
                         .slice(0, 3)
                         .map((employee: any) => (
                           <MostActiveEmployeeCard
@@ -253,10 +261,10 @@ export default function DashboardPage() {
                           />
                         ))}
                   </Card>
-                  {tickets.length > 4 && (
+                  {mostActive.length > 4 && (
                     <ShowAll
-                      text={showAllTickets ? "Show Less" : "Show All"}
-                      onClick={() => setShowAllTickets(!showAllTickets)}
+                      text={showAllEmployees ? "Show Less" : "Show All"}
+                      onClick={() => setShowAllEmployees(!showAllEmployees)}
                     />
                   )}
                 </Box>
@@ -303,7 +311,7 @@ export default function DashboardPage() {
                   {!isLoadingDepartments &&
                     Array.isArray(mostActiveDepartments) &&
                     mostActiveDepartments.length > 0 &&
-                    mostActiveDepartments
+                    displayedDepartments
                       .slice(0, 3)
                       .map((dept: any) => (
                         <MostClientActive
@@ -313,10 +321,10 @@ export default function DashboardPage() {
                           avatar={mcDonaldsAvatar}
                         />
                       ))}
-                  {tickets.length > 4 && (
+                  {mostActiveDepartments.length > 4 && (
                     <ShowAll
-                      text={showAllTickets ? "Show Less" : "Show All"}
-                      onClick={() => setShowAllTickets(!showAllTickets)}
+                      text={showAllDepartments ? "Show Less" : "Show All"}
+                      onClick={() => setShowAllDepartments(!showAllEmployees)}
                     />
                   )}
                 </Box>
