@@ -51,7 +51,7 @@ function FormSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-
+    
     if (isSignup) {
       if (!firstName || !lastName || !email || !password || !confirmPassword) {
         setError("please fill in all fields");
@@ -79,11 +79,11 @@ function FormSection() {
         return;
       } catch (err) {
         console.error(err);
-        if (axios.isAxiosError(err)) {
-          setError(err.response?.data?.message || "Something went wrong");
-        } else {
-          setError("An unexpected error occurred");
-        }
+         if (axios.isAxiosError(err)) {
+    setError(err.response?.data?.message || "Something went wrong");
+  } else {
+    setError("An unexpected error occurred");
+  }
       }
     } else {
       if (!password || !email) {
@@ -102,6 +102,7 @@ function FormSection() {
       setError(null);
     } catch (err) {
       console.error(err);
+      
     }
   };
   return (
@@ -148,11 +149,8 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
-      {error && (
-        <Alert severity="error" onClose={() => setError("")}>
-          {error}
-        </Alert>
-      )}
+      {error && <Alert severity="error"
+      onClose={() => setError(null)}>{error}</Alert>}
       <Box
         component={"form"}
         onSubmit={handleSubmit}
