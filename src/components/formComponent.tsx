@@ -44,13 +44,14 @@ function FormSection() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-
   const API_URL = import.meta.env.VITE_API_URL;
   console.log("API URL:", import.meta.env.VITE_API_URL);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
     if (isSignup) {
       if (!firstName || !lastName || !email || !password || !confirmPassword) {
         setError("please fill in all fields");
@@ -72,13 +73,17 @@ function FormSection() {
         setIsSignup(false);
         setFirstName("");
         setLastName("");
-        setEmail("");
         setPassword("");
         setConfirmPassword("");
 
         return;
       } catch (err) {
         console.error(err);
+        if (axios.isAxiosError(err)) {
+          setError(err.response?.data?.message || "Something went wrong");
+        } else {
+          setError("An unexpected error occurred");
+        }
       }
     } else {
       if (!password || !email) {
@@ -143,7 +148,11 @@ function FormSection() {
           </Typography>
         </Box>
       </Box>
-      {error && <Alert severity="error">{error}</Alert>}
+      {error && (
+        <Alert severity="error" onClose={() => setError("")}>
+          {error}
+        </Alert>
+      )}
       <Box
         component={"form"}
         onSubmit={handleSubmit}
