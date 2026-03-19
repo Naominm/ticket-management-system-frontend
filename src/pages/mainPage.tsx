@@ -172,12 +172,12 @@ export default function CollapsibleSidebar() {
                     >
                       Task Title <span style={{ color: "red" }}>*</span>
                     </Typography>
-                    <ArrowDropDownIcon />
                   </Box>
                   <input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     multiple
+                    required
                     placeholder="Enter task title"
                     style={{
                       border: "none",
