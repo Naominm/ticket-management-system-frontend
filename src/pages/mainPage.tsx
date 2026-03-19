@@ -259,7 +259,51 @@ export default function CollapsibleSidebar() {
                       Assign To<span style={{ color: "red" }}>*</span>
                     </Typography>
                   </Box>
-                  <CalendarMonthIcon />
+                  <Select
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                    size="small"
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: "#fff",
+                      fontFamily: "var(--primary-font)",
+                    }}
+                  >
+                    <MenuItem value="SELF">Self</MenuItem>
+                    <MenuItem value="OTHERS">Others</MenuItem>
+                  </Select>
+                </ListItem>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#fff",
+                    borderRadius: 1,
+                    minHeight: "10vh",
+                    mb: 0.5,
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      fontWeight={600}
+                      sx={{ fontFamily: "var(--primary-font)" }}
+                    >
+                      Select the Person<span style={{ color: "red" }}>*</span>
+                    </Typography>
+                  </Box>
+                  <Select
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                    size="small"
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: "#fff",
+                      fontFamily: "var(--primary-font)",
+                    }}
+                  >
+                    <MenuItem value="SELF">Self</MenuItem>
+                    <MenuItem value="OTHERS">Others</MenuItem>
+                  </Select>
                 </ListItem>
                 <ListItem
                   sx={{
