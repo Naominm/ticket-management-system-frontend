@@ -256,7 +256,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      Creation Date <span style={{ color: "red" }}>*</span>
+                      Assign To<span style={{ color: "red" }}>*</span>
                     </Typography>
                   </Box>
                   <CalendarMonthIcon />
