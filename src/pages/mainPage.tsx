@@ -225,7 +225,7 @@ export default function CollapsibleSidebar() {
                       fontWeight={600}
                       sx={{ fontFamily: "var(--primary-font)" }}
                     >
-                      Company/Department <span style={{ color: "red" }}>*</span>
+                      Department <span style={{ color: "red" }}>*</span>
                     </Typography>
                     <ArrowDropDownIcon />
                   </Box>
