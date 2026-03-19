@@ -14,13 +14,12 @@ import {
 } from "@mui/material";
 import SidebarComponent from "../components/sidebarComponent";
 import CreateTicketComponent from "../components/createTicketComponent";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-
 export default function CollapsibleSidebar() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [departmentId, setDepartmentId] = useState("");
+  const [departments, setDepartments] = useState<any[]>([]);
+  const [loadingDepartments, setLoadingDepartments] = useState(true);
   const [priority, setPriority] = useState("MEDIUM");
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<any>(null);
@@ -96,6 +95,26 @@ export default function CollapsibleSidebar() {
     };
 
     fetchProfile();
+  }, []);
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/department`, {
+          withCredentials: true,
+        });
+
+        console.log("Departments:", res.data);
+
+        setDepartments(res.data);
+      } catch (error) {
+        console.error("Failed to fetch departments", error);
+      } finally {
+        setLoadingDepartments(false);
+      }
+    };
+
+    fetchDepartments();
   }, []);
 
   return (
@@ -226,20 +245,27 @@ export default function CollapsibleSidebar() {
                     >
                       Department <span style={{ color: "red" }}>*</span>
                     </Typography>
-                    <ArrowDropDownIcon />
                   </Box>
-                  <input
-                    type="text"
-                    placeholder="Enter the department ID"
+                  <Select
                     value={departmentId}
                     onChange={(e) => setDepartmentId(e.target.value)}
-                    style={{
-                      border: "none",
-                      outline: "none",
-                      background: "transparent",
+                    size="small"
+                    sx={{
+                      minWidth: 120,
+                      backgroundColor: "#fff",
                       fontFamily: "var(--primary-font)",
                     }}
-                  />
+                  >
+                    {loadingDepartments ? (
+                      <MenuItem disabled>Loading...</MenuItem>
+                    ) : (
+                      departments.map((dept) => (
+                        <MenuItem key={dept.id} value={dept.id}>
+                          {dept.name}
+                        </MenuItem>
+                      ))
+                    )}
+                  </Select>
                 </ListItem>
                 <ListItem
                   sx={{
