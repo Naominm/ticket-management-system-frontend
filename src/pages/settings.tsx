@@ -9,6 +9,8 @@ import {
   FormControl,
   TextField,
   Button,
+  Select,
+  MenuItem,
   Tab,
   Tabs,
   Alert,
@@ -500,6 +502,17 @@ function PersonalDetailsForm({
 }
 
 function JobDetailsForm({ profile, setProfile }: any) {
+  const [departments, setDepartments] = useState<
+    { id: number; name: string }[]
+  >([]);
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/department`, { withCredentials: true })
+      .then((res) => setDepartments(res.data))
+      .catch((err) => console.error("Failed to load departments", err));
+  }, [API_URL]);
   return (
     <Box
       sx={{
@@ -529,17 +542,32 @@ function JobDetailsForm({ profile, setProfile }: any) {
       <FormControl fullWidth>
         <FormLabel sx={{ fontFamily: "var(--primary-font)" }}>
           Department
+          {profile?.department?.name && (
+            <Typography
+              component="span"
+              sx={{ fontSize: "0.75rem", color: "gray", ml: 1 }}
+            >
+              (current: {profile.department.name})
+            </Typography>
+          )}
         </FormLabel>
-        <TextField
-          size="small"
-          value={profile?.department || ""}
+        <Select
+          value={profile?.departmentId ?? ""}
           onChange={(e) =>
-            setProfile({ ...profile, department: e.target.value })
+            setProfile({ ...profile, departmentId: e.target.value as number })
           }
-          sx={{
-            bgcolor: "#DEDEDE",
-          }}
-        />
+          displayEmpty
+          sx={{ bgcolor: "#DEDEDE", fontFamily: "var(--primary-font)" }}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {departments.map((dept) => (
+            <MenuItem key={dept.id} value={dept.id}>
+              {dept.name}
+            </MenuItem>
+          ))}
+        </Select>
       </FormControl>
 
       <FormControl fullWidth>
