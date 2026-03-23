@@ -144,6 +144,7 @@ export default function TicketPage() {
                     <TableRow>
                       <TableCell>Code</TableCell>
                       <TableCell>Employee</TableCell>
+                      <TableCell>Assigned To</TableCell>
                       <TableCell>Start Date</TableCell>
                       <TableCell>Status</TableCell>
                       <TableCell>Priority</TableCell>
@@ -165,6 +166,11 @@ export default function TicketPage() {
                       <TableRow key={ticket.id}>
                         <TableCell>{ticket.id}</TableCell>
                         <TableCell>{ticket.user?.lastName || "N/A"}</TableCell>
+                        <TableCell>
+                          {ticket.assignedAgent
+                            ? `${ticket.assignedAgent.firstName} ${ticket.assignedAgent.lastName}`
+                            : "Unassigned"}
+                        </TableCell>
                         <TableCell>
                           {new Date(ticket.createdAt).toLocaleDateString()}
                         </TableCell>
@@ -209,7 +215,7 @@ export default function TicketPage() {
                     ))}
                     {tickets.length === 0 && (
                       <TableRow>
-                        <TableCell colSpan={7} align="center">
+                        <TableCell colSpan={8} align="center">
                           No tickets Found
                         </TableCell>
                       </TableRow>

@@ -20,6 +20,10 @@ export default function CollapsibleSidebar() {
   const [departmentId, setDepartmentId] = useState("");
   const [departments, setDepartments] = useState<any[]>([]);
   const [loadingDepartments, setLoadingDepartments] = useState(true);
+  const [assignTo, setAssignTo] = useState("SELF");
+  const [assignedUserId, setAssignedUserId] = useState("");
+  const [departmentUsers, setDepartmentUsers] = useState<any[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
   const [priority, setPriority] = useState("MEDIUM");
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState<any>(null);
@@ -31,47 +35,85 @@ export default function CollapsibleSidebar() {
   } | null>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // If we switch to 'SELF' or clear the department, clear the user list
+    if (!departmentId || assignTo !== "OTHERS") {
+      setDepartmentUsers([]);
+      setAssignedUserId("");
+      return;
+    }
+
+    const fetchDepartmentUsers = async () => {
+      try {
+        setLoadingUsers(true);
+        setAssignedUserId("");
+
+        const res = await axios.get(
+          `${API_URL}/api/department/${departmentId}/users`,
+          {
+            withCredentials: true,
+          },
+        );
+
+        setDepartmentUsers(res.data);
+      } catch (error) {
+        console.error("Failed to fetch users", error);
+        setAlert({
+          type: "error",
+          message: "Could not load users for this department.",
+        });
+      } finally {
+        setLoadingUsers(false);
+      }
+    };
+
+    fetchDepartmentUsers();
+  }, [departmentId, assignTo, API_URL]);
+
   const handleCreateTicket = async () => {
     if (!title || !description || !departmentId) {
+      setAlert({ type: "error", message: "Please fill in all fields" });
+      return;
+    }
+    if (assignTo === "OTHERS" && !assignedUserId) {
       setAlert({
         type: "error",
-        message: "Please fill in all fields",
+        message: "Please select a person to assign the task to",
       });
       return;
     }
+
+    const finalAssignedId =
+      assignTo === "SELF" ? profile?.id : Number(assignedUserId);
+
     try {
       setLoading(true);
       setAlert(null);
-      const token = localStorage.getItem("token");
-      const response = await axios.post(
+      console.log("Submitting ticket:", {
+        title,
+        description,
+        priority,
+        departmentId: Number(departmentId),
+        assignedAgentId: finalAssignedId,
+      });
+      await axios.post(
         "http://localhost:5000/api/ticket",
         {
           title,
           description,
           priority,
           departmentId: Number(departmentId),
+          assignedAgentId: finalAssignedId,
         },
-        {
-          withCredentials: true,
-        },
+        { withCredentials: true },
       );
-      console.log("Ticket created:", response.data, token);
-      setTitle("");
-      setDescription("");
-      setDepartmentId("");
-      setPriority("MEDIUM");
-      setAlert({
-        type: "success",
-        message: "Ticket Created Successfully",
-      });
+
+      setAlert({ type: "success", message: "Ticket Created Successfully" });
       navigate("/ticket");
     } catch (err: any) {
-      console.error(err);
       setAlert({
         type: "error",
-        message:
-          err.response?.data?.message ||
-          "Failed to create ticket please try again",
+        message: err.response?.data?.message || "Failed to create ticket",
       });
     } finally {
       setLoading(false);
@@ -286,51 +328,46 @@ export default function CollapsibleSidebar() {
                     </Typography>
                   </Box>
                   <Select
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
+                    value={assignTo}
+                    onChange={(e) => setAssignTo(e.target.value)}
                     size="small"
-                    sx={{
-                      minWidth: 120,
-                      backgroundColor: "#fff",
-                      fontFamily: "var(--primary-font)",
-                    }}
+                    sx={{ minWidth: 150 }}
                   >
                     <MenuItem value="SELF">Self</MenuItem>
                     <MenuItem value="OTHERS">Others</MenuItem>
                   </Select>
                 </ListItem>
-                <ListItem
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    bgcolor: "#fff",
-                    borderRadius: 1,
-                    minHeight: "10vh",
-                    mb: 0.5,
-                  }}
-                >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Typography
-                      fontWeight={600}
-                      sx={{ fontFamily: "var(--primary-font)" }}
-                    >
-                      Select the Person<span style={{ color: "red" }}>*</span>
+                {assignTo === "OTHERS" && (
+                  <ListItem
+                    sx={{
+                      justifyContent: "space-between",
+                      bgcolor: "#fff",
+                      mb: 0.5,
+                      borderRadius: 1,
+                    }}
+                  >
+                    <Typography fontWeight={600}>
+                      Select the Person <span style={{ color: "red" }}>*</span>
                     </Typography>
-                  </Box>
-                  <Select
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    size="small"
-                    sx={{
-                      minWidth: 120,
-                      backgroundColor: "#fff",
-                      fontFamily: "var(--primary-font)",
-                    }}
-                  >
-                    <MenuItem value="SELF">Self</MenuItem>
-                    <MenuItem value="OTHERS">Others</MenuItem>
-                  </Select>
-                </ListItem>
+                    <Select
+                      value={assignedUserId}
+                      onChange={(e) => setAssignedUserId(e.target.value)}
+                      size="small"
+                      disabled={!departmentId}
+                      sx={{ minWidth: 150 }}
+                    >
+                      {loadingUsers ? (
+                        <MenuItem disabled>Loading Users...</MenuItem>
+                      ) : (
+                        departmentUsers.map((user) => (
+                          <MenuItem key={user.id} value={user.id}>
+                            {`${user.firstName} ${user.lastName}`}
+                          </MenuItem>
+                        ))
+                      )}
+                    </Select>
+                  </ListItem>
+                )}
                 <ListItem
                   sx={{
                     display: "flex",
