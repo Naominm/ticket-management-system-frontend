@@ -59,6 +59,7 @@ export default function DashboardPage() {
       const res = await axios.get(`${API_URL}/api/ticket`, {
         withCredentials: true,
       });
+      console.log(res.data.tickets[0]?.user);
       return res.data.tickets;
     },
   });
@@ -177,6 +178,7 @@ export default function DashboardPage() {
                       date={new Date(ticket.createdAt).toLocaleDateString()}
                       time={formatTimeAgo(ticket.createdAt)}
                       bg={getStatusBg(ticket.status)}
+                      avatar={ticket.user?.avatarUrl || null}
                     />
                   ))}
               </Card>

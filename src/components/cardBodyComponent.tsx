@@ -5,10 +5,10 @@ import {
   Typography,
   IconButton,
   Button,
+  Avatar,
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import ManAvatar from "../assets/man.png";
 
 interface CardProps {
   title: string;
@@ -18,6 +18,7 @@ interface CardProps {
   date: string;
   time: string;
   bg: string;
+  avatar: string | null;
 }
 
 export default function CardBodyComponent({
@@ -28,6 +29,7 @@ export default function CardBodyComponent({
   date,
   time,
   bg,
+  avatar,
 }: CardProps) {
   return (
     <Card>
@@ -70,7 +72,13 @@ export default function CardBodyComponent({
             gap: 2,
           }}
         >
-          <Box component={"img"} sx={{ width: "40px" }} src={ManAvatar} />
+          <Avatar
+            src={avatar || undefined}
+            alt={name}
+            sx={{ width: 40, height: 40 }}
+          >
+            {!avatar && name?.charAt(0).toUpperCase()}
+          </Avatar>
           <Box
             component={"div"}
             sx={{
