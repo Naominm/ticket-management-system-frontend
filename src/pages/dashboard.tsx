@@ -80,6 +80,7 @@ export default function DashboardPage() {
         `${API_URL}/api/assign/most-active-employees`,
         { withCredentials: true },
       );
+      console.log(res.data.data[0]);
       return res.data.data;
     },
   });
@@ -259,6 +260,7 @@ export default function DashboardPage() {
                                 ? "var(--yellow-color)"
                                 : "red"
                           }
+                          avatar={employee.avatarUrl || null}
                         />
                       ))}
                   </Card>
@@ -317,7 +319,7 @@ export default function DashboardPage() {
                         key={dept.id}
                         name={dept.name}
                         number={dept.resolvedTickets}
-                        avatar={mcDonaldsAvatar}
+                        avatar={`https://ui-avatars.com/api/?name=${encodeURIComponent(dept.name)}&background=random&color=fff&size=40`}
                       />
                     ))}
                   {mostActiveDepartments.length > 3 && (

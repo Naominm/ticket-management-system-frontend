@@ -1,22 +1,29 @@
-import { Box, CardContent, Typography } from "@mui/material";
+import { Box, CardContent, Typography, Avatar } from "@mui/material";
 
-import manAvatar from "../assets/man.png";
 interface ActiveEmployeeProp {
   name: string;
   number: number;
   percentage: string;
   color: string;
+  avatar: string | null;
 }
 export default function MostActiveEmployeeCard({
   name,
   number,
   percentage,
   color,
+  avatar,
 }: ActiveEmployeeProp) {
   return (
     <CardContent sx={{ display: "flex", width: "100%", gap: 5 }}>
       <Box sx={{ display: "flex", gap: 4 }}>
-        <Box component={"img"} sx={{ width: "40px" }} src={manAvatar} />
+        <Avatar
+          src={avatar || undefined}
+          alt={name}
+          sx={{ width: 40, height: 40 }}
+        >
+          {!avatar && name?.charAt(0).toUpperCase()}
+        </Avatar>
         <Typography
           variant="h6"
           sx={{
