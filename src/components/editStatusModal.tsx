@@ -8,6 +8,8 @@ import {
   DialogTitle,
   IconButton,
   Typography,
+  MenuItem,
+  Select,
   TextField,
   CircularProgress,
 } from "@mui/material";
@@ -31,7 +33,13 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [assignedAgentId, setAssignedAgentId] = useState<string>("");
+  const [selectedAgent, setSelectedAgent] = useState<{
+    id: number;
+    firstName: string;
+    lastName: string;
+  } | null>(null);
+  const [departmentUsers, setDepartmentUsers] = useState<any[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
 
   const { data: currentUser } = useQuery({
     queryKey: ["profile"],
@@ -40,17 +48,6 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         withCredentials: true,
       });
       return res.data.user;
-    },
-  });
-
-  const { data: agents = [] } = useQuery({
-    queryKey: ["agents"],
-    enabled: currentUser?.role !== "USER",
-    queryFn: async () => {
-      const res = await axios.get(`${API_URL}/api/users?role=AGENT`, {
-        withCredentials: true,
-      });
-      return res.data.users;
     },
   });
 
@@ -71,13 +68,11 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
           if (selectedColor === green[500]) status = "RESOLVED";
           else if (selectedColor === orange[500]) status = "IN_PROGRESS";
           else if (selectedColor === red[500]) status = "CLOSED";
-        } else if (assignedAgentId && assignedAgentId !== "") {
-          status = "IN_PROGRESS";
         }
 
         payload.status = status;
-        if (assignedAgentId !== "") {
-          payload.assignedAgentId = Number(assignedAgentId);
+        if (selectedAgent) {
+          payload.assignedAgentId = selectedAgent.id;
         }
       }
 
@@ -108,7 +103,22 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
     if (ticket) {
       setTitle(ticket.title || "");
       setDescription(ticket.description || "");
-      setAssignedAgentId(ticket.assignedAgentId || "");
+
+      if (ticket.assignedAgent) {
+        setSelectedAgent({
+          id: ticket.assignedAgent.id,
+          firstName: ticket.assignedAgent.firstName,
+          lastName: ticket.assignedAgent.lastName,
+        });
+      } else if (ticket.user) {
+        setSelectedAgent({
+          id: ticket.user.id,
+          firstName: ticket.user.firstName,
+          lastName: ticket.user.lastName,
+        });
+      } else {
+        setSelectedAgent(null);
+      }
 
       switch (ticket.status) {
         case "CLOSED":
@@ -145,6 +155,27 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
 
     updateTicketMutation.mutate();
   };
+
+  useEffect(() => {
+    if (!ticket?.departmentId) return;
+
+    const fetchUsers = async () => {
+      setLoadingUsers(true);
+      try {
+        const res = await axios.get(
+          `${API_URL}/api/department/${ticket.departmentId}/users`,
+          { withCredentials: true },
+        );
+        setDepartmentUsers(res.data);
+      } catch (err) {
+        console.error("Failed to fetch department users", err);
+      } finally {
+        setLoadingUsers(false);
+      }
+    };
+
+    fetchUsers();
+  }, [ticket?.departmentId]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -185,16 +216,34 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
               <Typography sx={{ mb: 1, fontSize: "0.9rem" }}>
                 Assign ticket
               </Typography>
-
-              <TextField
-                type="number"
+              <Select
                 fullWidth
                 size="small"
-                label="Agent ID"
-                value={assignedAgentId}
-                onChange={(e) => setAssignedAgentId(e.target.value)}
-                disabled={updateTicketMutation.isPending}
-              />
+                displayEmpty
+                value={selectedAgent ? JSON.stringify(selectedAgent) : ""}
+                onChange={(e) =>
+                  setSelectedAgent(
+                    e.target.value ? JSON.parse(e.target.value) : null,
+                  )
+                }
+                disabled={updateTicketMutation.isPending || loadingUsers}
+              >
+                <MenuItem value="">
+                  <em>{loadingUsers ? "Loading..." : "Unassigned"}</em>
+                </MenuItem>
+                {departmentUsers.map((user) => (
+                  <MenuItem
+                    key={user.id}
+                    value={JSON.stringify({
+                      id: user.id,
+                      firstName: user.firstName,
+                      lastName: user.lastName,
+                    })}
+                  >
+                    {user.firstName} {user.lastName}
+                  </MenuItem>
+                ))}
+              </Select>
             </Box>
 
             <hr />
