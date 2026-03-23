@@ -33,6 +33,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [comment, setComment] = useState("");
   const [selectedAgent, setSelectedAgent] = useState<{
     id: number;
     firstName: string;
@@ -40,6 +41,8 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
   } | null>(null);
   const [departmentUsers, setDepartmentUsers] = useState<any[]>([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
+
+  const getDraftKey = (id: string | number) => `ticket_comment_draft_${id}`;
 
   const { data: currentUser } = useQuery({
     queryKey: ["profile"],
@@ -51,11 +54,19 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
     },
   });
 
+  const { data: comments = [], isLoading: isLoadingComments } = useQuery({
+    queryKey: ["ticketComments", ticket?.id],
+    queryFn: async () => {
+      const res = await axios.get(`${API_URL}/api/ticket/${ticket.id}`, {
+        withCredentials: true,
+      });
+      return res.data.ticket.comments || [];
+    },
+    enabled: !!ticket?.id && open,
+  });
+
   const updateTicketMutation = useMutation({
     mutationFn: async () => {
-      console.log("--- STARTING MUTATION ---");
-      console.log("Current User Role:", currentUser?.role);
-
       const payload: any = {};
 
       if (currentUser?.role === "USER") {
@@ -74,25 +85,29 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         if (selectedAgent) {
           payload.assignedAgentId = selectedAgent.id;
         }
+        if (comment.trim()) {
+          payload.comment = comment.trim();
+        }
       }
 
-      const finalUrl = `${API_URL}/api/ticket/${ticket.id}`;
-      console.log("Request URL:", finalUrl);
-      console.log("Request Payload:", payload);
-
-      return axios.put(finalUrl, payload, { withCredentials: true });
+      return axios.put(`${API_URL}/api/ticket/${ticket.id}`, payload, {
+        withCredentials: true,
+      });
     },
-    onSuccess: (response) => {
-      console.log("✅ SUCCESS:", response.data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      queryClient.invalidateQueries({
+        queryKey: ["ticketComments", ticket?.id],
+      });
+
+      if (ticket?.id) {
+        localStorage.removeItem(getDraftKey(ticket.id));
+      }
+
+      setComment("");
       onClose();
     },
     onError: (error: any) => {
-      console.error("ERROR OBJECT:", error);
-      if (error.response) {
-        console.error("Server Response Data:", error.response.data);
-        console.error("Server Response Status:", error.response.status);
-      }
       alert(
         error.response?.data?.message || "Something went wrong while saving.",
       );
@@ -103,6 +118,9 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
     if (ticket) {
       setTitle(ticket.title || "");
       setDescription(ticket.description || "");
+
+      const savedDraft = localStorage.getItem(getDraftKey(ticket.id));
+      setComment(savedDraft || "");
 
       if (ticket.assignedAgent) {
         setSelectedAgent({
@@ -122,7 +140,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
 
       switch (ticket.status) {
         case "CLOSED":
-          setSelectedColor(green[500]);
+          setSelectedColor(red[500]);
           break;
         case "OPEN":
           setSelectedColor(orange[500]);
@@ -140,25 +158,12 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
   }, [ticket]);
 
   const handleSave = () => {
-    console.log("Save button clicked");
-
-    if (!ticket) {
-      console.log("Save aborted: No ticket data found.");
-      return;
-    }
-
-    if (!currentUser) {
-      console.log("Save aborted: User data not loaded yet.");
-      alert("Still loading user data, please wait.");
-      return;
-    }
-
+    if (!ticket || !currentUser) return;
     updateTicketMutation.mutate();
   };
 
   useEffect(() => {
     if (!ticket?.departmentId) return;
-
     const fetchUsers = async () => {
       setLoadingUsers(true);
       try {
@@ -173,9 +178,8 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
         setLoadingUsers(false);
       }
     };
-
     fetchUsers();
-  }, [ticket?.departmentId]);
+  }, [ticket?.departmentId, API_URL]);
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -247,6 +251,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
             </Box>
 
             <hr />
+
             <Box sx={{ display: "flex", gap: 5, mt: 1 }}>
               <Typography sx={{ mb: 2 }}>Choose status color:</Typography>
               <Box sx={{ display: "flex", gap: 2, mb: 2 }}>
@@ -274,7 +279,78 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
                 ))}
               </Box>
             </Box>
+
             <hr />
+
+            <Box sx={{ mt: 2 }}>
+              <Typography sx={{ mb: 1, fontSize: "0.9rem" }}>
+                Progress note (Auto-saved)
+              </Typography>
+              <TextField
+                fullWidth
+                multiline
+                rows={3}
+                placeholder="Add a progress note or comment..."
+                value={comment}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setComment(val);
+                  if (ticket?.id) {
+                    localStorage.setItem(getDraftKey(ticket.id), val);
+                  }
+                }}
+                disabled={updateTicketMutation.isPending}
+              />
+            </Box>
+            {isLoadingComments ? (
+              <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                <CircularProgress size={20} />
+              </Box>
+            ) : comments.length > 0 ? (
+              <Box sx={{ mt: 2 }}>
+                <Typography sx={{ fontSize: "0.9rem", fontWeight: 600, mb: 1 }}>
+                  Progress History
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
+                    maxHeight: "200px",
+                    overflowY: "auto",
+                  }}
+                >
+                  {comments.map((c: any) => (
+                    <Box
+                      key={c.id}
+                      sx={{
+                        bgcolor: "#f4f4f4",
+                        borderLeft: "3px solid var(--dark-background)",
+                        borderRadius: 1,
+                        p: 1.5,
+                      }}
+                    >
+                      <Typography
+                        sx={{ fontSize: "0.75rem", color: "gray", mb: 0.5 }}
+                      >
+                        <strong>
+                          {c.user
+                            ? `${c.user.firstName} ${c.user.lastName}`
+                            : "Unknown User"}
+                        </strong>{" "}
+                        • {new Date(c.createdAt).toLocaleString()}
+                      </Typography>
+                      <Typography sx={{ fontSize: "0.85rem" }}>
+                        {c.content}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            ) : null}
+
+            <hr />
+
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
               <Button
                 variant="contained"
@@ -288,45 +364,6 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
               >
                 show more <ArrowDropDownIcon />
               </Button>
-
-              <Typography
-                sx={{
-                  color: "gray",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  mt: 2,
-                  fontSize: "0.85rem",
-                }}
-              >
-                <CircleIcon sx={{ color: "green", fontSize: "0.9rem" }} />
-                Green: Task completed
-              </Typography>
-              <Typography
-                sx={{
-                  color: "gray",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  fontSize: "0.85rem",
-                }}
-              >
-                <CircleIcon sx={{ color: "orange", fontSize: "0.9rem" }} />
-                Yellow: In progress
-              </Typography>
-              <Typography
-                sx={{
-                  color: "gray",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  mb: 2,
-                  fontSize: "0.85rem",
-                }}
-              >
-                <CircleIcon sx={{ color: "red", fontSize: "0.9rem" }} />
-                Red: Not resolved
-              </Typography>
             </Box>
           </>
         )}
