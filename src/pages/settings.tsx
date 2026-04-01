@@ -20,6 +20,7 @@ import SearchComponent from "../components/searchComponent";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AvatarImage from "../assets/boy.png";
 import EmployeeGrowthGraph from "../components/lineGraphComponent";
+import { User } from "../types/user";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
