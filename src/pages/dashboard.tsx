@@ -15,7 +15,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import MostActiveEmployeeCard from "../components/mostactiveEmloyeeCard";
 import MostClientActive from "../components/mostClientActiveComponent";
 import PeopleIcon from "@mui/icons-material/People";
-import mcDonaldsAvatar from "../assets/macdonalds.png";
 // import BurgerKingAvatar from "../assets/burgerking.png";
 // import othanimAvatar from "../assets/othanim.png";
 import ShowAll from "../components/showAllButton";
