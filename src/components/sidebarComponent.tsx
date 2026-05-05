@@ -16,6 +16,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import MapsHomeWorkIcon from "@mui/icons-material/MapsHomeWork";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
+import PeopleIcon from "@mui/icons-material/People";
 import XIcon from "@mui/icons-material/X";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -25,6 +26,15 @@ const drawerWidth = 165;
 export default function SidebarComponent() {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
+  const isAdmin = role === "ADMIN";
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("name");
+    navigate("/");
+  };
   return (
     <Drawer
       variant="permanent"
@@ -111,6 +121,16 @@ export default function SidebarComponent() {
           label="My Tickets"
           onClick={() => navigate("/ticket")}
         />
+
+        {isAdmin && (
+          <SidebarItem
+            open={open}
+            icon={<PeopleIcon />}
+            label="Staff"
+            onClick={() => navigate("/staff")}
+          />
+        )}
+
         <SidebarItem
           open={open}
           icon={<SettingsIcon />}
@@ -145,7 +165,7 @@ export default function SidebarComponent() {
             fontFamily: "var(--primary-font)",
             fontWeight: 800,
           }}
-          onClick={() => navigate("/")}
+          onClick={handleLogout}
         >
           Log out
         </Button>
