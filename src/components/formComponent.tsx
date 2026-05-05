@@ -37,82 +37,50 @@ export default function FormComponent() {
 }
 
 function FormSection() {
-  const [isSignup, setIsSignup] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const API_URL = import.meta.env.VITE_API_URL;
-  console.log("API URL:", import.meta.env.VITE_API_URL);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (isSignup) {
-      if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        setError("please fill in all fields");
-        return;
-      }
-      if (password !== confirmPassword) {
-        setError("password do not match");
-        return;
-      }
-      try {
-        const res = await axios.post(
-          `${API_URL}/api/auth/signup`,
-          { firstName, lastName, email, password },
-          { withCredentials: true },
-        );
-        const token = res.data.token;
-        localStorage.setItem("token", token);
-        console.log("signup successful", res.data);
-        setIsSignup(false);
-        setFirstName("");
-        setLastName("");
-        setPassword("");
-        setConfirmPassword("");
-
-        return;
-      } catch (err) {
-        console.error(err);
-        if (axios.isAxiosError(err)) {
-          setError(err.response?.data?.message || "Something went wrong");
-        } else {
-          setError("An unexpected error occurred");
-        }
-      }
-    } else {
-      if (!password || !email) {
-        setError("All fields are required");
-        return;
-      }
+    if (!email || !password) {
+      setError("All fields are required.");
+      return;
     }
+
     try {
+      setLoading(true);
       const res = await axios.post(
         `${API_URL}/api/auth/login`,
         { identifier: email, password },
         { withCredentials: true },
       );
-      console.log(`login successful`, res.data);
-      navigate(`/home`);
-      setError(null);
-    } catch (err: any) {
-      console.error("Auth error:", err);
 
-      if (err.response?.status === 401 || err.response?.status === 404) {
-        setError("Invalid email or password");
+      // Store role so sidebar can read it
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.role);
+      localStorage.setItem("name", res.data.name);
+
+      navigate("/home");
+    } catch (err: any) {
+      if (err.response?.status === 401) {
+        setError("Invalid email or password.");
       } else {
-        setError("Something went wrong. Please try again later.");
+        setError("Something went wrong. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
     <Box
-      component={"div"}
+      component="div"
       sx={{
         height: { xs: "auto", md: "120vh" },
         minHeight: "50vh",
@@ -129,98 +97,46 @@ function FormSection() {
           flexDirection: "column",
           alignItems: "center",
           gap: 1,
-          fontFamily: "var(--primary-font) ",
         }}
       >
-        <Box component="div">
-          <Typography
-            variant="h5"
-            textTransform={"uppercase"}
-            fontWeight={600}
-            sx={{
-              fontFamily: "var(--secondary-font)",
-              fontSize: { xs: "1.5rem", md: "1.8rem" },
-            }}
-          >
-            {isSignup ? "Create account" : "Welcome Back"}
-          </Typography>
-          <Typography
-            variant="body2"
-            textAlign={"center"}
-            textTransform={"capitalize"}
-            fontFamily={"var(--primary-font)"}
-          >
-            {isSignup ? "Signup with Email" : "Login with Email"}
-          </Typography>
-        </Box>
+        <Typography
+          variant="h5"
+          textTransform="uppercase"
+          fontWeight={600}
+          sx={{
+            fontFamily: "var(--secondary-font)",
+            fontSize: { xs: "1.5rem", md: "1.8rem" },
+          }}
+        >
+          Welcome Back
+        </Typography>
+        <Typography
+          variant="body2"
+          textAlign="center"
+          textTransform="capitalize"
+          fontFamily="var(--primary-font)"
+        >
+          Login with your Tenakata account
+        </Typography>
       </Box>
+
       {error && (
-        <Alert severity="error" onClose={() => setError(null)}>
+        <Alert severity="error" onClose={() => setError(null)} sx={{ mx: 2 }}>
           {error}
         </Alert>
       )}
+
       <Box
-        component={"form"}
+        component="form"
         onSubmit={handleSubmit}
-        sx={{ display: "flex", flexDirection: "column", gap: 1 }}
+        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
       >
-        {isSignup && (
-          <FormControl
-            sx={{
-              px: { xs: 2, md: 10 },
-              display: "flex",
-              flexDirection: "column",
-              gap: 1,
-              width: "100%",
-            }}
-          >
-            <FormLabel
-              sx={{
-                color: "#000",
-                fontWeight: 500,
-                fontFamily: "var(--primary-font)",
-                fontSize: "1rem",
-              }}
-            >
-              First Name
-            </FormLabel>
-            <TextField
-              placeholder="eg. John Doe"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              sx={{ backgroundColor: "#fff" }}
-              size="small"
-              required
-              fullWidth
-            />
-            <FormLabel
-              sx={{
-                color: "#000",
-                fontWeight: 500,
-                fontFamily: "var(--primary-font)",
-                fontSize: "1rem",
-              }}
-            >
-              Last Name
-            </FormLabel>
-            <TextField
-              placeholder="eg. John Doe"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              sx={{ backgroundColor: "#fff" }}
-              size="small"
-              required
-              fullWidth
-            />
-          </FormControl>
-        )}
         <FormControl
           sx={{
             px: { xs: 2, md: 10 },
             display: "flex",
             flexDirection: "column",
             gap: 1,
-            width: "100%",
           }}
         >
           <FormLabel
@@ -228,7 +144,6 @@ function FormSection() {
               color: "#000",
               fontWeight: 500,
               fontFamily: "var(--primary-font)",
-              fontSize: "1rem",
             }}
           >
             Email
@@ -243,13 +158,13 @@ function FormSection() {
             fullWidth
           />
         </FormControl>
+
         <FormControl
           sx={{
             px: { xs: 2, md: 10 },
             display: "flex",
             flexDirection: "column",
-            gap: 2,
-            width: "100%",
+            gap: 1,
           }}
         >
           <FormLabel
@@ -257,13 +172,12 @@ function FormSection() {
               color: "#000",
               fontWeight: 500,
               fontFamily: "var(--primary-font)",
-              fontSize: "1rem",
             }}
           >
-            password
+            Password
           </FormLabel>
           <TextField
-            placeholder="@B123"
+            placeholder="••••••••"
             value={password}
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -273,86 +187,45 @@ function FormSection() {
             fullWidth
           />
         </FormControl>
-        {isSignup && (
-          <FormControl
-            sx={{
-              px: { xs: 2, md: 10 },
-              display: "flex",
-              flexDirection: "column",
-              gap: 1,
-              width: "100%",
-            }}
-          >
-            <FormLabel
-              sx={{
-                color: "#000",
-                fontWeight: 500,
-                fontFamily: "var(--primary-font)",
-                fontSize: ".8 rem",
-              }}
-            >
-              confirm Password
-            </FormLabel>
-            <TextField
-              value={confirmPassword}
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="example@tenakata.com"
-              sx={{ backgroundColor: "#fff" }}
-              size="small"
-              required
-              fullWidth
-            />
-          </FormControl>
-        )}
 
         <Box
-          component={"div"}
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mt: 1,
             px: { xs: 2, md: 10 },
           }}
         >
           <FormControlLabel
             control={<Checkbox size="small" />}
+            label="Keep me logged in"
             sx={{
               "& .MuiFormControlLabel-label": {
                 fontFamily: "var(--primary-font)",
                 fontSize: "0.875rem",
               },
             }}
-            label="Keep me logged in"
           />
           <Link
-            href="/forgot password"
+            href="/forgot-password"
             sx={{
               color: "var(--red-color)",
               textDecoration: "none",
               fontFamily: "var(--primary-font)",
-              fontSize: { xs: "0.8rem", md: "0.8rem" },
+              fontSize: "0.8rem",
             }}
           >
-            {" "}
             Forgot password?
           </Link>
         </Box>
-        <Box
-          component={"div"}
-          sx={{
-            width: "100%",
-            minHeight: "10vh",
-            px: { xs: 2, md: 10 },
-            mt: 0,
-          }}
-        >
+
+        <Box sx={{ px: { xs: 2, md: 10 } }}>
           <Button
             variant="contained"
             size="small"
             fullWidth
             type="submit"
+            disabled={loading}
             sx={{
               backgroundColor: "var(--dark-background)",
               textTransform: "lowercase",
@@ -360,23 +233,8 @@ function FormSection() {
               fontSize: "1.2rem",
             }}
           >
-            Submit
+            {loading ? "Logging in..." : "Login"}
           </Button>
-          <Link
-            component="button"
-            onClick={() => setIsSignup((prev) => !prev)}
-            sx={{
-              color: "blue",
-              textDecoration: "none",
-              fontFamily: "var(--primary-font)",
-              fontSize: { xs: "0.8rem", md: "0.8rem" },
-              mb: 0.4,
-            }}
-          >
-            {isSignup
-              ? "Already have an account Login"
-              : "Do not have an account signup"}
-          </Link>
         </Box>
       </Box>
     </Box>
@@ -414,7 +272,7 @@ function FormImageSection() {
         Ticketing System
       </Button>
       <Box
-        component={"img"}
+        component="img"
         src={hero}
         alt="hero image"
         sx={{
@@ -423,7 +281,7 @@ function FormImageSection() {
           objectFit: "contain",
           position: "relative",
         }}
-      ></Box>
+      />
     </Box>
   );
 }
