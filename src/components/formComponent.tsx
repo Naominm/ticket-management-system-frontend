@@ -61,7 +61,6 @@ function FormSection() {
         { withCredentials: true },
       );
 
-      // Store role so sidebar can read it
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("name", res.data.name);
