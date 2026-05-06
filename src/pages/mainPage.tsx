@@ -52,6 +52,7 @@ export default function CollapsibleSidebar() {
           `${API_URL}/api/departments/${departmentId}/users`,
           {
             withCredentials: true,
+           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           },
         );
 
