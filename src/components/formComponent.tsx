@@ -65,7 +65,11 @@ function FormSection() {
       localStorage.setItem("role", res.data.role);
       localStorage.setItem("name", res.data.name);
 
-      navigate("/home");
+      if (res.data.mustChangePassword) {
+        navigate("/change-password");
+      } else {
+        navigate("/home");
+      }
     } catch (err: any) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
