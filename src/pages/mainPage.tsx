@@ -49,7 +49,7 @@ export default function CollapsibleSidebar() {
         setAssignedUserId("");
 
         const res = await axios.get(
-          `${API_URL}/api/department/${departmentId}/users`,
+          `${API_URL}/api/departments/${departmentId}/users`,
           {
             withCredentials: true,
           },
@@ -97,7 +97,7 @@ export default function CollapsibleSidebar() {
         assignedAgentId: finalAssignedId,
       });
       await axios.post(
-        "http://localhost:5000/api/ticket",
+        `${API_URL}/api/ticket`,
         {
           title,
           description,
@@ -105,7 +105,10 @@ export default function CollapsibleSidebar() {
           departmentId: Number(departmentId),
           assignedAgentId: finalAssignedId,
         },
-        { withCredentials: true },
+        {
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
       );
 
       setAlert({ type: "success", message: "Ticket Created Successfully" });
@@ -124,6 +127,7 @@ export default function CollapsibleSidebar() {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(`${API_URL}/api/profile`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           withCredentials: true,
         });
         console.log("RAW PROFILE RESPONSE:", JSON.stringify(res.data, null, 2));
@@ -142,8 +146,9 @@ export default function CollapsibleSidebar() {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/department`, {
+        const res = await axios.get(`${API_URL}/api/departments`, {
           withCredentials: true,
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 
         console.log("Departments:", res.data);
