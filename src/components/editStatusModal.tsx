@@ -14,7 +14,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import CircleIcon from "@mui/icons-material/Circle";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { green, orange, red } from "@mui/material/colors";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -168,7 +167,7 @@ export default function EditModalStatus({ open, onClose, ticket }: Props) {
       setLoadingUsers(true);
       try {
         const res = await axios.get(
-          `${API_URL}/api/department/${ticket.departmentId}/users`,
+          `${API_URL}/api/departments/${ticket.departmentId}/users`,
           { withCredentials: true },
         );
         setDepartmentUsers(res.data);
