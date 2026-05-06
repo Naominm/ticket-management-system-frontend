@@ -16,6 +16,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  Alert,
 } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -51,6 +52,8 @@ export default function TicketPage() {
   const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [ticketToDelete, setTicketToDelete] = useState<any | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
   const API_URL = import.meta.env.VITE_API_URL;
   const queryClient = useQueryClient();
 
@@ -68,6 +71,7 @@ export default function TicketPage() {
       return res.data.tickets;
     },
   });
+
   const { data: currentUser } = useQuery({
     queryKey: ["profile"],
     queryFn: async () => {
@@ -87,17 +91,18 @@ export default function TicketPage() {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
       setDeleteDialogOpen(false);
       setTicketToDelete(null);
+      setDeleteError(null);
     },
     onError: (error: any) => {
-      alert(
-        error.response?.data?.message ||
-          "Something went wrong while deleting the ticket.",
+      setDeleteError(
+        error.response?.data?.message || "Something went wrong while deleting.",
       );
     },
   });
 
   const handleDeleteClick = (ticket: any) => {
     setTicketToDelete(ticket);
+    setDeleteError(null);
     setDeleteDialogOpen(true);
   };
 
@@ -133,9 +138,9 @@ export default function TicketPage() {
               <Typography sx={{ p: 2 }}>Loading tickets...</Typography>
             )}
             {isError && (
-              <Typography color="error" sx={{ p: 2 }}>
-                Failed to load tickets
-              </Typography>
+              <Alert severity="error" sx={{ mx: 2 }}>
+                Failed to load tickets. Please try refreshing.
+              </Alert>
             )}
             {!isLoading && !isError && (
               <TableContainer component={Paper}>
@@ -183,7 +188,7 @@ export default function TicketPage() {
                               borderRadius: "50%",
                               backgroundColor: getStatusColor(ticket.status),
                             }}
-                          ></span>
+                          />
                         </TableCell>
                         <TableCell>{ticket.priority}</TableCell>
                         <TableCell>{ticket.title}</TableCell>
@@ -216,7 +221,7 @@ export default function TicketPage() {
                     {tickets.length === 0 && (
                       <TableRow>
                         <TableCell colSpan={8} align="center">
-                          No tickets Found
+                          No tickets found
                         </TableCell>
                       </TableRow>
                     )}
@@ -227,9 +232,13 @@ export default function TicketPage() {
           </Box>
         </Box>
       </Box>
+
       <Dialog
         open={deleteDialogOpen}
-        onClose={() => setDeleteDialogOpen(false)}
+        onClose={() => {
+          setDeleteDialogOpen(false);
+          setDeleteError(null);
+        }}
         maxWidth="xs"
         fullWidth
       >
@@ -240,9 +249,21 @@ export default function TicketPage() {
             <strong>{ticketToDelete?.title}</strong>?<br />
             <strong>This action cannot be undone.</strong>
           </Typography>
+          {deleteError && (
+            <Alert severity="error" sx={{ mt: 2 }}>
+              {deleteError}
+            </Alert>
+          )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+          <Button
+            onClick={() => {
+              setDeleteDialogOpen(false);
+              setDeleteError(null);
+            }}
+          >
+            Cancel
+          </Button>
           <Button
             color="error"
             variant="contained"
