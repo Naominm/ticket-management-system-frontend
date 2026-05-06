@@ -58,6 +58,10 @@ const roleColor = (role: string): "error" | "primary" | "default" => {
   }
 };
 
+const authHeaders = () => ({
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
+});
+
 export default function StaffPage() {
   const [staff, setStaff] = useState<Staff[]>([]);
   const [loadingStaff, setLoadingStaff] = useState(true);
@@ -69,6 +73,7 @@ export default function StaffPage() {
       setLoadingStaff(true);
       const res = await axios.get(`${API_URL}/api/auth/users`, {
         withCredentials: true,
+        headers: authHeaders(),
       });
       setStaff(res.data.users);
     } catch (err) {
@@ -252,7 +257,6 @@ function CreateStaffModal({
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     role: "AGENT",
     department: "",
   });
@@ -268,7 +272,10 @@ function CreateStaffModal({
   useEffect(() => {
     if (!open) return;
     axios
-      .get(`${API_URL}/api/departments`, { withCredentials: true })
+      .get(`${API_URL}/api/departments`, {
+        withCredentials: true,
+        headers: authHeaders(),
+      })
       .then((res) => setDepartments(res.data))
       .catch(() => setError("Failed to load departments."));
   }, [open, API_URL]);
@@ -278,7 +285,6 @@ function CreateStaffModal({
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
       role: "AGENT",
       department: "",
     });
@@ -300,7 +306,7 @@ function CreateStaffModal({
       const res = await axios.post(
         `${API_URL}/api/departments`,
         { name: newDeptName.trim() },
-        { withCredentials: true },
+        { withCredentials: true, headers: authHeaders() },
       );
       const created: Department = res.data.department;
       setDepartments((prev) => [...prev, created]);
@@ -316,7 +322,7 @@ function CreateStaffModal({
 
   const handleSubmit = async () => {
     setError(null);
-    if (!form.firstName || !form.lastName || !form.email || !form.password) {
+    if (!form.firstName || !form.lastName || !form.email) {
       setError("Please fill in all required fields.");
       return;
     }
@@ -325,6 +331,7 @@ function CreateStaffModal({
       setSubmitLoading(true);
       await axios.post(`${API_URL}/api/auth/users`, form, {
         withCredentials: true,
+        headers: authHeaders(),
       });
       setSuccess("Staff member created successfully.");
       setTimeout(() => {
@@ -425,19 +432,6 @@ function CreateStaffModal({
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              sx={{ bgcolor: "#f9f9f9" }}
-            />
-          </FormControl>
-
-          <FormControl fullWidth>
-            <FormLabel sx={{ fontFamily: "var(--primary-font)", mb: 0.5 }}>
-              Password <span style={{ color: "red" }}>*</span>
-            </FormLabel>
-            <TextField
-              size="small"
-              type="password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
               sx={{ bgcolor: "#f9f9f9" }}
             />
           </FormControl>
